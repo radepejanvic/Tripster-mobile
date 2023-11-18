@@ -5,4 +5,7 @@
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_account">Account</string>
+    <string name="title_accommodations">Accommodations</string>
+    <string name="title_reviews">Reviews</string>
+    <string name="title_users">Users</string>
 </resources>
