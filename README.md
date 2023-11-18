@@ -1,17 +1,10 @@
 # Mobile application
 
-## Content
-- [roles and members](#roles-and-members)
-- [coding conventions](#coding-conventions)
-
 ## Roles and members
-- **student 1** -  
-- **student 2** -
-- **student 3** - 
+- **student 1** - Nikola Trajković SV45/2021
+- **student 2** - Rade Pejanović SV10/2021
+- **student 3** - Veljko Ivaišević SV44/2021
 
-## Coding conventions 
-- **Activity** - <activity_name>Activity
-...
 
 
 
