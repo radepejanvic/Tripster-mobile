@@ -33,5 +33,10 @@
         android:name="com.example.tripster.ui.accommodations.AccommodationsFragment"
         android:label="@string/title_accommodations"
         tools:layout="@layout/fragment_accommodations" />
+    <fragment
+        android:id="@+id/navigation_reviews"
+        android:name="com.example.tripster.ui.reviews.ReviewsFragment"
+        android:label="@string/title_reviews"
+        tools:layout="@layout/fragment_reviews" />
 
 </navigation>

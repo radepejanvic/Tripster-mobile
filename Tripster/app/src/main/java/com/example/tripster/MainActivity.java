@@ -31,15 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
         navigationBar = binding.navBar;
 
-        userType = UserType.randomUserType();
+//        userType = UserType.randomUserType();
+        userType = UserType.ADMIN;
 
 //        navigationBar.getMenu().findItem(R.id.navigation_reservations).setVisible(false);
 
         navigationBar.inflateMenu(getRoleMenu());
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+        // Make this dynamically change based on the user role.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_reservations, R.id.navigation_notifications, R.id.navigation_account, R.id.navigation_accommodations)
+                R.id.navigation_home,
+                R.id.navigation_reservations,
+                R.id.navigation_notifications,
+                R.id.navigation_account,
+                R.id.navigation_accommodations,
+                R.id.navigation_reviews)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);

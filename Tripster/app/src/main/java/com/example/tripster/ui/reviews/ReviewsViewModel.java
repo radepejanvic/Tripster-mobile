@@ -1,16 +1,15 @@
-package com.example.tripster.ui.reservations;
+package com.example.tripster.ui.reviews;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ReservationsViewModel extends ViewModel {
-
+public class ReviewsViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
-    public ReservationsViewModel() {
+    public ReviewsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is reservations fragment");
+        mText.setValue("This is reviews fragment");
     }
 
     public LiveData<String> getText() {
