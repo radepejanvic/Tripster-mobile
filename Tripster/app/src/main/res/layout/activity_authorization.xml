@@ -7,7 +7,7 @@
     android:background="@color/grey"
     tools:context=".AuthorizationActivity">
     <ImageView
-        android:id="@+id/whiteTripster"
+        android:id="@+id/imgTripster"
         android:layout_width="152dp"
         android:layout_height="144dp"
         android:src="@drawable/logo"
@@ -16,11 +16,13 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="30dp"/>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/downView"
-    tools:ignore="MissingConstraints" />
+    <RelativeLayout
+        android:id="@+id/downView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgTripster"
+        tools:ignore="MissingConstraints" />
 
 
 
