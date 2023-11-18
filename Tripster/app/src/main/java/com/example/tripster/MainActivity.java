@@ -1,6 +1,8 @@
 package com.example.tripster;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.example.tripster.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private Toolbar toolbar;
+    private BottomNavigationView navigationBar;
+    private UserType userType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,15 +31,34 @@ public class MainActivity extends AppCompatActivity {
         toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_reservations, R.id.navigation_notifications, R.id.navigation_account)
-                .build();
+        navigationBar = binding.navBar;
+
+        userType = UserType.randomUserType();
+//        userType = UserType.ADMIN;
+
+//        navigationBar.getMenu().findItem(R.id.navigation_reservations).setVisible(false);
+
+        navigationBar.inflateMenu(getRoleMenu());
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        NavigationUI.setupWithNavController(navigationBar, navController);
     }
 
+    private int getRoleMenu() {
+        switch (userType) {
+            case ADMIN:
+                return R.menu.bottom_nav_menu_admin;
+            case HOST:
+                return R.menu.bottom_nav_menu_host;
+            default:
+                return R.menu.bottom_nav_menu_guest;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_nav_menu, menu);
+        return true;
+    }
 }

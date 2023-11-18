@@ -21,4 +21,9 @@
     <string name="postal_code">Postal code</string>
     <string name="country">Country</string>
 
+    <string name="title_accommodations">Accommodations</string>
+    <string name="title_reviews">Reviews</string>
+    <string name="title_users">Users</string>
+    <string name="title_search">Search</string>
+    <string name="title_filter">Filter</string>
 </resources>
