@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,20 +13,17 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        int SPLASH_TIME_OUT = 1000;
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-
-                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 finish();
-
             }
-        }, SPLASH_TIME_OUT);
-
+        },4000);
     }
 }
