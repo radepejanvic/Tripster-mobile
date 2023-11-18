@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/username"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="40dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/username"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/password"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/username" />
+
+            <EditText
+                android:id="@+id/passwordAgain"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/password_again"
+                android:inputType="textPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password" />
+
+            <EditText
+                android:id="@+id/EmailAddress"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/passwordAgain" />
+
+            <EditText
+                android:id="@+id/firstName"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/first_name"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/EmailAddress" />
+
+            <EditText
+                android:id="@+id/lastName"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/last_name"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/firstName" />
+
+            <EditText
+                android:id="@+id/phone"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lastName" />
+
+            <EditText
+                android:id="@+id/street"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/street"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
+
+            <EditText
+                android:id="@+id/postalCode"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/postal_code"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/street" />
+
+            <EditText
+                android:id="@+id/city"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/city"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postalCode" />
+            <EditText
+                android:id="@+id/country"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/country"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/city" />
+
+            <Button
+                android:id="@+id/btnSignup"
+                style="@style/ButtonTextStyle"
+                android:layout_width="129dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                android:text="@string/sign_up"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+            <Button
+                android:id="@+id/btnLogin"
+                style="@style/ButtonTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/grey"
+                android:text="@string/log_in"
+                android:textStyle="normal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSignup" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                style="@style/EditTextStyle"
+                android:layout_width="341dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
