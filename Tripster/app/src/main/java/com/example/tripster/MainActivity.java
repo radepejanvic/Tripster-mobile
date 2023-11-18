@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         navigationBar = binding.navBar;
 
-//        userType = UserType.randomUserType();
-        userType = UserType.ADMIN;
+        userType = UserType.randomUserType();
+//        userType = UserType.ADMIN;
 
 //        navigationBar.getMenu().findItem(R.id.navigation_reservations).setVisible(false);
 
