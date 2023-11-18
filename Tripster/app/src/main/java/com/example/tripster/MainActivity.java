@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         navigationBar = binding.navBar;
 
+        userType = UserType.randomUserType();
+
 //        navigationBar.getMenu().findItem(R.id.navigation_reservations).setVisible(false);
 
         navigationBar.inflateMenu(getRoleMenu());
