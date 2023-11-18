@@ -1,4 +1,4 @@
-package com.example.tripster.ui.accommodations;
+package com.example.tripster.ui.users;
 
 import androidx.lifecycle.ViewModelProvider;
 
@@ -12,22 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.tripster.databinding.FragmentAccountBinding;
+import com.example.tripster.databinding.FragmentUsersBinding;
+import com.example.tripster.ui.account.AccountViewModel;
 
-public class AccommodationsFragment extends Fragment {
+public class UsersFragment extends Fragment {
 
-    private FragmentAccountBinding binding;
+    private FragmentUsersBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        AccommodationsViewModel accommodationsViewModel =
-                new ViewModelProvider(this).get(AccommodationsViewModel.class);
+        UsersViewModel usersViewModel =
+                new ViewModelProvider(this).get(UsersViewModel.class);
 
-        binding = FragmentAccountBinding.inflate(inflater, container, false);
+        binding = FragmentUsersBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textAccount;
-        accommodationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textUsers;
+        usersViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
