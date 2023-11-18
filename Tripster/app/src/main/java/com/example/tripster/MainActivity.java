@@ -1,6 +1,8 @@
 package com.example.tripster;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.example.tripster.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -53,5 +55,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_nav_menu, menu);
+        return true;
+    }
 }
