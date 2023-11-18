@@ -13,9 +13,9 @@
 
     <fragment
         android:id="@+id/navigation_reservations"
-        android:name="com.example.tripster.ui.dashboard.DashboardFragment"
+        android:name="com.example.tripster.ui.reservations.ReservationsFragment"
         android:label="@string/title_reservations"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_reservations" />
 
     <fragment
         android:id="@+id/navigation_notifications"
