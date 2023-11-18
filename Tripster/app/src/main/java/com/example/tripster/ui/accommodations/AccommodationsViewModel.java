@@ -9,7 +9,7 @@ public class AccommodationsViewModel extends ViewModel {
 
     public AccommodationsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is account fragment");
+        mText.setValue("This is accommodations fragment");
     }
 
     public LiveData<String> getText() {

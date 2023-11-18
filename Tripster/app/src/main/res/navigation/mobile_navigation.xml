@@ -29,9 +29,9 @@
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
     <fragment
-        android:id="@+id/navigate_accommodations"
+        android:id="@+id/navigation_accommodations"
         android:name="com.example.tripster.ui.accommodations.AccommodationsFragment"
-        android:label="fragment_accommodations"
+        android:label="@string/title_accommodations"
         tools:layout="@layout/fragment_accommodations" />
 
 </navigation>
