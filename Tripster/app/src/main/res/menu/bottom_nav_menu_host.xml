@@ -6,8 +6,13 @@
         android:title="@string/title_home" />
 
     <item
+        android:id="@+id/navigation_accommodations"
+        android:icon="@drawable/ic_bedroom_parent_24"
+        android:title="@string/title_reservations" />
+
+    <item
         android:id="@+id/navigation_reservations"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/ic_calendar_month_24"
         android:title="@string/title_reservations" />
 
     <item
@@ -17,11 +22,6 @@
 
     <item
         android:id="@+id/navigation_account"
-        android:icon="@drawable/ic_account_black_24dp"
-        android:title="@string/title_account" />
-
-    <item
-        android:id="@+id/navigation_blank"
         android:icon="@drawable/ic_account_black_24dp"
         android:title="@string/title_account" />
 
