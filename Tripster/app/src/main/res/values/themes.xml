@@ -34,4 +34,11 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">12dp</item>
     </style>
+
+    <style name="Accommodation">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+        <item name="color">@color/gray</item>
+        <item name="android:foreground">@color/gray</item>
+    </style>
 </resources>
