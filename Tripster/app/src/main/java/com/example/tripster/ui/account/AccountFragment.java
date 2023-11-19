@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.tripster.databinding.FragmentAccountBinding;
@@ -18,6 +20,12 @@ public class AccountFragment extends Fragment {
 
     private FragmentAccountBinding binding;
 
+    private boolean changePassVisible = false;
+
+    private EditText currentPass;
+    private EditText newPass;
+    private EditText repeatNewPass;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         AccountViewModel accountViewModel =
@@ -25,6 +33,24 @@ public class AccountFragment extends Fragment {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        currentPass = binding.currentPassword;
+        newPass = binding.newPassword;
+        repeatNewPass = binding.repeatNew;
+
+        hideChangePass();
+
+        binding.changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (changePassVisible) {
+                    hideChangePass();
+                } else {
+                    showChangePass();
+                }
+                changePassVisible = !changePassVisible;
+            }
+        });
 
         return root;
     }
@@ -34,4 +60,17 @@ public class AccountFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    private void hideChangePass() {
+        currentPass.setVisibility(View.GONE);
+        newPass.setVisibility(View.GONE);
+        repeatNewPass.setVisibility(View.GONE);
+    }
+
+    private void showChangePass() {
+        currentPass.setVisibility(View.VISIBLE);
+        newPass.setVisibility(View.VISIBLE);
+        repeatNewPass.setVisibility(View.VISIBLE);
+    }
+
 }
