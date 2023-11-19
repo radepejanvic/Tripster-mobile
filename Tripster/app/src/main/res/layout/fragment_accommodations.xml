@@ -23,7 +23,7 @@
             android:elevation="100dp">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/frame_layout_image"
+                android:id="@+id/image_wrapper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/gray"
@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/profile_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
@@ -53,8 +53,8 @@
                 android:text="Hotel Norrebro"
 
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/frame_layout_image"
-                app:layout_constraintTop_toBottomOf="@+id/frame_layout_image" />
+                app:layout_constraintStart_toStartOf="@+id/image_wrapper"
+                app:layout_constraintTop_toBottomOf="@+id/image_wrapper" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

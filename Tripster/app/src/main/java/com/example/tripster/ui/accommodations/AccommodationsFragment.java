@@ -26,8 +26,6 @@ public class AccommodationsFragment extends Fragment {
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textAccount;
-        accommodationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
