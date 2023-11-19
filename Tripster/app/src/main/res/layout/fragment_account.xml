@@ -35,7 +35,7 @@
                 android:layout_height="200dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/hotel_room_101"
+                android:src="@mipmap/profile_round"
                 android:background="@color/gray"
                 android:elevation="30dp"
                 />
