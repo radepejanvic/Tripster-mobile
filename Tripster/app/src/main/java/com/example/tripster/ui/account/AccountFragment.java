@@ -23,6 +23,14 @@ public class AccountFragment extends Fragment {
     private FragmentAccountBinding binding;
 
     private ScrollView scrollView;
+    private EditText name;
+    private EditText surname;
+    private EditText email;
+    private EditText phone;
+    private EditText country;
+    private EditText city;
+    private EditText postalCode;
+    private EditText streetAndNumber;
     private boolean changePassVisible = false;
     private EditText currentPass;
     private EditText newPass;
@@ -39,12 +47,20 @@ public class AccountFragment extends Fragment {
         loadUserData();
 
         scrollView = binding.scroll;
-
+        name = binding.name;
+        surname = binding.surname;
+        email = binding.email;
+        phone = binding.phone;
+        country = binding.country;
+        city = binding.city;
+        postalCode = binding.postalCode;
+        streetAndNumber = binding.streetAndNumber;
         currentPass = binding.currentPassword;
         newPass = binding.newPassword;
         repeatNewPass = binding.repeatNew;
 
         hideChangePass();
+        alterFieldEditable(false);
 
         binding.changePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,4 +114,22 @@ public class AccountFragment extends Fragment {
         binding.streetAndNumber.setText(user.streetAndNumber);
     }
 
+    private void alterFieldEditable(boolean editable) {
+        name.setFocusable(editable);
+        name.setFocusableInTouchMode(editable);
+        surname.setFocusable(editable);
+        surname.setFocusableInTouchMode(editable);
+        email.setFocusable(editable);
+        email.setFocusableInTouchMode(editable);
+        phone.setFocusableInTouchMode(editable);
+        phone.setFocusableInTouchMode(editable);
+        country.setFocusableInTouchMode(editable);
+        country.setFocusableInTouchMode(editable);
+        city.setFocusableInTouchMode(editable);
+        city.setFocusableInTouchMode(editable);
+        postalCode.setFocusableInTouchMode(editable);
+        postalCode.setFocusableInTouchMode(editable);
+        streetAndNumber.setFocusableInTouchMode(editable);
+        streetAndNumber.setFocusableInTouchMode(editable);
+    }
 }
