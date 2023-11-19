@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/name"
         style="@style/EditTextStyle"
-        android:layout_width="341dp"
+        android:layout_width="320dp"
         android:layout_height="48dp"
         android:autofillHints=""
         android:background="@drawable/login_button"
@@ -24,7 +24,7 @@
     <EditText
         android:id="@+id/surname"
         style="@style/EditTextStyle"
-        android:layout_width="341dp"
+        android:layout_width="320dp"
         android:layout_height="48dp"
         android:autofillHints=""
         android:background="@drawable/login_button"
@@ -54,7 +54,8 @@
         style="@style/ButtonTextStyle"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/grey"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/secondary_button"
         android:text="@string/register"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
