@@ -5,6 +5,7 @@
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_account">Account</string>
+
     <string name="log_in">Log in</string>
     <string name="register">New user? <b>Register</b></string>
     <string name="username">Username</string>
@@ -26,4 +27,11 @@
     <string name="title_users">Users</string>
     <string name="title_search">Search</string>
     <string name="title_filter">Filter</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="accommodation_from_centre">from city centre</string>
+    <string name="accommodation_see_booking_options">See booking options</string>
+
 </resources>

@@ -34,4 +34,10 @@
     </style>
 
     <style name="Theme.Tripster" parent="Base.Theme.Tripster" />
+    <style name="Accommodation">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+        <item name="color">@color/gray</item>
+        <item name="android:foreground">@color/gray</item>
+    </style>
 </resources>
