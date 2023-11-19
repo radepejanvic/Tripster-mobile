@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.tripster.databinding.FragmentAccountBinding;
@@ -20,8 +21,8 @@ public class AccountFragment extends Fragment {
 
     private FragmentAccountBinding binding;
 
+    private ScrollView scrollView;
     private boolean changePassVisible = false;
-
     private EditText currentPass;
     private EditText newPass;
     private EditText repeatNewPass;
@@ -33,6 +34,8 @@ public class AccountFragment extends Fragment {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        scrollView = binding.scroll;
 
         currentPass = binding.currentPassword;
         newPass = binding.newPassword;
@@ -47,6 +50,12 @@ public class AccountFragment extends Fragment {
                     hideChangePass();
                 } else {
                     showChangePass();
+                    scrollView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            scrollView.fullScroll(View.FOCUS_DOWN);
+                        }
+                    });
                 }
                 changePassVisible = !changePassVisible;
             }
