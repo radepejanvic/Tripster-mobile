@@ -15,6 +15,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.tripster.databinding.FragmentAccountBinding;
+import com.example.tripster.ui.DummyUser;
 
 public class AccountFragment extends Fragment {
 
@@ -34,6 +35,8 @@ public class AccountFragment extends Fragment {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        loadUserData();
 
         scrollView = binding.scroll;
 
@@ -80,6 +83,19 @@ public class AccountFragment extends Fragment {
         currentPass.setVisibility(View.VISIBLE);
         newPass.setVisibility(View.VISIBLE);
         repeatNewPass.setVisibility(View.VISIBLE);
+    }
+
+    // TODO: Delete this when the connection with backend is made.
+    private void loadUserData() {
+        DummyUser user = new DummyUser();
+        binding.name.setText(user.name);
+        binding.surname.setText(user.surname);
+        binding.email.setText(user.email);
+        binding.phone.setText(user.phone);
+        binding.country.setText(user.country);
+        binding.city.setText(user.city);
+        binding.postalCode.setText(user.postalCode);
+        binding.streetAndNumber.setText(user.streetAndNumber);
     }
 
 }
