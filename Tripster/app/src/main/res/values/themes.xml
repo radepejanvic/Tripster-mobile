@@ -26,6 +26,7 @@
     <style name="EditTextStyle" parent="ButtonTextStyle">
         <item name="android:paddingLeft">10dp</item>
         <item name="android:textColorHint">@color/hint</item>
+        <item name="android:textStyle">normal</item>
     </style>
 
     <style name="BackButtonStyle" parent="ButtonTextStyle">
