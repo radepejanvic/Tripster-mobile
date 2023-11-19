@@ -101,8 +101,8 @@ public class RegisterFragment extends Fragment{
         });
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("Owner");
-        list.add("User");
+        list.add("Gust");
+        list.add("Host");
         ArrayAdapter<String>adapter = new ArrayAdapter<>(ARG_PARAM1, android.R.layout.simple_spinner_item,list);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinner.setAdapter(adapter);
