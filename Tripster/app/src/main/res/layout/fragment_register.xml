@@ -22,54 +22,39 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/name"
                 style="@style/EditTextStyle"
-                android:layout_width="341dp"
+                android:layout_width="320dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="40dp"
                 android:autofillHints=""
                 android:background="@drawable/login_button"
                 android:ems="10"
-                android:hint="@string/username"
+                android:hint="@string/name"
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/surname"
                 style="@style/EditTextStyle"
-                android:layout_width="341dp"
+                android:layout_width="320dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
                 android:background="@drawable/login_button"
                 android:ems="10"
-                android:hint="@string/password"
-                android:inputType="textPassword"
+                android:hint="@string/surname"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/username" />
+                app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <EditText
-                android:id="@+id/passwordAgain"
+                android:id="@+id/email"
                 style="@style/EditTextStyle"
-                android:layout_width="341dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:autofillHints=""
-                android:background="@drawable/login_button"
-                android:ems="10"
-                android:hint="@string/password_again"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password" />
-
-            <EditText
-                android:id="@+id/EmailAddress"
-                style="@style/EditTextStyle"
-                android:layout_width="341dp"
+                android:layout_width="320dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
@@ -79,42 +64,42 @@
                 android:inputType="textEmailAddress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passwordAgain" />
+                app:layout_constraintTop_toBottomOf="@+id/surname" />
 
             <EditText
-                android:id="@+id/firstName"
+                android:id="@+id/password"
                 style="@style/EditTextStyle"
-                android:layout_width="341dp"
+                android:layout_width="320dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
                 android:background="@drawable/login_button"
                 android:ems="10"
-                android:hint="@string/first_name"
-                android:inputType="text"
+                android:hint="@string/password"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EmailAddress" />
+                app:layout_constraintTop_toBottomOf="@+id/email" />
 
             <EditText
-                android:id="@+id/lastName"
+                android:id="@+id/repeated_password"
                 style="@style/EditTextStyle"
-                android:layout_width="341dp"
+                android:layout_width="320dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
                 android:background="@drawable/login_button"
                 android:ems="10"
-                android:hint="@string/last_name"
-                android:inputType="text"
+                android:hint="@string/repeat_password"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstName" />
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <EditText
                 android:id="@+id/phone"
                 style="@style/EditTextStyle"
-                android:layout_width="341dp"
+                android:layout_width="320dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
@@ -124,56 +109,12 @@
                 android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lastName" />
+                app:layout_constraintTop_toBottomOf="@+id/repeated_password" />
 
-            <EditText
-                android:id="@+id/street"
-                style="@style/EditTextStyle"
-                android:layout_width="341dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:autofillHints=""
-                android:background="@drawable/login_button"
-                android:ems="10"
-                android:hint="@string/street"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/phone" />
-
-            <EditText
-                android:id="@+id/postalCode"
-                style="@style/EditTextStyle"
-                android:layout_width="341dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:autofillHints=""
-                android:background="@drawable/login_button"
-                android:ems="10"
-                android:hint="@string/postal_code"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/street" />
-
-            <EditText
-                android:id="@+id/city"
-                style="@style/EditTextStyle"
-                android:layout_width="341dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:autofillHints=""
-                android:background="@drawable/login_button"
-                android:ems="10"
-                android:hint="@string/city"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/postalCode" />
             <EditText
                 android:id="@+id/country"
                 style="@style/EditTextStyle"
-                android:layout_width="341dp"
+                android:layout_width="320dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:autofillHints=""
@@ -183,7 +124,63 @@
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/phone" />
+
+            <EditText
+                android:id="@+id/city"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/city"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <EditText
+                android:id="@+id/postal_code"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/postal_code"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/city" />
+
+            <EditText
+                android:id="@+id/street_and_number"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/street"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/postal_code" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/street_and_number" />
 
             <Button
                 android:id="@+id/btnSignup"
@@ -203,24 +200,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/grey"
-                android:text="@string/log_in"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/secondary_button"
+                android:text="@string/back_to_login"
                 android:textStyle="normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btnSignup" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                style="@style/EditTextStyle"
-                android:layout_width="341dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/login_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/country" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
