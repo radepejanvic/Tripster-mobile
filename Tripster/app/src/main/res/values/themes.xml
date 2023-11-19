@@ -34,10 +34,24 @@
     </style>
 
     <style name="Theme.Tripster" parent="Base.Theme.Tripster" />
+    <!-- Treba da se stave i za nocni rezim -->
     <style name="Accommodation">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>
         <item name="color">@color/gray</item>
         <item name="android:foreground">@color/gray</item>
     </style>
+    <style name="AccommodationTitleText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="AccommodationRateText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">12dp</item>
+    </style>
+    <style name="AccommodationSmallText">
+        <item name="android:textSize">10dp</item>
+    </style>
+
 </resources>
