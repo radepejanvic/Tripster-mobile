@@ -75,6 +75,7 @@ public class LoginFragment extends Fragment {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "nesto", Toast.LENGTH_SHORT).show();
                 FragmentTransition.to(RegisterFragment.newInstance(ARG_PARAM1, "Ovo je fragment 1"), ARG_PARAM1, false, R.id.downView);
             }
         });
