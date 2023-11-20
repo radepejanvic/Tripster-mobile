@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.tripster.AccommodationsFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_accommodations" />
+        tools:layout="@layout/fragment_accommodations" >
+        <action
+            android:id="@+id/action_navigation_home_to_singleAccommodationFragment"
+            app:destination="@id/singleAccommodationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_reservations"
@@ -43,5 +47,11 @@
         android:name="com.example.tripster.ui.users.UsersFragment"
         android:label="@string/title_users"
         tools:layout="@layout/fragment_users" />
+    <fragment
+        android:id="@+id/singleAccommodationFragment"
+        android:name="com.example.tripster.SingleAccommodationFragment"
+        android:label="fragment_single_accommodation"
+        tools:layout="@layout/fragment_single_accommodation" />
+
 
 </navigation>

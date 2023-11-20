@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".AccommodationsFragment">
+
 <ScrollView
     android:layout_height="match_parent"
     android:layout_width="match_parent">
@@ -22,6 +22,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:clickable="true"
+        android:focusable="true"
         app:cardCornerRadius="25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,11 +47,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/hotel_room_101"
                     android:background="@color/gray"
+                    android:clickable="true"
                     android:elevation="30dp"
-                    />
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/hotel_room_101" />
 
             </androidx.cardview.widget.CardView>
 
@@ -206,7 +208,10 @@
 
                     android:text="See booking options"
                     app:layout_constraintEnd_toEndOf="parent" />
+
             </androidx.cardview.widget.CardView>
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
