@@ -67,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Intent intent = new Intent(this, AuthorizationActivity.class);
-        startActivity(intent);
-        finish();
+        if (item.getItemId() == R.id.navigation_logout) {
+            Intent intent = new Intent(this, AuthorizationActivity.class);
+            startActivity(intent);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 }
