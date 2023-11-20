@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.tripster.ui.home.HomeFragment"
+        android:name="com.example.tripster.AccommodationsFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_accommodations" />
 
     <fragment
         android:id="@+id/navigation_reservations"
@@ -30,7 +30,7 @@
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/navigation_accommodations"
-        android:name="com.example.tripster.ui.accommodations.AccommodationsFragment"
+        android:name="com.example.tripster.AccommodationsFragment"
         android:label="@string/title_accommodations"
         tools:layout="@layout/fragment_accommodations" />
     <fragment
