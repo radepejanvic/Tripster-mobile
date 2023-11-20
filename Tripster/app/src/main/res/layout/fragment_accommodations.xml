@@ -22,13 +22,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/gray"
         app:cardCornerRadius="25dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray"
+            style="@style/AccommodationBackground"
             android:elevation="100dp">
 
             <androidx.cardview.widget.CardView
@@ -157,7 +156,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    style="@style/AccommodationButtons"
                     android:padding="5dp"
 
                     android:text="4.6"
@@ -202,7 +201,7 @@
                     android:id="@+id/textBooking"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
+                    style="@style/AccommodationButtons"
                     android:padding="5dp"
 
                     android:text="See booking options"
@@ -214,201 +213,201 @@
 
     </androidx.cardview.widget.CardView>
         <!--Ispod ovoga ce se brisati jer ostaje samo kostur a kasnije cemo praviti dinamicko ucitavanje -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/gray"
-        app:cardCornerRadius="25dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/hotel1012"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray"
-            android:elevation="100dp">
+            android:layout_margin="10dp"
+            app:cardCornerRadius="25dp">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/frame_layout_image1"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:cardCornerRadius="25dp">
+                style="@style/AccommodationBackground"
+                android:elevation="100dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView1"
-                    android:layout_width="match_parent"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/frame_layout_image2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/hotel_room_101"
                     android:background="@color/gray"
-                    android:elevation="30dp"
-                    />
-
-            </androidx.cardview.widget.CardView>
-
-            <TextView
-                android:id="@+id/residenceName1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginBottom="15dp"
-                android:text="Hotel Norrebro"
-                style="@style/AccommodationTitleText"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/frame_layout_image1"
-                app:layout_constraintTop_toBottomOf="@+id/frame_layout_image1"
-                app:layout_constraintVertical_bias="0.05" />
-
-            <TextView
-                android:id="@+id/distance1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="0.4 km from city centre"
-                android:textSize="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/residenceName1" />
-
-            <TextView
-                android:id="@+id/infoText11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:layout_marginLeft="20dp"
-                android:text="Free cancelation"
-                android:textSize="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/distance1" />
-
-            <TextView
-                android:id="@+id/infoText21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="Premium room"
-                style="@style/AccommodationRateText"
-                app:layout_constraintStart_toStartOf="@+id/frame_layout_image1"
-                app:layout_constraintTop_toBottomOf="@id/infoText11" />
-            <TextView
-                android:id="@+id/infoText31"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="1 x king size bed"
-                style="@style/AccommodationSmallText"
-                app:layout_constraintStart_toStartOf="@+id/frame_layout_image1"
-                app:layout_constraintTop_toBottomOf="@id/infoText21" />
-
-            <TextView
-                android:id="@+id/infoText41"
-                style="@style/AccommodationSmallText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="1 x bathroom"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/frame_layout_image1"
-                app:layout_constraintTop_toBottomOf="@id/infoText31" />
-
-            <TextView
-                android:id="@+id/gradeText1"
-                style="@style/AccommodationRateText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="5dp"
-                android:text="Excelent"
-
-                app:layout_constraintEnd_toStartOf="@+id/cardView1"
-                app:layout_constraintTop_toBottomOf="@+id/frame_layout_image1" />
-
-            <TextView
-                android:id="@+id/textViewReviewCount1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="1,456 reviews"
-
-                android:textSize="10sp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView1"
-                app:layout_constraintTop_toBottomOf="@+id/gradeText1" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/frame_layout_image1">
-
-                <TextView
-                    android:id="@+id/textView21"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:padding="5dp"
-
-                    android:text="4.6"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/frame_layout_image1" />
-            </androidx.cardview.widget.CardView>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:cardCornerRadius="25dp">
 
-            <TextView
-                android:id="@+id/textViewPrice1"
-                style="@style/AccommodationTitleText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="230€"
-                android:layout_marginRight="20dp"
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/hotel_room_101"
+                        android:background="@color/gray"
+                        android:elevation="30dp"
+                        />
 
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewReviewCount1" />
-            <TextView
-                android:id="@+id/textViewPriceDescription1"
-                style="@style/AccommodationSmallText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="per night"
-                android:layout_marginRight="20dp"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPrice1" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/bookingCard1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="20dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPriceDescription1">
+                </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/textBooking1"
+                    android:id="@+id/residenceName2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:padding="5dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="Hotel Norrebro"
+                    style="@style/AccommodationTitleText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/frame_layout_image2"
+                    app:layout_constraintTop_toBottomOf="@+id/frame_layout_image2"
+                    app:layout_constraintVertical_bias="0.05" />
 
-                    android:text="See booking options"
-                    app:layout_constraintEnd_toEndOf="parent" />
-            </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/distance2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="0.4 km from city centre"
+                    android:textSize="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/residenceName2" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/infoText12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="20dp"
+                    android:text="Free cancelation"
+                    android:textSize="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/distance2" />
+
+                <TextView
+                    android:id="@+id/infoText22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="Premium room"
+                    style="@style/AccommodationRateText"
+                    app:layout_constraintStart_toStartOf="@+id/frame_layout_image2"
+                    app:layout_constraintTop_toBottomOf="@id/infoText12" />
+                <TextView
+                    android:id="@+id/infoText32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:text="1 x king size bed"
+                    style="@style/AccommodationSmallText"
+                    app:layout_constraintStart_toStartOf="@+id/frame_layout_image2"
+                    app:layout_constraintTop_toBottomOf="@id/infoText22" />
+
+                <TextView
+                    android:id="@+id/infoText42"
+                    style="@style/AccommodationSmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="1 x bathroom"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/frame_layout_image2"
+                    app:layout_constraintTop_toBottomOf="@id/infoText32" />
+
+                <TextView
+                    android:id="@+id/gradeText2"
+                    style="@style/AccommodationRateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Excelent"
+
+                    app:layout_constraintEnd_toStartOf="@+id/cardView2"
+                    app:layout_constraintTop_toBottomOf="@+id/frame_layout_image2" />
+
+                <TextView
+                    android:id="@+id/textViewReviewCount2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="1,456 reviews"
+
+                    android:textSize="10sp"
+                    app:layout_constraintEnd_toStartOf="@+id/cardView2"
+                    app:layout_constraintTop_toBottomOf="@+id/gradeText2" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="20dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="15dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/frame_layout_image2">
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/AccommodationButtons"
+                        android:padding="5dp"
+
+                        android:text="4.6"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/frame_layout_image2" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textViewPrice2"
+                    style="@style/AccommodationTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="230€"
+                    android:layout_marginRight="20dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewReviewCount2" />
+                <TextView
+                    android:id="@+id/textViewPriceDescription2"
+                    style="@style/AccommodationSmallText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="per night"
+                    android:layout_marginRight="20dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPrice2" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bookingCard2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="20dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="15dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewPriceDescription2">
+
+                    <TextView
+                        android:id="@+id/textBooking2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/AccommodationButtons"
+                        android:padding="5dp"
+
+                        android:text="See booking options"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 </ScrollView>
