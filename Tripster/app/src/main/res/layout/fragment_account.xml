@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     tools:context=".ui.account.AccountFragment">
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,19 +35,31 @@
                 android:layout_height="200dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/hotel_room_101"
+                android:src="@mipmap/profile_round"
                 android:background="@color/gray"
                 android:elevation="30dp"
                 />
 
         </androidx.cardview.widget.CardView>
 
+        <TextView
+            android:id="@+id/personal_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_info"
+            android:layout_marginTop="20dp"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_wrapper"
+            />
+
         <EditText
             android:id="@+id/name"
             style="@style/EditTextStyle"
             android:layout_width="320dp"
             android:layout_height="48dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:autofillHints=""
             android:background="@drawable/login_button"
             android:ems="10"
@@ -54,7 +67,7 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_wrapper" />
+            app:layout_constraintTop_toBottomOf="@id/personal_info" />
 
         <EditText
             android:id="@+id/surname"
@@ -87,36 +100,6 @@
             app:layout_constraintTop_toBottomOf="@+id/surname" />
 
         <EditText
-            android:id="@+id/password"
-            style="@style/EditTextStyle"
-            android:layout_width="320dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="20dp"
-            android:autofillHints=""
-            android:background="@drawable/login_button"
-            android:ems="10"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email" />
-
-        <EditText
-            android:id="@+id/repeated_password"
-            style="@style/EditTextStyle"
-            android:layout_width="320dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="20dp"
-            android:autofillHints=""
-            android:background="@drawable/login_button"
-            android:ems="10"
-            android:hint="@string/repeat_password"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
-
-        <EditText
             android:id="@+id/phone"
             style="@style/EditTextStyle"
             android:layout_width="320dp"
@@ -129,14 +112,26 @@
             android:inputType="phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/repeated_password" />
+            app:layout_constraintTop_toBottomOf="@+id/email" />
+
+        <TextView
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:layout_marginTop="20dp"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone"
+            />
 
         <EditText
             android:id="@+id/country"
             style="@style/EditTextStyle"
             android:layout_width="320dp"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:autofillHints=""
             android:background="@drawable/login_button"
             android:ems="10"
@@ -144,7 +139,7 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phone" />
+            app:layout_constraintTop_toBottomOf="@+id/address" />
 
         <EditText
             android:id="@+id/city"
@@ -189,32 +184,83 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postal_code" />
+            app:layout_constraintTop_toBottomOf="@id/postal_code" />
 
-        <Spinner
-            android:id="@+id/spinner"
+        <Button
+            android:id="@+id/change_password"
+            style="@style/ButtonTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/secondary_button"
+            android:text="@string/change_password"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/street_and_number" />
+
+
+        <EditText
+            android:id="@+id/current_password"
+            style="@style/EditTextStyle"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="4dp"
+            android:autofillHints=""
+            android:background="@drawable/login_button"
+            android:ems="10"
+            android:hint="@string/current_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/change_password" />
+
+        <EditText
+            android:id="@+id/new_password"
             style="@style/EditTextStyle"
             android:layout_width="320dp"
             android:layout_height="48dp"
             android:layout_marginTop="20dp"
+            android:autofillHints=""
             android:background="@drawable/login_button"
+            android:ems="10"
+            android:hint="@string/new_password"
+            android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/street_and_number" />
+            app:layout_constraintTop_toBottomOf="@+id/current_password" />
 
-<!--            <Button-->
-<!--                android:id="@+id/btnSignup"-->
-<!--                style="@style/ButtonTextStyle"-->
-<!--                android:layout_width="129dp"-->
-<!--                android:layout_height="35dp"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:background="@drawable/login_button"-->
-<!--                android:text="@string/sign_up"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/spinner" />-->
+        <EditText
+            android:id="@+id/repeat_new"
+            style="@style/EditTextStyle"
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:autofillHints=""
+            android:background="@drawable/login_button"
+            android:ems="10"
+            android:hint="@string/repeat_new_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/new_password" />
+
+
+        <Button
+            android:id="@+id/update"
+            style="@style/ButtonTextStyle"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/login_button"
+            android:text="@string/update_account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repeat_new"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
