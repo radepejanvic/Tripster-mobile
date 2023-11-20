@@ -12,4 +12,12 @@
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_filter"
         android:title="@string/title_filter" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:title="@string/title_settings" />
+
+    <item
+        android:id="@+id/navigation_logout"
+        android:title="@string/title_logout" />
 </menu>

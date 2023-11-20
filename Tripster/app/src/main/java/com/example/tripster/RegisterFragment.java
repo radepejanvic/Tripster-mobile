@@ -91,7 +91,7 @@ public class RegisterFragment extends Fragment{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
-                Toast.makeText(ARG_PARAM1,item,Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ARG_PARAM1,item,Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -101,8 +101,9 @@ public class RegisterFragment extends Fragment{
         });
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("Owner");
-        list.add("User");
+        list.add("Choose account type");
+        list.add("Guest");
+        list.add("Host");
         ArrayAdapter<String>adapter = new ArrayAdapter<>(ARG_PARAM1, android.R.layout.simple_spinner_item,list);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinner.setAdapter(adapter);

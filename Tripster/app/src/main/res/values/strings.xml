@@ -5,32 +5,46 @@
     <string name="title_reservations">Reservations</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_account">Account</string>
-
-    <string name="log_in">Log in</string>
-    <string name="register">New user? <b>Register</b></string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="forgot_password">Forgot password?</string>
-    <string name="password_again">Password again</string>
-    <string name="first_name">First name</string>
-    <string name="last_name">Last name</string>
-    <string name="phone_number">Phone number</string>
-    <string name="email">E-mail</string>
-    <string name="sign_up">Sign up</string>
-    <string name="street">Street nb</string>
-    <string name="city">City</string>
-    <string name="postal_code">Postal code</string>
-    <string name="country">Country</string>
-
     <string name="title_accommodations">Accommodations</string>
     <string name="title_reviews">Reviews</string>
     <string name="title_users">Users</string>
     <string name="title_search">Search</string>
     <string name="title_filter">Filter</string>
+    <string name="title_settings">Settings</string>
+    <string name="title_logout">Log out</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="log_in">Log in</string>
+    <string name="register">New user? <b>Register</b></string>
+    <string name="back_to_login">Already have an account? <b>Login</b></string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="phone_number">Phone number</string>
+    <string name="email">E-mail</string>
+    <string name="sign_up">Sign up</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
+    <string name="street">Street and number</string>
+    <string name="postal_code">Postal code</string>
 
-    <string name="accommodation_from_centre">from city centre</string>
-    <string name="accommodation_see_booking_options">See booking options</string>
+<!--    veljko  -->
 
+
+
+
+<!--    rade  -->
+
+
+
+
+
+<!--    trajce  -->
+
+
+
+
+    
 </resources>
