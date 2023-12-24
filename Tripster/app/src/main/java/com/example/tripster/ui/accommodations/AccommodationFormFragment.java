@@ -45,7 +45,8 @@ public class AccommodationFormFragment extends Fragment {
     private EditText country;
     private EditText city;
     private EditText postalCode;
-    private EditText streetAndNumber;
+    private EditText streetNumber;
+    private EditText street;
     private EditText description;
     private Spinner pricePolicy;
     private Spinner cancellationPolicy;
@@ -75,7 +76,8 @@ public class AccommodationFormFragment extends Fragment {
         country = binding.country;
         city = binding.city;
         postalCode = binding.postalCode;
-        streetAndNumber = binding.streetAndNumber;
+        streetNumber = binding.streetNumber;
+        street = binding.street;
         description = binding.description;
         pricePolicy = binding.pricePolicy;
         cancellationPolicy = binding.cancellationPolicy;
