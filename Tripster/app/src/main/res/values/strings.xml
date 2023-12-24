@@ -71,6 +71,14 @@
     <string name="accommodation_form_button_update">Update accommodation</string>
     <string name="accommodation_form_button_delete">Delete accommodation</string>
 
+    <string name="accommodation_form_availability_title">Accommodation availability and prices.</string>
+    <string name="accommodation_form_sub_title_availability_label">Selected date range:</string>
+    <string name="accommodation_form_availability_hint_price">Price</string>
+    <string name="accommodation_form_availability_button_add">Add price list</string>
+    <string name="accommodation_form_availability_button_update">Update price list</string>
+    <string name="accommodation_form_availability_button_disable">Disable interval</string>
+
+
     <string-array name="type_options">
         <item>Pick the type of your unit</item>
         <item>Apartment</item>
@@ -107,6 +115,13 @@
         <item>30</item>
         <item>null</item>
     </string-array>
+
+    <string-array name="availability_mode">
+        <item>Pick the action</item>
+        <item>Create new price list</item>
+        <item>Disable an interval</item>
+    </string-array>
+
     <!--    veljko  -->
 
 
