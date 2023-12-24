@@ -1,4 +1,4 @@
-package com.example.tripster.ui;
+package com.example.tripster.ui.accommodations;
 
 import androidx.lifecycle.ViewModel;
 
