@@ -153,7 +153,7 @@ public class LoginFragment extends Fragment {
                         throw new RuntimeException(e);
                     }
 
-                    SharedPreferencesManager.saveUserInfo(AUTHORIZATION, email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID());
+                    SharedPreferencesManager.saveUserInfo(AUTHORIZATION, email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID(),jwt.toString());
                     Intent intent = new Intent(AUTHORIZATION, MainActivity.class);
                     intent.putExtra("Role", role);
                     Toast.makeText(getContext(), "Welcome "+emailInput.getText().toString(), Toast.LENGTH_SHORT).show();
