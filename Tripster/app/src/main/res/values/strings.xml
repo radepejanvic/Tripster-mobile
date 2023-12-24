@@ -43,8 +43,8 @@
     <string name="accommodation_form_title_update">Hello Rade, let`s update your new accommodation!</string>
     <string name="accommodation_form_sub_title_main">We`ll start with some base info.</string>
     <string name="accommodation_form_sub_title_address">Let`s now move on to address info!</string>
-    <string name="accommodation_form_sub_title_description">Here we need as much details as possible</string>
-    <string name="accommodation_form_sub_title_additional">The more you provide, the more you`ll attract!</string>
+    <string name="accommodation_form_sub_title_description">Put as much details as possible</string>
+    <string name="accommodation_form_sub_title_additional">Provide as much as you can!</string>
     <string name="accommodation_form_sub_title_price">How would you like to price a stay.</string>
     <string name="accommodation_form_sub_title_policy">Finally tell us what is your free cancellation period policy.</string>
 
