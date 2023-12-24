@@ -17,7 +17,7 @@ public interface UserService {
             "Content-Type:application/json"
     })
     @GET("{id}")
-    Call<User> getUser(@Path("id") int id, @Body User user);
+    Call<User> getUser(@Path("id") long id);
 
     @Headers({
             "User-Agent: Mobile-Android",
@@ -31,6 +31,6 @@ public interface UserService {
             "Content-Type:application/json"
     })
     @DELETE("{id}")
-    Call<User> deleteUser(@Path("id") int id);
+    Call<User> deleteUser(@Path("id") long id);
 
 }
