@@ -35,7 +35,7 @@ public class AccommodationFormFragment extends Fragment {
     private EditText name;
     private EditText shortDescription;
     private Spinner type;
-    private Spinner reservation;
+    private Spinner reservationPolicy;
     private EditText minCap;
     private EditText maxCap;
     private EditText country;
@@ -58,7 +58,7 @@ public class AccommodationFormFragment extends Fragment {
         name = binding.name;
         shortDescription = binding.shortDescription;
         type = binding.type;
-        reservation = binding.reservationPolicy;
+        reservationPolicy = binding.reservationPolicy;
         minCap = binding.minCap;
         maxCap = binding.maxCap;
         country = binding.country;
@@ -98,6 +98,14 @@ public class AccommodationFormFragment extends Fragment {
         types.add("Studio");
         types.add("Room");
         return types;
+    }
+
+    private List<String> getReservationPolicies() {
+        List<String> policies = new ArrayList<>();
+        policies.add("Pick the reservation approval policy");
+        policies.add("Automatic approval (advised)");
+        policies.add("Manual approval");
+        return policies;
     }
 
 
