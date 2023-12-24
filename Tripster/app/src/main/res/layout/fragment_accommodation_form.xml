@@ -86,7 +86,7 @@
                 android:background="@drawable/login_button"
                 android:ems="10"
                 android:hint="@string/accommodation_form_hint_min_cap"
-                android:inputType="text"
+                android:inputType="number"
                 app:layout_constraintStart_toStartOf="@+id/short_description"
                 app:layout_constraintTop_toBottomOf="@+id/short_description" />
 
@@ -100,7 +100,7 @@
                 android:background="@drawable/login_button"
                 android:ems="10"
                 android:hint="@string/accommodation_form_hint_max_cap"
-                android:inputType="text"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="@+id/short_description"
                 app:layout_constraintTop_toBottomOf="@+id/short_description" />
 
