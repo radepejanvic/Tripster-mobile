@@ -90,4 +90,15 @@ public class AccommodationFormFragment extends Fragment {
         spinner.setAdapter(adapter);
     }
 
+
+    private List<String> getTypes() {
+        List<String> types = new ArrayList<>();
+        types.add("Pick the type of your unit");
+        types.add("Apartment");
+        types.add("Studio");
+        types.add("Room");
+        return types;
+    }
+
+
 }
