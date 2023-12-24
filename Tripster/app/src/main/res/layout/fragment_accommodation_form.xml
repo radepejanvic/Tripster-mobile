@@ -19,39 +19,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/image_wrapper"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:background="@color/gray"
-                app:layout_constraintEnd_toEndOf="parent"
+            <TextView
+                android:id="@+id/title"
+                style="@style/TitleText"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accommodation_form_title"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:cardCornerRadius="100dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@mipmap/profile_round"
-                    android:background="@color/gray"
-                    android:elevation="30dp"
-                    />
-
-            </androidx.cardview.widget.CardView>
+                />
 
             <TextView
                 android:id="@+id/personal_info"
-                android:layout_width="wrap_content"
+                style="@style/SubtitleText"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:text="@string/personal_info"
+                android:text="@string/accommodation_form_sub_title_main"
                 android:layout_marginTop="20dp"
                 android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_wrapper"
+                app:layout_constraintTop_toBottomOf="@id/title"
                 />
 
             <EditText
@@ -63,14 +56,14 @@
                 android:autofillHints=""
                 android:background="@drawable/login_button"
                 android:ems="10"
-                android:hint="@string/name"
+                android:hint="@string/accommodation_form_hint_name"
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/personal_info" />
 
             <EditText
-                android:id="@+id/surname"
+                android:id="@+id/short_description"
                 style="@style/EditTextStyle"
                 android:layout_width="320dp"
                 android:layout_height="48dp"
@@ -78,52 +71,74 @@
                 android:autofillHints=""
                 android:background="@drawable/login_button"
                 android:ems="10"
-                android:hint="@string/surname"
+                android:hint="@string/accommodation_form_hint_short_desc"
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <EditText
-                android:id="@+id/email"
+                android:id="@+id/min_cap"
                 style="@style/EditTextStyle"
-                android:layout_width="320dp"
+                android:layout_width="155dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:autofillHints=""
                 android:background="@drawable/login_button"
                 android:ems="10"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/surname" />
+                android:hint="@string/accommodation_form_hint_min_cap"
+                android:inputType="text"
+                app:layout_constraintStart_toStartOf="@id/short_description"
+                app:layout_constraintTop_toBottomOf="@+id/short_description" />
+
 
             <EditText
-                android:id="@+id/phone"
+                android:id="@+id/max_cap"
+                style="@style/EditTextStyle"
+                android:layout_width="155dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="44dp"
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/accommodation_form_hint_max_cap"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/short_description" />
+
+            <Spinner
+                android:id="@+id/type"
                 style="@style/EditTextStyle"
                 android:layout_width="320dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:autofillHints=""
                 android:background="@drawable/login_button"
-                android:ems="10"
-                android:hint="@string/phone_number"
-                android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
+                app:layout_constraintTop_toBottomOf="@+id/max_cap" />
+
+            <Spinner
+                android:id="@+id/reservation_policy"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/type" />
 
             <TextView
                 android:id="@+id/address"
-                android:layout_width="wrap_content"
+                style="@style/SubtitleText"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
-                android:text="@string/address"
+                android:text="@string/accommodation_form_sub_title_address"
                 android:layout_marginTop="20dp"
                 android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/phone"
+                app:layout_constraintTop_toBottomOf="@id/reservation_policy"
                 />
 
             <EditText
@@ -186,89 +201,107 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/postal_code" />
 
+            <TextView
+                android:id="@+id/title_description"
+                style="@style/SubtitleText"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accommodation_form_sub_title_description"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/street_and_number"
+                />
+
+            <EditText
+                android:id="@+id/description"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/accommodation_form_hint_description"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_description" />
+
+            <TextView
+                android:id="@+id/title_amenities"
+                style="@style/SubtitleText"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accommodation_form_sub_title_additional"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                />
+
+            <Spinner
+                android:id="@+id/price_policy"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_amenities" />
+
+            <Spinner
+                android:id="@+id/cancellation_policy"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/price_policy" />
+
             <Button
-                android:id="@+id/change_password"
+                android:id="@+id/register"
                 style="@style/ButtonTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/secondary_button"
-                android:text="@string/change_password"
-                android:textStyle="normal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/street_and_number" />
-
-
-            <EditText
-                android:id="@+id/current_password"
-                style="@style/EditTextStyle"
-                android:layout_width="320dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="4dp"
-                android:autofillHints=""
-                android:background="@drawable/login_button"
-                android:ems="10"
-                android:hint="@string/current_password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/change_password" />
-
-            <EditText
-                android:id="@+id/new_password"
-                style="@style/EditTextStyle"
-                android:layout_width="320dp"
+                android:layout_width="200dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:autofillHints=""
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/login_button"
-                android:ems="10"
-                android:hint="@string/new_password"
-                android:inputType="textPassword"
+                android:text="@string/accommodation_form_button_register"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/current_password" />
-
-            <EditText
-                android:id="@+id/repeat_new"
-                style="@style/EditTextStyle"
-                android:layout_width="320dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="20dp"
-                android:autofillHints=""
-                android:background="@drawable/login_button"
-                android:ems="10"
-                android:hint="@string/repeat_new_password"
-                android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/new_password" />
-
+                app:layout_constraintTop_toBottomOf="@id/cancellation_policy" />
 
             <Button
                 android:id="@+id/update"
                 style="@style/ButtonTextStyle"
-                android:layout_width="140dp"
-                android:layout_height="35dp"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_button"
-                android:text="@string/update_account"
+                android:text="@string/accommodation_form_button_update"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/repeat_new" />
+                app:layout_constraintTop_toBottomOf="@id/register" />
 
             <Button
                 android:id="@+id/delete"
                 style="@style/ButtonTextStyle"
-                android:layout_width="140dp"
-                android:layout_height="35dp"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/login_button"
                 android:textColor="@color/red"
-                android:text="@string/delete_account"
+                android:text="@string/accommodation_form_button_delete"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/update"
