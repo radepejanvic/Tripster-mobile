@@ -49,6 +49,9 @@ public class LoginFragment extends Fragment {
     private String mParam2;
     private EditText emailInput;
     private EditText passwordInput;
+    private Button btnLogin;
+
+    private Button btnRegister;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -89,7 +92,7 @@ public class LoginFragment extends Fragment {
 
         emailInput = binding.name;
         passwordInput = binding.surname;
-        Button btnLogin = view.findViewById(R.id.btnLogin);
+        btnLogin = binding.btnLogin;
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +113,7 @@ public class LoginFragment extends Fragment {
 
             }
         });
-        Button btnRegister = view.findViewById(R.id.btnRegister);
+        btnRegister = binding.btnRegister;
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
