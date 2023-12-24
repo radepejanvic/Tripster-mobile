@@ -69,10 +69,15 @@ public class AccommodationFormFragment extends Fragment {
         pricePolicy = binding.pricePolicy;
         cancellationPolicy = binding.cancellationPolicy;
 
+        spinnerSetUp(type, R.array.type_options);
+        spinnerSetUp(type, R.array.reservation_policy_options);
+        spinnerSetUp(type, R.array.pricing_policy_options);
+        spinnerSetUp(type, R.array.cancellation_policy_options);
+
         return root;
     }
 
-    private void spinnerSetUp(Spinner spinner, ArrayList<String> options) {
+    private void spinnerSetUp(Spinner spinner, int options) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
