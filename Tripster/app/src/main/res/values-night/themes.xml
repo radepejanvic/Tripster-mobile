@@ -35,6 +35,15 @@
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">12dp</item>
     </style>
+
+    <style name="TitleText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="SubtitleText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16dp</item>
+    </style>
+
     <style name="AccommodationBackground">
         <item name="android:background">@color/darkGrey</item>
     </style>
