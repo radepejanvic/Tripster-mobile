@@ -133,38 +133,6 @@ public class AccommodationFormFragment extends Fragment {
     }
 
 
-//    private void spinnerSetUp(Spinner spinner, int optionsResId) {
-//        // Set up item selection listener
-//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String item = parent.getItemAtPosition(position).toString();
-//                // Handle the selected item
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//                // Handle no selection
-//            }
-//        });
-//
-//        // Retrieve the string array from resources
-//        String[] options = getResources().getStringArray(optionsResId);
-//
-//        // Set up ArrayAdapter with the string array
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-//                spinner.getContext(),
-//                android.R.layout.simple_spinner_item,
-//                options
-//        );
-//
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        // Set the adapter to the spinner
-//        spinner.setAdapter(adapter);
-//    }
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
