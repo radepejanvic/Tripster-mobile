@@ -1,8 +1,6 @@
 package com.example.tripster;
 
 import android.app.AlertDialog;
-import android.content.Intent;
-import android.opengl.EGLExt;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,17 +12,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentRegisterBinding;
 import com.example.tripster.model.User;
-import com.example.tripster.model.UserType;
+import com.example.tripster.model.enums.UserType;
 import com.example.tripster.util.Validator;
 
-import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 
 import retrofit2.Call;

@@ -1,6 +1,6 @@
 package com.example.tripster.model;
 
-import android.text.Editable;
+import com.example.tripster.model.enums.UserType;
 
 public class User {
 

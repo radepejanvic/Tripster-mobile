@@ -7,7 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.tripster.databinding.ActivityMainBinding;
-import com.example.tripster.model.UserType;
+import com.example.tripster.model.enums.UserType;
 import com.example.tripster.util.SharedPreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
