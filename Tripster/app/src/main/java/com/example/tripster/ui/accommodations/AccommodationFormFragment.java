@@ -108,5 +108,13 @@ public class AccommodationFormFragment extends Fragment {
         return policies;
     }
 
+    private List<String> getPricingPolicies() {
+        List<String> policies = new ArrayList<>();
+        policies.add("Pick the pricing policy");
+        policies.add("Per night (advised)");
+        policies.add("Per guest per night");
+        return policies;
+    }
+
 
 }
