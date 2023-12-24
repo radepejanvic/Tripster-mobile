@@ -50,6 +50,27 @@ public class Accommodation {
 
     public Accommodation() {}
 
+    public Accommodation(String name, Long ownerId, String country,
+                         String city, String zipCode, String street, String number,
+                         String shortDescription, String description, int minCap, int maxCap, int cancelDuration,
+                         AccommodationType type, boolean automaticReservation, boolean pricePerNight) {
+        this.name = name;
+        this.ownerId = ownerId;
+        this.country = country;
+        this.city = city;
+        this.zipCode = zipCode;
+        this.street = street;
+        this.number = number;
+        this.shortDescription = shortDescription;
+        this.description = description;
+        this.minCap = minCap;
+        this.maxCap = maxCap;
+        this.cancelDuration = cancelDuration;
+        this.type = type;
+        this.automaticReservation = automaticReservation;
+        this.pricePerNight = pricePerNight;
+    }
+
     public Long getId() {
         return id;
     }
@@ -216,5 +237,32 @@ public class Accommodation {
 
     public void setPricePerNight(boolean pricePerNight) {
         this.pricePerNight = pricePerNight;
+    }
+
+    @Override
+    public String toString() {
+        return "Accommodation{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ownerId=" + ownerId +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", description='" + description + '\'' +
+                ", amenities=" + amenities +
+                ", minCap=" + minCap +
+                ", maxCap=" + maxCap +
+                ", cancelDuration=" + cancelDuration +
+                ", type=" + type +
+                ", automaticReservation=" + automaticReservation +
+                ", status=" + status +
+                ", calendar=" + calendar +
+                ", rating=" + rating +
+                ", numOfReviews=" + numOfReviews +
+                ", pricePerNight=" + pricePerNight +
+                '}';
     }
 }
