@@ -39,11 +39,12 @@ public class User {
         this.number = number;
     }
 
-    public User(long id, String email, UserType type, long personID) {
+    public User(long id, String email, UserType type, long personID,String jwt) {
         this.userID = id;
         this.email = email;
         this.userType = type;
         this.personID = personID;
+        this.token = jwt;
     }
 
     public User(String email, String password) {
