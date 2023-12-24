@@ -40,6 +40,7 @@
     <string name="delete_account">Delete account</string>
 
     <string name="accommodation_form_title">Hello Rade, let`s register your new accommodation!</string>
+    <string name="accommodation_form_title_update">Hello Rade, let`s update your new accommodation!</string>
     <string name="accommodation_form_sub_title_main">We`ll start with some base info.</string>
     <string name="accommodation_form_sub_title_address">Let`s now move on to address info!</string>
     <string name="accommodation_form_sub_title_description">Here we need as much details as possible</string>
@@ -62,6 +63,10 @@
     <string name="accommodation_form_hint_street">Street</string>
     <string name="accommodation_form_hint_number">Number</string>
     <string name="accommodation_form_hint_description">Description</string>
+
+    <string name="accommodation_form_button_register">Register accommodation</string>
+    <string name="accommodation_form_button_update">Update accommodation</string>
+    <string name="accommodation_form_button_delete">Delete accommodation</string>
 
 
 <!--    veljko  -->
