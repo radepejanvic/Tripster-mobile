@@ -1,5 +1,6 @@
 package com.example.tripster.client;
 
+import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.User;
 
 import retrofit2.Call;
@@ -13,6 +14,6 @@ public interface AccommodationService {
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
-    @POST()
-    Call<User> save(@Body User user);
+    @POST("accommodations")
+    Call<Accommodation> save(@Body Accommodation accommodation);
 }
