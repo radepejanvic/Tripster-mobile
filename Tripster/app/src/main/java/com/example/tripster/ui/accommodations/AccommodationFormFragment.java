@@ -91,30 +91,4 @@ public class AccommodationFormFragment extends Fragment {
     }
 
 
-    private List<String> getTypes() {
-        List<String> types = new ArrayList<>();
-        types.add("Pick the type of your unit");
-        types.add("Apartment");
-        types.add("Studio");
-        types.add("Room");
-        return types;
-    }
-
-    private List<String> getReservationPolicies() {
-        List<String> policies = new ArrayList<>();
-        policies.add("Pick the reservation approval policy");
-        policies.add("Automatic approval (advised)");
-        policies.add("Manual approval");
-        return policies;
-    }
-
-    private List<String> getPricingPolicies() {
-        List<String> policies = new ArrayList<>();
-        policies.add("Pick the pricing policy");
-        policies.add("Per night (advised)");
-        policies.add("Per guest per night");
-        return policies;
-    }
-
-
 }

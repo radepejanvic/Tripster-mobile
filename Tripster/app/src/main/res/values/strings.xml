@@ -68,8 +68,46 @@
     <string name="accommodation_form_button_update">Update accommodation</string>
     <string name="accommodation_form_button_delete">Delete accommodation</string>
 
+    <string-array name="type_options">
+        <item>Pick the type of your unit</item>
+        <item>Apartment</item>
+        <item>Studio</item>
+        <item>Room</item>
+    </string-array>
 
-<!--    veljko  -->
+    <string-array name="reservation_policy_options">
+        <item>Pick the reservation approval policy</item>
+        <item>Automatic approval (advised)</item>
+        <item>Manual approval</item>
+    </string-array>
+
+    <string-array name="pricing_policy_options">
+        <item>Pick the pricing policy</item>
+        <item>Per night (advised)</item>
+        <item>Per guest per night</item>
+    </string-array>
+
+    <string-array name="cancellation_policy_options">
+        <item>Pick the cancellation policy</item>
+        <item>3 days before</item>
+        <item>7 days before</item>
+        <item>14 days before</item>
+        <item>1 month before</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="cancellation_policy_values">
+        <item>null</item>
+        <item>3</item>
+        <item>7</item>
+        <item>14</item>
+        <item>30</item>
+        <item>null</item>
+    </string-array>
+
+
+
+    <!--    veljko  -->
 
 
 
