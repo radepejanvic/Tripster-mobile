@@ -36,6 +36,14 @@
         <item name="android:textSize">12dp</item>
     </style>
 
+    <style name="TitleText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="SubtitleText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16dp</item>
+    </style>
+
     <style name="Accommodation">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20dp</item>

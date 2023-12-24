@@ -11,6 +11,7 @@
     <string name="title_search">Search</string>
     <string name="title_filter">Filter</string>
     <string name="title_settings">Settings</string>
+    <string name="title_accommodation_form">Add unit</string>
     <string name="title_logout">Log out</string>
 
     <string name="log_in">Log in</string>
@@ -41,6 +42,71 @@
     <string name="delete_account">Delete account</string>
     <string name="dialog_message" />
 
+    <string name="accommodation_form_title">Hello Rade, let`s register your new accommodation!</string>
+    <string name="accommodation_form_title_update">Hello Rade, let`s update your new accommodation!</string>
+    <string name="accommodation_form_sub_title_main">We`ll start with some base info.</string>
+    <string name="accommodation_form_sub_title_address">Let`s now move on to address info!</string>
+    <string name="accommodation_form_sub_title_description">Put as much details as possible</string>
+    <string name="accommodation_form_sub_title_additional">Provide as much as you can!</string>
+    <string name="accommodation_form_sub_title_price">How would you like to price a stay.</string>
+    <string name="accommodation_form_sub_title_policy">Finally tell us what is your free cancellation period policy.</string>
+
+    <string name="accommodation_form_label_name">Something unique and authentic</string>
+    <string name="accommodation_form_label_short_desc">Make it short and memorable</string>
+    <string name="accommodation_form_label_num_of_guests">Make it as flexible as possible</string>
+    <string name="accommodation_form_label_name_desc">Describe it to the fullest of details</string>
+
+    <string name="accommodation_form_hint_name">Accommodation name</string>
+    <string name="accommodation_form_hint_short_desc">Short description</string>
+    <string name="accommodation_form_hint_min_cap">Minimal capacity</string>
+    <string name="accommodation_form_hint_max_cap">Maximal capacity</string>
+    <string name="accommodation_form_hint_country">Country</string>
+    <string name="accommodation_form_hint_city">City</string>
+    <string name="accommodation_form_hint_zip_code">Zip code</string>
+    <string name="accommodation_form_hint_street">Street</string>
+    <string name="accommodation_form_hint_number">Number</string>
+    <string name="accommodation_form_hint_description">Description</string>
+
+    <string name="accommodation_form_button_register">Register accommodation</string>
+    <string name="accommodation_form_button_update">Update accommodation</string>
+    <string name="accommodation_form_button_delete">Delete accommodation</string>
+
+    <string-array name="type_options">
+        <item>Pick the type of your unit</item>
+        <item>Apartment</item>
+        <item>Studio</item>
+        <item>Room</item>
+    </string-array>
+
+    <string-array name="reservation_policy_options">
+        <item>Pick the reservation approval policy</item>
+        <item>Automatic approval (advised)</item>
+        <item>Manual approval</item>
+    </string-array>
+
+    <string-array name="pricing_policy_options">
+        <item>Pick the pricing policy</item>
+        <item>Per night (advised)</item>
+        <item>Per guest per night</item>
+    </string-array>
+
+    <string-array name="cancellation_policy_options">
+        <item>Pick the cancellation policy</item>
+        <item>3 days before</item>
+        <item>7 days before</item>
+        <item>14 days before</item>
+        <item>1 month before</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="cancellation_policy_values">
+        <item>null</item>
+        <item>3</item>
+        <item>7</item>
+        <item>14</item>
+        <item>30</item>
+        <item>null</item>
+    </string-array>
     <!--    veljko  -->
 
 

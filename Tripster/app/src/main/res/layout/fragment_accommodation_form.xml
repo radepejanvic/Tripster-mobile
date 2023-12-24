@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.accommodations.AccommodationFormFragment">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/TitleText"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accommodation_form_title"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/personal_info"
+                style="@style/SubtitleText"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accommodation_form_sub_title_main"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                />
+
+            <EditText
+                android:id="@+id/name"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/accommodation_form_hint_name"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/personal_info" />
+
+            <EditText
+                android:id="@+id/short_description"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/accommodation_form_hint_short_desc"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name" />
+
+            <EditText
+                android:id="@+id/min_cap"
+                style="@style/EditTextStyle"
+                android:layout_width="155dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/accommodation_form_hint_min_cap"
+                android:inputType="text"
+                app:layout_constraintStart_toStartOf="@+id/short_description"
+                app:layout_constraintTop_toBottomOf="@+id/short_description" />
+
+
+            <EditText
+                android:id="@+id/max_cap"
+                style="@style/EditTextStyle"
+                android:layout_width="155dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/accommodation_form_hint_max_cap"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="@+id/short_description"
+                app:layout_constraintTop_toBottomOf="@+id/short_description" />
+
+            <Spinner
+                android:id="@+id/type"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/max_cap" />
+
+            <Spinner
+                android:id="@+id/reservation_policy"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/type" />
+
+            <TextView
+                android:id="@+id/address"
+                style="@style/SubtitleText"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accommodation_form_sub_title_address"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reservation_policy"
+                />
+
+            <EditText
+                android:id="@+id/country"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/country"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address" />
+
+            <EditText
+                android:id="@+id/city"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/city"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <EditText
+                android:id="@+id/postal_code"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/postal_code"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/city" />
+
+            <EditText
+                android:id="@+id/street_and_number"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/street"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/postal_code" />
+
+            <TextView
+                android:id="@+id/title_description"
+                style="@style/SubtitleText"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accommodation_form_sub_title_description"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/street_and_number"
+                />
+
+            <EditText
+                android:id="@+id/description"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/accommodation_form_hint_description"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_description" />
+
+            <TextView
+                android:id="@+id/title_amenities"
+                style="@style/SubtitleText"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:text="@string/accommodation_form_sub_title_additional"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorOnPrimary"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                />
+
+            <Spinner
+                android:id="@+id/price_policy"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_amenities" />
+
+            <Spinner
+                android:id="@+id/cancellation_policy"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/login_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/price_policy" />
+
+            <Button
+                android:id="@+id/register"
+                style="@style/ButtonTextStyle"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/login_button"
+                android:text="@string/accommodation_form_button_register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cancellation_policy" />
+
+            <Button
+                android:id="@+id/update"
+                style="@style/ButtonTextStyle"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/login_button"
+                android:text="@string/accommodation_form_button_update"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/register" />
+
+            <Button
+                android:id="@+id/delete"
+                style="@style/ButtonTextStyle"
+                android:layout_width="200dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/login_button"
+                android:textColor="@color/red"
+                android:text="@string/accommodation_form_button_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/update"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

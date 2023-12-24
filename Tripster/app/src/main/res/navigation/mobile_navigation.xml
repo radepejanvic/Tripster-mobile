@@ -52,6 +52,10 @@
         android:name="com.example.tripster.SingleAccommodationFragment"
         android:label="fragment_single_accommodation"
         tools:layout="@layout/fragment_single_accommodation" />
-
+    <fragment
+        android:id="@+id/navigation_accommodation_form"
+        android:name="com.example.tripster.ui.accommodations.AccommodationFormFragment"
+        android:label="fragment_accommodation_form"
+        tools:layout="@layout/fragment_accommodation_form" />
 
 </navigation>
