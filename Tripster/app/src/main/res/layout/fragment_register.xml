@@ -151,13 +151,13 @@
                 android:background="@drawable/login_button"
                 android:ems="10"
                 android:hint="@string/postal_code"
-                android:inputType="text"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/city" />
 
             <EditText
-                android:id="@+id/street_and_number"
+                android:id="@+id/street"
                 style="@style/EditTextStyle"
                 android:layout_width="320dp"
                 android:layout_height="48dp"
@@ -171,6 +171,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/postal_code" />
 
+            <EditText
+                android:id="@+id/streetNumber"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/street_number"
+                android:inputType="number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/street" />
+
             <Spinner
                 android:id="@+id/spinner"
                 style="@style/EditTextStyle"
@@ -180,7 +195,7 @@
                 android:background="@drawable/login_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/street_and_number" />
+                app:layout_constraintTop_toBottomOf="@+id/streetNumber" />
 
             <Button
                 android:id="@+id/btnSignup"
