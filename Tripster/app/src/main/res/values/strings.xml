@@ -116,7 +116,7 @@
         <item>null</item>
     </string-array>
 
-    <string-array name="availability_mode">
+    <string-array name="availability_mode_options">
         <item>Pick the action</item>
         <item>Create new price list</item>
         <item>Disable an interval</item>
