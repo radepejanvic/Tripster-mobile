@@ -1,5 +1,7 @@
 package com.example.tripster.ui.accommodations;
 
+import static androidx.navigation.ViewKt.findNavController;
+
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -48,6 +50,10 @@ public class AccommodationFormFragment extends Fragment {
     private Spinner pricePolicy;
     private Spinner cancellationPolicy;
 
+    private Button register;
+    private Button update;
+    private Button delete;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -73,11 +79,22 @@ public class AccommodationFormFragment extends Fragment {
         description = binding.description;
         pricePolicy = binding.pricePolicy;
         cancellationPolicy = binding.cancellationPolicy;
+        register = binding.register;
+        update = binding.update;
+        delete = binding.delete;
 
         spinnerSetUp(type, R.array.type_options);
         spinnerSetUp(reservationPolicy, R.array.reservation_policy_options);
         spinnerSetUp(pricePolicy, R.array.pricing_policy_options);
         spinnerSetUp(cancellationPolicy, R.array.cancellation_policy_options);
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findNavController(v).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+            }
+        });
+
 
         return root;
     }
