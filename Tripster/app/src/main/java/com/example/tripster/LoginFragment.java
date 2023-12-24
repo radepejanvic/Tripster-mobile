@@ -14,12 +14,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.tripster.client.ClientUtils;
-import com.example.tripster.databinding.FragmentAccommodationsBinding;
 import com.example.tripster.databinding.FragmentLoginBinding;
 import com.example.tripster.model.User;
 import com.example.tripster.model.UserType;
 import com.example.tripster.util.SharedPreferencesManager;
-import com.google.android.material.textfield.TextInputEditText;
+import com.example.tripster.util.Validator;
 import com.nimbusds.jose.shaded.json.JSONArray;
 import com.nimbusds.jose.shaded.json.JSONObject;
 import com.nimbusds.jwt.JWT;
@@ -27,12 +26,7 @@ import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.JWTParser;
 
 
-import org.json.JSONException;
-
-
 import java.text.ParseException;
-import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -99,9 +93,21 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("REZ", emailInput.getText().toString()+" "+passwordInput.getText().toString());
-                User user = new User(emailInput.getText().toString(),passwordInput.getText().toString());
-                postLogin(user);
+
+                String email = emailInput.getText().toString().trim();
+                String password = passwordInput.getText().toString().trim();
+
+                if(email.isEmpty() || password.isEmpty()){
+                    Toast.makeText(getContext(), "All fields must be fill!", Toast.LENGTH_SHORT).show();
+                }else if(!Validator.isValidEmail(email)){
+                    Toast.makeText(getContext(), "Email is in wrong format", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    User user = new User(emailInput.getText().toString(),passwordInput.getText().toString());
+                    postLogin(user);
+                }
+
+
             }
         });
         Button btnRegister = view.findViewById(R.id.btnRegister);
@@ -152,21 +158,31 @@ public class LoginFragment extends Fragment {
                     AUTHORIZATION.finish();
                 }else{
                     Log.d("REZ","Meesage recieved: "+response.code());
-                    openDialog();
+                    openDialog(response);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
-//                Toast.makeText(getContext(), "Welcome "+emailInput.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void openDialog() {
+    private void openDialog(Response<User> response) {
+        switch (response.code()) {
+            case 404:
+                Toast.makeText(getContext(), "User doesn't exist.", Toast.LENGTH_SHORT).show();
+                break;
+            case 403:
+                Toast.makeText(getContext(), "User doesn't exist.", Toast.LENGTH_SHORT).show();
+                break;
+            case 401:
+                Toast.makeText(getContext(), "User is suspended.", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
     }
-
-    ;
 
 }
