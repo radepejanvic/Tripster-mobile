@@ -28,16 +28,20 @@ public class ClientUtils {
                 .readTimeout(120, TimeUnit.SECONDS)
                 .writeTimeout(120, TimeUnit.SECONDS)
                 .addInterceptor(interceptor);
-        builder.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request originalRequest = chain.request();
-                Request.Builder builder = originalRequest.newBuilder()
-                        .header("Authorization", "Bearer " + authToken);
-                Request newRequest = builder.build();
-                return chain.proceed(newRequest);
-            }
-        });
+
+        if (!authToken.equals("")){
+            builder.addInterceptor(new Interceptor() {
+                @Override
+                public Response intercept(Chain chain) throws IOException {
+                    Request originalRequest = chain.request();
+                    Request.Builder builder = originalRequest.newBuilder()
+                            .header("Authorization", "Bearer " + authToken);
+                    Request newRequest = builder.build();
+                    return chain.proceed(newRequest);
+                }
+            });
+        }
+
 
         return builder.build();
     }
