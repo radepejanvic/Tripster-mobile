@@ -11,28 +11,43 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
+import com.example.tripster.AuthorizationActivity;
+import com.example.tripster.MainActivity;
 import com.example.tripster.R;
+
+import java.util.ArrayList;
 
 public class AccommodationFormFragment extends Fragment {
 
-    private AccommodationFormViewModel mViewModel;
-
-    public static AccommodationFormFragment newInstance() {
-        return new AccommodationFormFragment();
-    }
+    private static MainActivity ARG_PARAM1 = new MainActivity();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_accommodation_form, container, false);
+
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(AccommodationFormViewModel.class);
-        // TODO: Use the ViewModel
+    private void spinnerSetUp(Spinner spinner, ArrayList<String> options) {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        ArrayAdapter<String>adapter = new ArrayAdapter<>(ARG_PARAM1, android.R.layout.simple_spinner_item, options);
+        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        spinner.setAdapter(adapter);
     }
 
 }
