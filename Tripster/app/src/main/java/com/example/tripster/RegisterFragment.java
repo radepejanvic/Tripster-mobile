@@ -1,5 +1,6 @@
 package com.example.tripster;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.opengl.EGLExt;
 import android.os.Bundle;
@@ -12,11 +13,23 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.tripster.client.ClientUtils;
+import com.example.tripster.databinding.FragmentRegisterBinding;
+import com.example.tripster.model.User;
+import com.example.tripster.model.UserType;
+import com.example.tripster.util.Validator;
+
+import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,13 +38,11 @@ import java.util.ArrayList;
  */
 public class RegisterFragment extends Fragment{
 
-    private static AuthorizationActivity ARG_PARAM1 = new AuthorizationActivity();
-    private static final String ARG_PARAM2 = "param2";
+    private static AuthorizationActivity AUTHORIZATION = new AuthorizationActivity();
 
-    // TODO: Rename and change types of parameters
-    private AuthorizationActivity mParam1;
-    private String mParam2;
+    private AuthorizationActivity authorizationActivity;
 
+    private String item;
     public RegisterFragment() {
         // Required empty public constructor
     }
@@ -48,8 +59,7 @@ public class RegisterFragment extends Fragment{
     public static RegisterFragment newInstance(AuthorizationActivity param1, String param2) {
         RegisterFragment fragment = new RegisterFragment();
         Bundle args = new Bundle();
-        ARG_PARAM1 = param1;
-        args.putString(ARG_PARAM2, param2);
+        AUTHORIZATION = param1;
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,10 +67,6 @@ public class RegisterFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
 
     }
 
@@ -70,45 +76,113 @@ public class RegisterFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout
         View view =  inflater.inflate(R.layout.fragment_register, container, false);
-        Button btnSignUp = view.findViewById(R.id.btnSignup);
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ARG_PARAM1, MainActivity.class);
-                startActivity(intent);
-                ARG_PARAM1.finish();
-            }
-        });
-        Button btnLogin = view.findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentTransition.to(LoginFragment.newInstance(ARG_PARAM1, "Ovo je fragment 1"), ARG_PARAM1, false, R.id.downView);
-            }
-        });
-        Spinner spinner = view.findViewById(R.id.spinner);
+        FragmentRegisterBinding binding = FragmentRegisterBinding.bind(view);
+
+        Spinner spinner = binding.spinner;
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
-//                Toast.makeText(ARG_PARAM1,item,Toast.LENGTH_SHORT).show();
+                item = parent.getItemAtPosition(position).toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                item = parent.getItemAtPosition(0).toString();
             }
         });
 
         ArrayList<String> list = new ArrayList<>();
-        list.add("Choose account type");
         list.add("Guest");
         list.add("Host");
-        ArrayAdapter<String>adapter = new ArrayAdapter<>(ARG_PARAM1, android.R.layout.simple_spinner_item,list);
+        ArrayAdapter<String>adapter = new ArrayAdapter<>(AUTHORIZATION, android.R.layout.simple_spinner_item,list);
         adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
         spinner.setAdapter(adapter);
 
+        EditText name = binding.name;
+        EditText surname = binding.surname;
+        EditText email = binding.email;
+        EditText password = binding.password;
+        EditText repeated_password = binding.repeatedPassword;
+        EditText phone = binding.phone;
+        EditText country = binding.country;
+        EditText city = binding.city;
+        EditText postal_code = binding.postalCode;
+        EditText street = binding.street;
+        EditText streetNumber = binding.streetNumber;
+
+
+        Button btnSignUp = binding.btnSignup;
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String emailText = email.getText().toString().trim();
+                String nameText = name.getText().toString().trim();
+                String surnameText = surname.getText().toString().trim();
+                String passwordText = password.getText().toString().trim();
+                String repPasswordText = repeated_password.getText().toString().trim();
+                String phoneText = phone.getText().toString().trim();
+                String countryText = country.getText().toString().trim();
+                String cityText = city.getText().toString().trim();
+                String postal_codeText = postal_code.getText().toString().trim();
+                String streetText = street.getText().toString().trim();
+                String streetNumberText = streetNumber.getText().toString().trim();
+                if(emailText.isEmpty() || nameText.isEmpty() || surnameText.isEmpty() || passwordText.isEmpty()
+                || repPasswordText.isEmpty() || phoneText.isEmpty() || countryText.isEmpty() || cityText.isEmpty()
+                || postal_codeText.isEmpty() || streetText.isEmpty() || streetNumberText.isEmpty()){
+                    Toast.makeText(getContext(), "All fields must be filled!", Toast.LENGTH_SHORT).show();
+                }else if(!Validator.isValidEmail(emailText)){
+                    Toast.makeText(getContext(), "Email is in wrong format", Toast.LENGTH_SHORT).show();
+                }else if(!Validator.isValidPhone(phoneText)){
+                    Toast.makeText(getContext(), "Phone is in wrong format", Toast.LENGTH_SHORT).show();
+                } else if (!passwordText.equals(repPasswordText)) {
+                    Toast.makeText(getContext(), "Password don't match.", Toast.LENGTH_SHORT).show();
+                } else{
+                    User user = new User(emailText,passwordText, UserType.valueOf(item.toUpperCase()), nameText,
+                            surnameText,phoneText,countryText,cityText,
+                            postal_codeText,streetText,streetNumberText);
+                    postRegister(user);
+                }
+
+            }
+        });
+
+        Button btnLogin = view.findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransition.to(LoginFragment.newInstance(AUTHORIZATION, "Ovo je fragment 1"), AUTHORIZATION, false, R.id.downView);
+            }
+        });
         return view;
+    }
+
+    private void postRegister(User user){
+        Call<User> call = ClientUtils.authService.register(user);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                if(response.code() == 201){
+                    builder.setTitle("You have successfully registered.")
+                            .setMessage("Go to the mail to be verified.");
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                    FragmentTransition.to(LoginFragment.newInstance(AUTHORIZATION, "Ovo je fragment 1"), AUTHORIZATION, false, R.id.downView);
+                }else{
+                    builder.setMessage("E-mail doesn't exist.");
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
     }
 
 

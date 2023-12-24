@@ -7,6 +7,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.tripster.databinding.ActivityMainBinding;
+import com.example.tripster.model.UserType;
+import com.example.tripster.util.SharedPreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -37,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         navigationBar = binding.navBar;
 
-//        userType = UserType.randomUserType();
-        userType = UserType.HOST;
+        userType = UserType.valueOf(getIntent().getStringExtra("Role"));
 
-//        navigationBar.getMenu().findItem(R.id.navigation_reservations).setVisible(false);
 
         navigationBar.inflateMenu(getRoleMenu());
 
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.navigation_logout) {
+            SharedPreferencesManager.clearUserInfo(this);
             Intent intent = new Intent(this, AuthorizationActivity.class);
             startActivity(intent);
             finish();
