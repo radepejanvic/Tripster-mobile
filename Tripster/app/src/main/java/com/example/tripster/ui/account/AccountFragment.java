@@ -19,7 +19,6 @@ import com.example.tripster.ui.DummyUser;
 
 public class AccountFragment extends Fragment {
 
-
     private FragmentAccountBinding binding;
 
     private ScrollView scrollView;

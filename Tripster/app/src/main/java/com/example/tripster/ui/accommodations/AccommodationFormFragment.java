@@ -1,7 +1,9 @@
 package com.example.tripster.ui.accommodations;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,18 +19,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.tripster.AuthorizationActivity;
 import com.example.tripster.MainActivity;
 import com.example.tripster.R;
 import com.example.tripster.databinding.FragmentAccommodationFormBinding;
+import com.example.tripster.ui.account.AccountViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AccommodationFormFragment extends Fragment {
-
-    private static MainActivity ARG_PARAM1 = new MainActivity();
 
     private FragmentAccommodationFormBinding binding;
     private ScrollView scrollView;
@@ -51,6 +53,9 @@ public class AccommodationFormFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        AccommodationFormViewModel accommodationFormViewModel =
+                new ViewModelProvider(this).get(AccommodationFormViewModel.class);
+
         binding = FragmentAccommodationFormBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -70,30 +75,100 @@ public class AccommodationFormFragment extends Fragment {
         cancellationPolicy = binding.cancellationPolicy;
 
         spinnerSetUp(type, R.array.type_options);
-        spinnerSetUp(type, R.array.reservation_policy_options);
-        spinnerSetUp(type, R.array.pricing_policy_options);
-        spinnerSetUp(type, R.array.cancellation_policy_options);
+        spinnerSetUp(reservationPolicy, R.array.reservation_policy_options);
+        spinnerSetUp(pricePolicy, R.array.pricing_policy_options);
+        spinnerSetUp(cancellationPolicy, R.array.cancellation_policy_options);
 
         return root;
     }
 
-    private void spinnerSetUp(Spinner spinner, int options) {
+    private void spinnerSetUp(Spinner spinner, int optionsResId) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
+                // Handle item selection
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                if (position == 0) {
+                    // Handle the case where the first item is selected
+                } else {
+                    // Handle other selections
+                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                // Handle no selection
             }
         });
 
-        ArrayAdapter<String>adapter = new ArrayAdapter<>(ARG_PARAM1, android.R.layout.simple_spinner_item, options);
-        adapter.setDropDownViewResource(android.R.layout.select_dialog_singlechoice);
+        String[] options = getResources().getStringArray(optionsResId);
+
+        // Create a custom adapter to disable the first item
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                spinner.getContext(),
+                android.R.layout.simple_spinner_item,
+                options
+        ) {
+            @Override
+            public boolean isEnabled(int position) {
+                return position != 0; // Disable the first item
+            }
+
+            @Override
+            public View getDropDownView(int position, View convertView, @NonNull ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                if (position == 0) {
+                    // Disable the first item in the dropdown
+                    view.setEnabled(false);
+                    TextView textView = (TextView) view;
+                    textView.setTextColor(ContextCompat.getColor(getContext(), R.color.hint)); // Optionally change the color of disabled item
+                }
+                return view;
+            }
+        };
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinner.setAdapter(adapter);
     }
 
+
+//    private void spinnerSetUp(Spinner spinner, int optionsResId) {
+//        // Set up item selection listener
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String item = parent.getItemAtPosition(position).toString();
+//                // Handle the selected item
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//                // Handle no selection
+//            }
+//        });
+//
+//        // Retrieve the string array from resources
+//        String[] options = getResources().getStringArray(optionsResId);
+//
+//        // Set up ArrayAdapter with the string array
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+//                spinner.getContext(),
+//                android.R.layout.simple_spinner_item,
+//                options
+//        );
+//
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        // Set the adapter to the spinner
+//        spinner.setAdapter(adapter);
+//    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 
 }
