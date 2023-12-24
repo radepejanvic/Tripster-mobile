@@ -28,7 +28,8 @@
     <string name="sign_up">Sign up</string>
     <string name="country">Country</string>
     <string name="city">City</string>
-    <string name="street">Street and number</string>
+    <string name="street">Street </string>
+    <string name="street_number">Street number</string>
     <string name="postal_code">Postal code</string>
     <string name="change_password">Change <b>password?</b></string>
     <string name="personal_info">Personal</string>
@@ -39,6 +40,7 @@
     <string name="repeat_new_password">Repeat new password</string>
     <string name="update_account">Update account</string>
     <string name="delete_account">Delete account</string>
+    <string name="dialog_message" />
 
     <string name="accommodation_form_title">Hello Rade, let`s register your new accommodation!</string>
     <string name="accommodation_form_title_update">Hello Rade, let`s update your new accommodation!</string>
@@ -105,9 +107,6 @@
         <item>30</item>
         <item>null</item>
     </string-array>
-
-
-
     <!--    veljko  -->
 
 

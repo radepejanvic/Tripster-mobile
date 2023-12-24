@@ -1,7 +1,13 @@
+import java.util.Properties
 plugins {
     id("com.android.application")
 }
 
+fun getIpAddress(): String {
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+    return properties.getProperty("ip_addr") ?: error("IP address not found in local.properties")
+}
 android {
     namespace = "com.example.tripster"
     compileSdk = 34
@@ -14,6 +20,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "IP_ADDR", "\"${getIpAddress()}\"")
     }
 
     buildTypes {
@@ -27,12 +34,16 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 }
 
 dependencies {
-
+    implementation("com.squareup.retrofit2:retrofit:2.3.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.3.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:3.12.1")
+    implementation("com.nimbusds:nimbus-jose-jwt:9.8")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
