@@ -93,6 +93,10 @@ public class AccommodationFormFragment extends Fragment {
         spinnerSetUp2(pricePolicy, R.array.pricing_policy_options);
         spinnerSetUp3(cancellationPolicy, R.array.cancellation_policy_options);
 
+
+        // TODO: Remove this hardcoded call, instead implement pass a variable via navigation which suggests if it is update or create
+        getAccommodation(1);
+
         binding.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,8 +106,10 @@ public class AccommodationFormFragment extends Fragment {
                 } else if (validateCapacity()) {
                     Toast.makeText(getContext(), "Minimal capacity must be smaller than maximal!", Toast.LENGTH_SHORT).show();
                 }else {
+                    accommodation = new Accommodation();
+                    accommodation.setOwnerId(SharedPreferencesManager.getUserInfo(getContext()).getId());
                     loadAccommodationFromInputs();
-                    postSave(accommodation);
+                    postSave();
                     findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
 //                    Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
                 }
@@ -121,7 +127,8 @@ public class AccommodationFormFragment extends Fragment {
                     Toast.makeText(getContext(), "Minimal capacity must be smaller than maximal!", Toast.LENGTH_SHORT).show();
                 }else {
                     loadAccommodationFromInputs();
-                    postSave(accommodation);
+                    updateAccommodation();
+                    Toast.makeText(getContext(), "Successfully updated accommodation.", Toast.LENGTH_SHORT).show();
                 }
 
 
@@ -134,8 +141,8 @@ public class AccommodationFormFragment extends Fragment {
     private void populateWithAccommodationData() {
         name.setText(accommodation.getName());
         shortDescription.setText(accommodation.getShortDescription());
-        minCap.setText(accommodation.getMinCap());
-        maxCap.setText(accommodation.getMaxCap());
+        minCap.setText(String.valueOf(accommodation.getMinCap()));
+        maxCap.setText(String.valueOf(accommodation.getMaxCap()));
         country.setText(accommodation.getCountry());
         city.setText(accommodation.getCity());
         postalCode.setText(accommodation.getZipCode());
@@ -150,8 +157,6 @@ public class AccommodationFormFragment extends Fragment {
     }
 
     private void loadAccommodationFromInputs() {
-        accommodation = new Accommodation();
-        accommodation.setOwnerId(SharedPreferencesManager.getUserInfo(getContext()).getId());
 
         accommodation.setName(name.getText().toString().trim());
         accommodation.setShortDescription(shortDescription.getText().toString().trim());
@@ -466,7 +471,7 @@ public class AccommodationFormFragment extends Fragment {
         binding = null;
     }
 
-    private void postSave(Accommodation accommodation){
+    private void postSave(){
         Call<Accommodation> call = ClientUtils.accommodationService.save(accommodation);
 
         call.enqueue(new Callback<Accommodation>() {
@@ -493,7 +498,9 @@ public class AccommodationFormFragment extends Fragment {
         call.enqueue(new Callback<Accommodation>() {
             @Override
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
-                if (response.code() == 201){
+                if (response.code() == 200){
+                    accommodation = response.body();
+                    populateWithAccommodationData();
                     Log.d("GET Request", "Accommodation " + response.body());
                 } else {
                     Log.d("GET Request", "Error fetching accommodation " + response.body());
@@ -514,7 +521,7 @@ public class AccommodationFormFragment extends Fragment {
         call.enqueue(new Callback<Accommodation>() {
             @Override
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
-                if (response.code() == 201){
+                if (response.code() == 200){
                     Log.d("PUT Request", "Accommodation " + response.body());
                 } else {
                     Log.d("PUT Request", "Error updating accommodation " + response.body());
