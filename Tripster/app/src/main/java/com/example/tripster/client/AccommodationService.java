@@ -1,5 +1,6 @@
 package com.example.tripster.client;
 
+import android.content.Context;
 import android.view.ScaleGestureDetector;
 
 import com.example.tripster.model.Accommodation;
@@ -13,6 +14,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface AccommodationService {
 
@@ -27,6 +29,6 @@ public interface AccommodationService {
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
-    @GET("accommodations/host/1")
-    Call<List<Accommodation>> getForGuest();
+    @GET("accommodations/host/{hostId}")
+    Call<List<Accommodation>> getForGuest(@Path("hostId") Long hostId);
 }

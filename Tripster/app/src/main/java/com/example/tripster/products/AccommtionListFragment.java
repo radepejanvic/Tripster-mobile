@@ -15,6 +15,7 @@ import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentAccommodationListBinding;
 import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.view.Product;
+import com.example.tripster.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +73,7 @@ public class AccommtionListFragment extends ListFragment {
     }
 
     private void getAccommodation(){
-        Call<List<Accommodation>> call = ClientUtils.accommodationService.getForGuest();
+        Call<List<Accommodation>> call = ClientUtils.accommodationService.getForGuest(SharedPreferencesManager.getUserInfo(getContext()).getPersonID());
 
         call.enqueue(new Callback<List<Accommodation>>() {
             @Override
