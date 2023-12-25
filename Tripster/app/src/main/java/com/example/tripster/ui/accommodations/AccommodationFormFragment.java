@@ -104,6 +104,7 @@ public class AccommodationFormFragment extends Fragment {
                 }else {
                     loadAccommodationFromInputs();
                     postSave(accommodation);
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
 //                    Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
                 }
 
@@ -141,6 +142,11 @@ public class AccommodationFormFragment extends Fragment {
         street.setText(accommodation.getStreet());
         number.setText(accommodation.getNumber());
         description.setText(accommodation.getDescription());
+
+        type.setSelection(setType());
+        reservationPolicy.setSelection(setReservationPolicy());
+        pricePolicy.setSelection(setPricingPolicy());
+        cancellationPolicy.setSelection(setCancellationPolicy());
     }
 
     private void loadAccommodationFromInputs() {
@@ -389,6 +395,16 @@ public class AccommodationFormFragment extends Fragment {
         return null;
     }
 
+    private int setType() {
+        switch (accommodation.getType()) {
+            case APARTMENT: return 1;
+            case STUDIO: return 2;
+            case ROOM: return 3;
+            default: return -1;
+        }
+    }
+
+
     private Boolean getReservationPolicy(String type){
         switch (type){
             case  "Automatic approval (advised)":
@@ -399,6 +415,10 @@ public class AccommodationFormFragment extends Fragment {
         return null;
     }
 
+    private int setReservationPolicy() {
+        return accommodation.isAutomaticReservation() ? 1 : 2;
+    }
+
     private Boolean getPricingPolicy(String type){
         switch (type){
             case  "Per night (advised)":
@@ -407,6 +427,10 @@ public class AccommodationFormFragment extends Fragment {
                 return false;
         }
         return null;
+    }
+
+    private int setPricingPolicy() {
+        return accommodation.isPricePerNight() ? 1 : 2;
     }
 
     private int getCancellationPolicy(String type){
@@ -424,6 +448,18 @@ public class AccommodationFormFragment extends Fragment {
         }
         return 0;
     }
+
+    private int setCancellationPolicy() {
+        switch (accommodation.getCancelDuration()) {
+            case 3: return 1;
+            case 7: return 2;
+            case 14: return 3;
+            case 30: return 4;
+            case 0: return 5;
+            default: return -1;
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -438,7 +474,6 @@ public class AccommodationFormFragment extends Fragment {
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                 if (response.code() == 201){
                     Log.d("POST Request", "Accommodation " + response.body());
-                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
                 } else {
                     Log.d("POST Request", "Error posting new accommodation " + response.body());
                 }
@@ -460,7 +495,6 @@ public class AccommodationFormFragment extends Fragment {
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                 if (response.code() == 201){
                     Log.d("GET Request", "Accommodation " + response.body());
-                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
                 } else {
                     Log.d("GET Request", "Error fetching accommodation " + response.body());
                 }
@@ -482,7 +516,6 @@ public class AccommodationFormFragment extends Fragment {
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                 if (response.code() == 201){
                     Log.d("PUT Request", "Accommodation " + response.body());
-                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
                 } else {
                     Log.d("PUT Request", "Error updating accommodation " + response.body());
                 }
