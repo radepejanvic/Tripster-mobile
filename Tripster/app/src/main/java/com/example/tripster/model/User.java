@@ -182,7 +182,7 @@ public class User {
                 ", street='" + street + '\'' +
                 ", number='" + number + '\'' +
                 ", token='" + token + '\'' +
-                ", personID=" + id +
+                ", id=" + id +
                 '}';
     }
 }
