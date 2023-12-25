@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentLoginBinding;
 import com.example.tripster.model.User;
-import com.example.tripster.model.UserType;
+import com.example.tripster.model.enums.UserType;
 import com.example.tripster.util.SharedPreferencesManager;
 import com.example.tripster.util.Validator;
 import com.nimbusds.jose.shaded.json.JSONArray;
@@ -153,7 +153,7 @@ public class LoginFragment extends Fragment {
                         throw new RuntimeException(e);
                     }
 
-                    SharedPreferencesManager.saveUserInfo(AUTHORIZATION, email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID(),jwt.toString());
+                    SharedPreferencesManager.saveUserInfo(AUTHORIZATION, email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID(),response.body().getToken());
                     Intent intent = new Intent(AUTHORIZATION, MainActivity.class);
                     intent.putExtra("Role", role);
                     Toast.makeText(getContext(), "Welcome "+emailInput.getText().toString(), Toast.LENGTH_SHORT).show();
