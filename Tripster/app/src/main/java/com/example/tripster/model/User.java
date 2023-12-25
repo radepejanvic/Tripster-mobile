@@ -19,7 +19,7 @@ public class User {
     private String street;
     private String number;
     private String token;
-    private Long personID;
+    private Long id;
 
     public User(){}
 
@@ -43,7 +43,7 @@ public class User {
         this.userID = id;
         this.email = email;
         this.userType = type;
-        this.personID = personID;
+        this.id = personID;
         this.token = jwt;
     }
 
@@ -157,11 +157,32 @@ public class User {
         this.token = token;
     }
 
-    public Long getPersonID() {
-        return personID;
+    public Long getId() {
+        return id;
     }
 
-    public void setPersonID(Long personID) {
-        this.personID = personID;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", userType=" + userType +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", street='" + street + '\'' +
+                ", number='" + number + '\'' +
+                ", token='" + token + '\'' +
+                ", personID=" + id +
+                '}';
     }
 }

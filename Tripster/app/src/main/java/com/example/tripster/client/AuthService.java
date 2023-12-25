@@ -1,5 +1,6 @@
 package com.example.tripster.client;
 
+import com.example.tripster.model.Token;
 import com.example.tripster.model.User;
 
 import retrofit2.Call;
@@ -13,7 +14,7 @@ public interface AuthService {
             "Content-Type:application/json"
     })
     @POST("login")
-    Call<User> login(@Body User user);
+    Call<Token> login(@Body User user);
 
     @Headers({
             "User-Agent: Mobile-Android",
