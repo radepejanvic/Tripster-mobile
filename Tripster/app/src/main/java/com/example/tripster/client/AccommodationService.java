@@ -59,5 +59,5 @@ public interface AccommodationService {
             "Content-Type:application/json"
     })
     @PATCH("accommodations")
-    Call<Accommodation> patchStatus(@Body Accommodation accommodation);
+    Call<String> patchStatus(@Body Accommodation accommodation);
 }
