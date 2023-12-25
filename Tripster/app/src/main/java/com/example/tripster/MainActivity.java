@@ -80,11 +80,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.navigation_logout) {
-            SharedPreferencesManager.clearUserInfo(this);
-            Intent intent = new Intent(this, AuthorizationActivity.class);
-            startActivity(intent);
-            finish();
+            logOut();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void logOut() {
+        SharedPreferencesManager.clearUserInfo(this);
+        Intent intent = new Intent(this, AuthorizationActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

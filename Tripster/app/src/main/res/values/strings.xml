@@ -33,6 +33,7 @@
     <string name="postal_code">Postal code</string>
     <string name="change_password">Change <b>password?</b></string>
     <string name="personal_info">Personal</string>
+    <string name="edit">Edit</string>
     <string name="security">Security</string>
     <string name="address">Address</string>
     <string name="current_password">Current password</string>

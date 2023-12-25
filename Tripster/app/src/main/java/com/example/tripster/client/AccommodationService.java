@@ -1,8 +1,5 @@
 package com.example.tripster.client;
 
-import android.content.Context;
-import android.view.ScaleGestureDetector;
-
 import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.User;
 import com.example.tripster.util.SharedPreferencesManager;
