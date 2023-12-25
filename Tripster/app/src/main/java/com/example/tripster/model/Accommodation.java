@@ -46,6 +46,7 @@ public class Accommodation {
 
     private Long numOfReviews;
 
+    private String photo;
     private boolean pricePerNight;
 
     public Accommodation() {}
@@ -69,6 +70,14 @@ public class Accommodation {
         this.type = type;
         this.automaticReservation = automaticReservation;
         this.pricePerNight = pricePerNight;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
     public Long getId() {

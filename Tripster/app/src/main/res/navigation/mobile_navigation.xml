@@ -78,5 +78,9 @@
         android:name="com.example.tripster.ui.accommodations.AvailabilityFragment"
         android:label="fragment_availability"
         tools:layout="@layout/fragment_availability" />
+    <fragment
+        android:id="@+id/navigation_accommodations_host"
+        android:name="com.example.tripster.products.AccommodationPageFragment"
+        android:label="ProductsPageFragment" />
 
 </navigation>

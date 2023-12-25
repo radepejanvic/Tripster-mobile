@@ -40,6 +40,8 @@
     <string name="repeat_new_password">Repeat new password</string>
     <string name="update_account">Update account</string>
     <string name="delete_account">Delete account</string>
+    <string name="decline">Decline</string>
+    <string name="Accept">Accept</string>
     <string name="dialog_message" />
 
     <string name="accommodation_form_title">Hello Rade, let`s register your new accommodation!</string>
