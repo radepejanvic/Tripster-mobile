@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentLoginBinding;
+import com.example.tripster.model.Token;
 import com.example.tripster.model.User;
 import com.example.tripster.model.UserType;
 import com.example.tripster.util.SharedPreferencesManager;
@@ -127,10 +128,10 @@ public class LoginFragment extends Fragment {
 
 
     public void postLogin(User user){
-        Call<User> call = ClientUtils.authService.login(user);
-        call.enqueue(new Callback<User>() {
+        Call<Token> call = ClientUtils.authService.login(user);
+        call.enqueue(new Callback<Token>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
+            public void onResponse(Call<Token> call, Response<Token> response) {
                 if (response.code() == 200){
                     Log.d("REZ","Meesage recieved");
                     Log.d("REZ",response.body().getToken());
@@ -147,13 +148,16 @@ public class LoginFragment extends Fragment {
                         JSONArray claim =  (JSONArray) ro;
                         JSONObject object = (JSONObject) claim.get(0);
                         role = object.get("authority").toString();
+                        Log.d("AUTHORITY", "onResponse: User authority " + role);
                         role = role.substring(5);
                         Log.d("REZ", role);
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
                     }
 
-                    SharedPreferencesManager.saveUserInfo(AUTHORIZATION, email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID(),jwt.toString());
+
+
+                    SharedPreferencesManager.saveUserInfo(AUTHORIZATION, email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID(),response.body().getToken());
                     Intent intent = new Intent(AUTHORIZATION, MainActivity.class);
                     intent.putExtra("Role", role);
                     Toast.makeText(getContext(), "Welcome "+emailInput.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -166,13 +170,13 @@ public class LoginFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<Token> call, Throwable t) {
                 Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
             }
         });
     }
 
-    private void openDialog(Response<User> response) {
+    private void openDialog(Response<Token> response) {
         switch (response.code()) {
             case 404:
                 Toast.makeText(getContext(), "User doesn't exist.", Toast.LENGTH_SHORT).show();
