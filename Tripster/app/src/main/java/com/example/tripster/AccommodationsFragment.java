@@ -39,7 +39,7 @@ public class AccommodationsFragment extends Fragment {
 
         binding = FragmentAccommodationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        binding.hotel101.setOnClickListener(new View.OnClickListener() {
+        binding.hotel1012.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 findNavController(v).navigate(R.id.action_navigation_home_to_singleAccommodationFragment);
