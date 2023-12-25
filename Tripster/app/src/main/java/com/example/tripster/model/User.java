@@ -1,5 +1,7 @@
 package com.example.tripster.model;
 
+import com.example.tripster.model.enums.UserType;
+
 public class User {
 
     private Long userID;

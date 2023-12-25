@@ -186,7 +186,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/city" />
 
             <EditText
-                android:id="@+id/street_and_number"
+                android:id="@+id/street"
                 style="@style/EditTextStyle"
                 android:layout_width="320dp"
                 android:layout_height="48dp"
@@ -199,7 +199,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/postal_code" />
-
+            <EditText
+                android:id="@+id/streetNumber"
+                style="@style/EditTextStyle"
+                android:layout_width="320dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:autofillHints=""
+                android:background="@drawable/login_button"
+                android:ems="10"
+                android:hint="@string/street_number"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/street" />
             <TextView
                 android:id="@+id/title_description"
                 style="@style/SubtitleText"
@@ -211,7 +224,7 @@
                 android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/street_and_number"
+                app:layout_constraintTop_toBottomOf="@id/streetNumber"
                 />
 
             <EditText

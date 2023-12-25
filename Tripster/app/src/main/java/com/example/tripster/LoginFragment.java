@@ -17,7 +17,7 @@ import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentLoginBinding;
 import com.example.tripster.model.Token;
 import com.example.tripster.model.User;
-import com.example.tripster.model.UserType;
+import com.example.tripster.model.enums.UserType;
 import com.example.tripster.util.SharedPreferencesManager;
 import com.example.tripster.util.Validator;
 import com.nimbusds.jose.shaded.json.JSONArray;

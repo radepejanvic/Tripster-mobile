@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.tripster.model.User;
-import com.example.tripster.model.UserType;
+import com.example.tripster.model.enums.UserType;
 
 public class SharedPreferencesManager {
     private static final String PREFERENCE_NAME = "MyAppPreferences";
