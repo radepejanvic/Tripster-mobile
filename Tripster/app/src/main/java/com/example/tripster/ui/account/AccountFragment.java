@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentAccountBinding;
 import com.example.tripster.model.User;
 import com.example.tripster.util.SharedPreferencesManager;
+import com.example.tripster.util.Validator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,49 +71,44 @@ public class AccountFragment extends Fragment {
         currentPass = binding.currentPassword;
         newPass = binding.newPassword;
         repeatNewPass = binding.repeatNew;
+        email.setFocusable(false);
+        email.setFocusableInTouchMode(false);
 
         getUser(SharedPreferencesManager.getUserInfo(getContext()).getUserID());
 
         hideChangePass();
-        alterFieldEditable(true);
 
-        binding.changePassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (changePassVisible) {
-                    hideChangePass();
-                } else {
-                    showChangePass();
-                    scrollView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            scrollView.fullScroll(View.FOCUS_DOWN);
-                        }
-                    });
-                }
-                changePassVisible = !changePassVisible;
+        binding.edit.setOnCheckedChangeListener((buttonView, isChecked) -> alterFieldEditable(isChecked));
+
+        binding.changePassword.setOnClickListener(v -> {
+            if (changePassVisible) {
+                hideChangePass();
+            } else {
+                showChangePass();
+                scrollView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        scrollView.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
             }
+            changePassVisible = !changePassVisible;
         });
 
-        binding.update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Add validations;
+        binding.update.setOnClickListener(v -> {
+            if (isValid()) {
                 loadUserFromInputs();
                 updateUser();
                 Toast.makeText(getContext(), "Successfully updated profile.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        binding.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Add dialog for making sure to delete
-                deleteUser();
-                if (getContext() instanceof MainActivity) {
-                    MainActivity activity = (MainActivity) getContext();
-                    activity.logOut();
-                }
+        binding.delete.setOnClickListener(v -> {
+            // TODO: Add dialog for making sure to delete
+            deleteUser();
+            if (getContext() instanceof MainActivity) {
+                MainActivity activity = (MainActivity) getContext();
+                activity.logOut();
             }
         });
 
@@ -151,24 +148,51 @@ public class AccountFragment extends Fragment {
     private void loadUserFromInputs() {
         user.setUserID(SharedPreferencesManager.getUserInfo(getContext()).getUserID());
         user.setId(SharedPreferencesManager.getUserInfo(getContext()).getId());
-        user.setName(name.getText().toString());
-        user.setSurname(surname.getText().toString());
-        user.setEmail(email.getText().toString());
-        user.setPhone(phone.getText().toString());
-        user.setCountry(country.getText().toString());
-        user.setCity(city.getText().toString());
-        user.setZipCode(postalCode.getText().toString());
-        user.setStreet(streetAndNumber.getText().toString());
+        user.setName(name.getText().toString().trim());
+        user.setSurname(surname.getText().toString().trim());
+        user.setEmail(email.getText().toString().trim());
+        user.setPhone(phone.getText().toString().trim());
+        user.setCountry(country.getText().toString().trim());
+        user.setCity(city.getText().toString().trim());
+        user.setZipCode(postalCode.getText().toString().trim());
+        user.setStreet(streetAndNumber.getText().toString().trim());
 //        user.setZipCode(postalCode.getText().toString());
     }
+
+
+    private boolean isValid() {
+        if (validateFormNotEmpty()) {
+            Toast.makeText(getContext(), "All fields must be filled!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!Validator.isValidEmail(user.getEmail())){
+            Toast.makeText(getContext(), "Email format is wrong.", Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(!Validator.isValidPhone(user.getPhone())){
+            Toast.makeText(getContext(), "Phone format is wrong." +
+                    "", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean validateFormNotEmpty() {
+        return  name.getText().toString().isEmpty() ||
+                surname.getText().toString().isEmpty() ||
+                email.getText().toString().isEmpty() ||
+                phone.getText().toString().isEmpty() ||
+                country.getText().toString().isEmpty() ||
+                city.getText().toString().isEmpty() ||
+                postalCode.getText().toString().isEmpty() ||
+                streetAndNumber.getText().toString().isEmpty();
+//                number.getText().toString().isEmpty();
+    }
+
 
     private void alterFieldEditable(boolean editable) {
         name.setFocusable(editable);
         name.setFocusableInTouchMode(editable);
         surname.setFocusable(editable);
         surname.setFocusableInTouchMode(editable);
-        email.setFocusable(editable);
-        email.setFocusableInTouchMode(editable);
         phone.setFocusableInTouchMode(editable);
         phone.setFocusableInTouchMode(editable);
         country.setFocusableInTouchMode(editable);
