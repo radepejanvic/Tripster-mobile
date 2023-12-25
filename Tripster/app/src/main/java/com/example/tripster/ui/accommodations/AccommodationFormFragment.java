@@ -5,13 +5,13 @@ import static androidx.navigation.ViewKt.findNavController;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,18 +24,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tripster.AuthorizationActivity;
-import com.example.tripster.MainActivity;
 import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentAccommodationFormBinding;
 import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.enums.AccommodationType;
-import com.example.tripster.ui.account.AccountViewModel;
 import com.example.tripster.util.SharedPreferencesManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,7 +48,7 @@ public class AccommodationFormFragment extends Fragment {
     private EditText country;
     private EditText city;
     private EditText postalCode;
-    private EditText streetNumber;
+    private EditText number;
     private EditText street;
     private EditText description;
     private Spinner pricePolicy;
@@ -65,9 +59,7 @@ public class AccommodationFormFragment extends Fragment {
     private String pricePolicyText;
     private String cancellationPolicyText;
 
-    private Button register;
-    private Button update;
-    private Button delete;
+    private Accommodation accommodation;
 
 
     @Override
@@ -90,56 +82,118 @@ public class AccommodationFormFragment extends Fragment {
         country = binding.country;
         city = binding.city;
         postalCode = binding.postalCode;
-        streetNumber = binding.streetNumber;
+        number = binding.number;
         street = binding.street;
         description = binding.description;
         pricePolicy = binding.pricePolicy;
         cancellationPolicy = binding.cancellationPolicy;
-        register = binding.register;
-        update = binding.update;
-        delete = binding.delete;
 
         spinnerSetUp(type, R.array.type_options);
         spinnerSetUp1(reservationPolicy, R.array.reservation_policy_options);
         spinnerSetUp2(pricePolicy, R.array.pricing_policy_options);
         spinnerSetUp3(cancellationPolicy, R.array.cancellation_policy_options);
 
-        register.setOnClickListener(new View.OnClickListener() {
+
+        // TODO: Remove this hardcoded call, instead implement pass a variable via navigation which suggests if it is update or create
+        getAccommodation(1);
+
+        binding.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameText =name.getText().toString().trim();
-                String shortDescriptionText = shortDescription.getText().toString().trim();
-                String minCapText = minCap.getText().toString().trim();
-                String maxCapText = maxCap.getText().toString().trim();
-                String countryText = country.getText().toString().trim();
-                String cityText = city.getText().toString().trim();
-                String postalCodeText = postalCode.getText().toString().trim();
-                String streetNumberText = streetNumber.getText().toString().trim();
-                String streetText = street.getText().toString().trim();
-                String descriptionText = description.getText().toString().trim();
 
-                if (nameText.isEmpty() || shortDescriptionText.isEmpty() || minCapText.isEmpty() || maxCapText.isEmpty() ||
-                countryText.isEmpty()|| cityText.isEmpty() || postalCodeText.isEmpty() || streetText.isEmpty()||
-                streetNumberText.isEmpty() || descriptionText.isEmpty() | typeText.isEmpty() || reservationPolicyText.isEmpty() ||
-                pricePolicyText.isEmpty() || cancellationPolicyText.isEmpty()){
-                    Toast.makeText(getContext(), "All fields must be fill!", Toast.LENGTH_SHORT).show();
-
-                } else if (Integer.parseInt(minCapText) > Integer.parseInt(maxCapText)) {
-                    Toast.makeText(getContext(), "Min capacity can't bigger then max capacity!", Toast.LENGTH_SHORT).show();
+                if (validateFormNotEmpty()){
+                    Toast.makeText(getContext(), "All fields must be filled!", Toast.LENGTH_SHORT).show();
+                } else if (validateCapacity()) {
+                    Toast.makeText(getContext(), "Minimal capacity must be smaller than maximal!", Toast.LENGTH_SHORT).show();
                 }else {
-                    Accommodation accommodation = new Accommodation(nameText, SharedPreferencesManager.getUserInfo(getContext()).getPersonID(),countryText,cityText,
-                            postalCodeText,streetText,streetNumberText,shortDescriptionText,descriptionText,Integer.parseInt(minCapText),Integer.parseInt(maxCapText),
-                            getCancellationPolicy(cancellationPolicyText),getType(typeText),getReservationPolicy(reservationPolicyText),getPricingPolicy(pricePolicyText));
-                    postSave(accommodation);
+                    accommodation = new Accommodation();
+                    accommodation.setOwnerId(SharedPreferencesManager.getUserInfo(getContext()).getId());
+                    loadAccommodationFromInputs();
+                    postSave();
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+//                    Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        binding.update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (validateFormNotEmpty()){
+                    Toast.makeText(getContext(), "All fields must be filled!", Toast.LENGTH_SHORT).show();
+                } else if (validateCapacity()) {
+                    Toast.makeText(getContext(), "Minimal capacity must be smaller than maximal!", Toast.LENGTH_SHORT).show();
+                }else {
+                    loadAccommodationFromInputs();
+                    updateAccommodation();
+                    Toast.makeText(getContext(), "Successfully updated accommodation.", Toast.LENGTH_SHORT).show();
                 }
 
 
             }
         });
 
-
         return root;
     }
+
+    private void populateWithAccommodationData() {
+        name.setText(accommodation.getName());
+        shortDescription.setText(accommodation.getShortDescription());
+        minCap.setText(String.valueOf(accommodation.getMinCap()));
+        maxCap.setText(String.valueOf(accommodation.getMaxCap()));
+        country.setText(accommodation.getCountry());
+        city.setText(accommodation.getCity());
+        postalCode.setText(accommodation.getZipCode());
+        street.setText(accommodation.getStreet());
+        number.setText(accommodation.getNumber());
+        description.setText(accommodation.getDescription());
+
+        type.setSelection(setType());
+        reservationPolicy.setSelection(setReservationPolicy());
+        pricePolicy.setSelection(setPricingPolicy());
+        cancellationPolicy.setSelection(setCancellationPolicy());
+    }
+
+    private void loadAccommodationFromInputs() {
+
+        accommodation.setName(name.getText().toString().trim());
+        accommodation.setShortDescription(shortDescription.getText().toString().trim());
+        accommodation.setMinCap(Integer.parseInt(minCap.getText().toString().trim()));
+        accommodation.setMaxCap(Integer.parseInt(maxCap.getText().toString().trim()));
+        accommodation.setCountry(country.getText().toString().trim());
+        accommodation.setCity(city.getText().toString().trim());
+        accommodation.setZipCode(postalCode.getText().toString().trim());
+        accommodation.setNumber(number.getText().toString().trim());
+        accommodation.setStreet(street.getText().toString().trim());
+        accommodation.setDescription(description.getText().toString().trim());
+
+        accommodation.setCancelDuration(getCancellationPolicy(cancellationPolicyText));
+        accommodation.setType(getType(typeText));
+        accommodation.setAutomaticReservation(getReservationPolicy(reservationPolicyText));
+        accommodation.setPricePerNight(getPricingPolicy(pricePolicyText));
+    }
+
+    private boolean validateFormNotEmpty() {
+        return  name.getText().toString().isEmpty() ||
+                shortDescription.getText().toString().isEmpty() ||
+                minCap.getText().toString().isEmpty() ||
+                maxCap.getText().toString().isEmpty() ||
+                country.getText().toString().isEmpty() ||
+                city.getText().toString().isEmpty() ||
+                postalCode.getText().toString().isEmpty() ||
+                street.getText().toString().isEmpty() ||
+                number.getText().toString().isEmpty() ||
+                description.getText().toString().isEmpty() ||
+                typeText.isEmpty() || reservationPolicyText.isEmpty() ||
+                pricePolicyText.isEmpty() || cancellationPolicyText.isEmpty();
+    }
+
+    private boolean validateCapacity() {
+        return Integer.parseInt(minCap.getText().toString()) > Integer.parseInt(maxCap.getText().toString());
+    }
+
 
     private void spinnerSetUp(Spinner spinner, int optionsResId) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -346,6 +400,16 @@ public class AccommodationFormFragment extends Fragment {
         return null;
     }
 
+    private int setType() {
+        switch (accommodation.getType()) {
+            case APARTMENT: return 1;
+            case STUDIO: return 2;
+            case ROOM: return 3;
+            default: return -1;
+        }
+    }
+
+
     private Boolean getReservationPolicy(String type){
         switch (type){
             case  "Automatic approval (advised)":
@@ -356,6 +420,10 @@ public class AccommodationFormFragment extends Fragment {
         return null;
     }
 
+    private int setReservationPolicy() {
+        return accommodation.isAutomaticReservation() ? 1 : 2;
+    }
+
     private Boolean getPricingPolicy(String type){
         switch (type){
             case  "Per night (advised)":
@@ -364,6 +432,10 @@ public class AccommodationFormFragment extends Fragment {
                 return false;
         }
         return null;
+    }
+
+    private int setPricingPolicy() {
+        return accommodation.isPricePerNight() ? 1 : 2;
     }
 
     private int getCancellationPolicy(String type){
@@ -381,20 +453,78 @@ public class AccommodationFormFragment extends Fragment {
         }
         return 0;
     }
+
+    private int setCancellationPolicy() {
+        switch (accommodation.getCancelDuration()) {
+            case 3: return 1;
+            case 7: return 2;
+            case 14: return 3;
+            case 30: return 4;
+            case 0: return 5;
+            default: return -1;
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
 
-    private void postSave(Accommodation accommodation){
+    private void postSave(){
         Call<Accommodation> call = ClientUtils.accommodationService.save(accommodation);
 
         call.enqueue(new Callback<Accommodation>() {
             @Override
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                 if (response.code() == 201){
-                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+                    Log.d("POST Request", "Accommodation " + response.body());
+                } else {
+                    Log.d("POST Request", "Error posting new accommodation " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Accommodation> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void getAccommodation(long id){
+        Call<Accommodation> call = ClientUtils.accommodationService.getAccommodation(id);
+
+        call.enqueue(new Callback<Accommodation>() {
+            @Override
+            public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
+                if (response.code() == 200){
+                    accommodation = response.body();
+                    populateWithAccommodationData();
+                    Log.d("GET Request", "Accommodation " + response.body());
+                } else {
+                    Log.d("GET Request", "Error fetching accommodation " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Accommodation> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void updateAccommodation(){
+        Call<Accommodation> call = ClientUtils.accommodationService.updateAccommodation(accommodation);
+
+        call.enqueue(new Callback<Accommodation>() {
+            @Override
+            public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
+                if (response.code() == 200){
+                    Log.d("PUT Request", "Accommodation " + response.body());
+                } else {
+                    Log.d("PUT Request", "Error updating accommodation " + response.body());
                 }
             }
 
