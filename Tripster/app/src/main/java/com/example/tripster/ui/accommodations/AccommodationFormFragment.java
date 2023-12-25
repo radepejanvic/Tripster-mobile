@@ -29,6 +29,7 @@ import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentAccommodationFormBinding;
 import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.enums.AccommodationType;
+import com.example.tripster.model.enums.Mode;
 import com.example.tripster.util.SharedPreferencesManager;
 
 import java.util.Objects;
@@ -61,16 +62,24 @@ public class AccommodationFormFragment extends Fragment {
     private String pricePolicyText;
     private String cancellationPolicyText;
 
+    private Button register;
+    private Button update;
+
     private Accommodation accommodation;
 
     private Long id;
+
+    private Mode mode = Mode.ADD;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-//        assert savedInstanceState != null;
-//        Long id = Long.parseLong((String) Objects.requireNonNull(savedInstanceState.get("id")));
+        if (getArguments() != null) {
+            getAccommodation(Long.parseLong(getArguments().getString("id")));
+            mode = Mode.UPDATE;
+        }
+
         AccommodationFormViewModel accommodationFormViewModel =
                 new ViewModelProvider(this).get(AccommodationFormViewModel.class);
 
@@ -92,17 +101,20 @@ public class AccommodationFormFragment extends Fragment {
         description = binding.description;
         pricePolicy = binding.pricePolicy;
         cancellationPolicy = binding.cancellationPolicy;
+        register = binding.register;
+        update = binding.update;
 
         spinnerSetUp(type, R.array.type_options);
         spinnerSetUp1(reservationPolicy, R.array.reservation_policy_options);
         spinnerSetUp2(pricePolicy, R.array.pricing_policy_options);
         spinnerSetUp3(cancellationPolicy, R.array.cancellation_policy_options);
 
+        configureButtons();
+
 
         // TODO: Remove this hardcoded call, instead implement pass a variable via navigation which suggests if it is update or create
-        getAccommodation(1);
 
-        binding.register.setOnClickListener(new View.OnClickListener() {
+        register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -115,14 +127,14 @@ public class AccommodationFormFragment extends Fragment {
                     accommodation.setOwnerId(SharedPreferencesManager.getUserInfo(getContext()).getId());
                     loadAccommodationFromInputs();
                     postSave();
+                    Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
                     findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
-//                    Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
-        binding.update.setOnClickListener(new View.OnClickListener() {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -134,6 +146,7 @@ public class AccommodationFormFragment extends Fragment {
                     loadAccommodationFromInputs();
                     updateAccommodation();
                     Toast.makeText(getContext(), "Successfully updated accommodation.", Toast.LENGTH_SHORT).show();
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
                 }
 
 
@@ -142,6 +155,17 @@ public class AccommodationFormFragment extends Fragment {
 
         return root;
     }
+
+    private void configureButtons() {
+        switch(mode) {
+            case ADD: update.setVisibility(View.GONE); break;
+            case UPDATE: register.setVisibility(View.GONE); break;
+            default:
+                register.setVisibility(View.GONE);
+                update.setVisibility(View.GONE);
+        }
+    }
+
 
     private void populateWithAccommodationData() {
         name.setText(accommodation.getName());
