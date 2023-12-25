@@ -452,4 +452,48 @@ public class AccommodationFormFragment extends Fragment {
 
     }
 
+    private void getAccommodation(long id){
+        Call<Accommodation> call = ClientUtils.accommodationService.getAccommodation(id);
+
+        call.enqueue(new Callback<Accommodation>() {
+            @Override
+            public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
+                if (response.code() == 201){
+                    Log.d("GET Request", "Accommodation " + response.body());
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+                } else {
+                    Log.d("GET Request", "Error fetching accommodation " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Accommodation> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void updateAccommodation(){
+        Call<Accommodation> call = ClientUtils.accommodationService.updateAccommodation(accommodation);
+
+        call.enqueue(new Callback<Accommodation>() {
+            @Override
+            public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
+                if (response.code() == 201){
+                    Log.d("PUT Request", "Accommodation " + response.body());
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+                } else {
+                    Log.d("PUT Request", "Error updating accommodation " + response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Accommodation> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 }
