@@ -122,6 +122,7 @@ public class AccommodationListAdapter extends ArrayAdapter<Product> {
             String base64Image = product.getImage();
             byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
             Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
             imageView.setImageBitmap(decodedBitmap);
             productCard.setOnClickListener(v -> {
                 Log.i("ShopApp", "Clicked: " + product.getTitle() + ", id: " +
@@ -149,21 +150,20 @@ public class AccommodationListAdapter extends ArrayAdapter<Product> {
                 Accommodation accommodation = new Accommodation();
                 accommodation.setId(product.getId());
                 accommodation.setStatus(AccommodationStatus.ACTIVE);
-               Call<Accommodation> call =  ClientUtils.accommodationService.patchStatus(accommodation);
+               Call<String> call =  ClientUtils.accommodationService.patchStatus(accommodation);
+                aProducts.remove(position);
+                notifyDataSetChanged();
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
 
-               call.enqueue(new Callback<Accommodation>() {
-                   @Override
-                   public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
-                       aProducts.remove(position);
+                    }
 
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
 
-                   }
-
-                   @Override
-                   public void onFailure(Call<Accommodation> call, Throwable t) {
-
-                   }
-               });
+                    }
+                });
             }
         });
 
@@ -173,7 +173,20 @@ public class AccommodationListAdapter extends ArrayAdapter<Product> {
                 Accommodation accommodation = new Accommodation();
                 accommodation.setId(product.getId());
                 accommodation.setStatus(AccommodationStatus.SUSPENDED);
-                ClientUtils.accommodationService.patchStatus(accommodation);
+                Call<String> call =  ClientUtils.accommodationService.patchStatus(accommodation);
+                aProducts.remove(position);
+                notifyDataSetChanged();
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
             }
         });
         return convertView;
