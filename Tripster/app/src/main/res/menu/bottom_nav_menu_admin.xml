@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_comment_24"
         android:title="@string/title_reviews" />
     <item
-        android:id="@+id/navigation_accommodations"
+        android:id="@+id/navigation_accommodations_host"
         android:icon="@drawable/ic_bedroom_parent_24"
         android:title="@string/title_accommodations" />
     <item

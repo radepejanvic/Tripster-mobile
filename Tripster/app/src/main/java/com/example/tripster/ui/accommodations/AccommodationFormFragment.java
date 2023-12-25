@@ -31,6 +31,8 @@ import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.enums.AccommodationType;
 import com.example.tripster.util.SharedPreferencesManager;
 
+import java.util.Objects;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -61,11 +63,14 @@ public class AccommodationFormFragment extends Fragment {
 
     private Accommodation accommodation;
 
+    private Long id;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+//        assert savedInstanceState != null;
+//        Long id = Long.parseLong((String) Objects.requireNonNull(savedInstanceState.get("id")));
         AccommodationFormViewModel accommodationFormViewModel =
                 new ViewModelProvider(this).get(AccommodationFormViewModel.class);
 

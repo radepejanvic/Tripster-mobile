@@ -14,6 +14,7 @@ import com.example.tripster.adapters.AccommodationListAdapter;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentAccommodationListBinding;
 import com.example.tripster.model.Accommodation;
+import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Product;
 import com.example.tripster.util.SharedPreferencesManager;
 
@@ -45,7 +46,11 @@ public class AccommtionListFragment extends ListFragment {
         Log.i("ShopApp", "onCreateView Products List Fragment");
         binding = FragmentAccommodationListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        getAccommodation();
+        if (SharedPreferencesManager.getUserInfo(getContext()).getUserType().equals(UserType.ADMIN)){
+            getAccommodationAdmin();
+        } else if (SharedPreferencesManager.getUserInfo(getContext()).getUserType().equals(UserType.HOST)) {
+            getAccommodation();
+        }
         return root;
     }
 
@@ -73,7 +78,33 @@ public class AccommtionListFragment extends ListFragment {
     }
 
     private void getAccommodation(){
-        Call<List<Accommodation>> call = ClientUtils.accommodationService.getForGuest(SharedPreferencesManager.getUserInfo(getContext()).getPersonID());
+        Call<List<Accommodation>> call = ClientUtils.accommodationService.getForHost(SharedPreferencesManager.getUserInfo(getContext()).getId());
+
+        call.enqueue(new Callback<List<Accommodation>>() {
+            @Override
+            public void onResponse(Call<List<Accommodation>> call, Response<List<Accommodation>> response) {
+                List<Product> products = new ArrayList<>();
+                for (Accommodation accommodation: response.body()) {
+                    Product product = new Product();
+                    product.setTitle(accommodation.getName());
+                    product.setDescription(accommodation.getShortDescription());
+                    product.setId(accommodation.getId());
+                    product.setImage(accommodation.getPhoto());
+                    products.add(product);
+
+                }
+                setAccommodation(products);
+            }
+
+            @Override
+            public void onFailure(Call<List<Accommodation>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getAccommodationAdmin(){
+        Call<List<Accommodation>> call = ClientUtils.accommodationService.getForAdmin();
 
         call.enqueue(new Callback<List<Accommodation>>() {
             @Override

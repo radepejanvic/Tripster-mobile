@@ -3,9 +3,14 @@ package com.example.tripster.adapters;
 
 
 
+import static android.app.ProgressDialog.show;
+
+import static androidx.navigation.ViewKt.findNavController;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,11 +26,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.tripster.R;
+import com.example.tripster.client.AccommodationService;
+import com.example.tripster.client.ClientUtils;
+import com.example.tripster.model.Accommodation;
+import com.example.tripster.model.enums.AccommodationStatus;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Product;
 import com.example.tripster.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /*
  * Adapteri unutar Android-a sluze da prikazu unapred nedefinisanu kolicinu podataka
@@ -117,6 +130,49 @@ public class AccommodationListAdapter extends ArrayAdapter<Product> {
             });
         }
 
+        see.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("id", product.getId().toString());
+                findNavController(v).navigate(R.id.action_navigation_accommodations_host_to_navigation_accommodation_form,bundle);
+
+            }
+        });
+
+        accepted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Accommodation accommodation = new Accommodation();
+                accommodation.setId(product.getId());
+                accommodation.setStatus(AccommodationStatus.ACTIVE);
+               Call<Accommodation> call =  ClientUtils.accommodationService.patchStatus(accommodation);
+
+               call.enqueue(new Callback<Accommodation>() {
+                   @Override
+                   public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
+                       aProducts.remove(position);
+
+
+                   }
+
+                   @Override
+                   public void onFailure(Call<Accommodation> call, Throwable t) {
+
+                   }
+               });
+            }
+        });
+
+        decline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Accommodation accommodation = new Accommodation();
+                accommodation.setId(product.getId());
+                accommodation.setStatus(AccommodationStatus.SUSPENDED);
+                ClientUtils.accommodationService.patchStatus(accommodation);
+            }
+        });
         return convertView;
     }
 }

@@ -10,6 +10,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.PUT;
@@ -44,5 +45,19 @@ public interface AccommodationService {
             "Content-Type:application/json"
     })
     @GET("accommodations/host/{hostId}")
-    Call<List<Accommodation>> getForGuest(@Path("hostId") Long hostId);
+    Call<List<Accommodation>> getForHost(@Path("hostId") Long hostId);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/admin")
+    Call<List<Accommodation>> getForAdmin();
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PATCH("accommodations")
+    Call<Accommodation> patchStatus(@Body Accommodation accommodation);
 }
