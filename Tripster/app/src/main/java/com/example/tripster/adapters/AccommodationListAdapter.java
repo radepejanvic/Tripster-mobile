@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.navigation.Navigation;
 
 import com.example.tripster.R;
 import com.example.tripster.client.AccommodationService;
@@ -136,7 +137,9 @@ public class AccommodationListAdapter extends ArrayAdapter<Product> {
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 bundle.putString("id", product.getId().toString());
-                findNavController(v).navigate(R.id.action_navigation_accommodations_host_to_navigation_accommodation_form,bundle);
+
+                // Set the arguments before navigating
+                Navigation.findNavController(v).navigate(R.id.action_navigation_accommodations_host_to_navigation_accommodation_form, bundle);
 
             }
         });
