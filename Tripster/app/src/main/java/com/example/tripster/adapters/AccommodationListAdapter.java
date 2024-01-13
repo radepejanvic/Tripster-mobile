@@ -119,11 +119,16 @@ public class AccommodationListAdapter extends ArrayAdapter<Product> {
         if(product != null){
             productTitle.setText(product.getTitle());
             productDescription.setText(product.getDescription());
-            String base64Image = product.getImage();
-            byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
-            Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-            imageView.setImageBitmap(decodedBitmap);
+            // TODO: Remove this condition.
+            if (product.getImage() == null || product.getImage().isEmpty()) {
+                imageView.setImageResource(R.drawable.hotel_room_101);
+            } else {
+                String base64Image = product.getImage();
+                byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
+                Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                imageView.setImageBitmap(decodedBitmap);
+            }
             productCard.setOnClickListener(v -> {
                 Log.i("ShopApp", "Clicked: " + product.getTitle() + ", id: " +
                         product.getId().toString());

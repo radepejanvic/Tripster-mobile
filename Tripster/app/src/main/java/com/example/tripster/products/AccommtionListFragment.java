@@ -46,6 +46,7 @@ public class AccommtionListFragment extends ListFragment {
         Log.i("ShopApp", "onCreateView Products List Fragment");
         binding = FragmentAccommodationListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        mProducts.clear();
         if (SharedPreferencesManager.getUserInfo(getContext()).getUserType().equals(UserType.ADMIN)){
             getAccommodationAdmin();
         } else if (SharedPreferencesManager.getUserInfo(getContext()).getUserType().equals(UserType.HOST)) {
