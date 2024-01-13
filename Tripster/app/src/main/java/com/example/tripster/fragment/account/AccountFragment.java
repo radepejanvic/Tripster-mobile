@@ -73,6 +73,7 @@ public class AccountFragment extends Fragment {
         email.setFocusable(false);
         email.setFocusableInTouchMode(false);
 
+        alterFieldEditable(false);
         getUser(SharedPreferencesManager.getUserInfo(getContext()).getUserID());
 
         hideChangePass();
