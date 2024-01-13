@@ -1,4 +1,4 @@
-package com.example.tripster.ui.reservations;
+package com.example.tripster.fragment.reservations;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

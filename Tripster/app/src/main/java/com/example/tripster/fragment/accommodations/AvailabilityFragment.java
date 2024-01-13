@@ -1,6 +1,4 @@
-package com.example.tripster.ui.accommodations;
-
-import static androidx.navigation.ViewKt.findNavController;
+package com.example.tripster.fragment.accommodations;
 
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;

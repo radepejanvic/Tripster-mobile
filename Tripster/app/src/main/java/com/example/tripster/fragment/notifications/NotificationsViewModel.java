@@ -1,15 +1,16 @@
-package com.example.tripster.ui.accommodations;
+package com.example.tripster.fragment.notifications;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AccommodationsViewModel extends ViewModel {
+public class NotificationsViewModel extends ViewModel {
+
     private final MutableLiveData<String> mText;
 
-    public AccommodationsViewModel() {
+    public NotificationsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is accommodations fragment");
+        mText.setValue("This is notifications fragment");
     }
 
     public LiveData<String> getText() {

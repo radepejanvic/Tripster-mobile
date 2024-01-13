@@ -1,4 +1,4 @@
-package com.example.tripster.ui.home;
+package com.example.tripster.fragment.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

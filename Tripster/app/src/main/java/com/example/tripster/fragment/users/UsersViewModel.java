@@ -1,15 +1,15 @@
-package com.example.tripster.ui.account;
+package com.example.tripster.fragment.users;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AccountViewModel extends ViewModel {
+public class UsersViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
-    public AccountViewModel() {
+    public UsersViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is account fragment");
+        mText.setValue("This is users fragment");
     }
 
     public LiveData<String> getText() {

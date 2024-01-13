@@ -17,19 +17,19 @@
 
     <fragment
         android:id="@+id/navigation_reservations"
-        android:name="com.example.tripster.ui.reservations.ReservationsFragment"
+        android:name="com.example.tripster.fragment.reservations.ReservationsFragment"
         android:label="@string/title_reservations"
         tools:layout="@layout/fragment_reservations" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.tripster.ui.notifications.NotificationsFragment"
+        android:name="com.example.tripster.fragment.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.example.tripster.ui.account.AccountFragment"
+        android:name="com.example.tripster.fragment.account.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
     <fragment
@@ -39,12 +39,12 @@
         tools:layout="@layout/fragment_accommodations" />
     <fragment
         android:id="@+id/navigation_reviews"
-        android:name="com.example.tripster.ui.reviews.ReviewsFragment"
+        android:name="com.example.tripster.fragment.reviews.ReviewsFragment"
         android:label="@string/title_reviews"
         tools:layout="@layout/fragment_reviews" />
     <fragment
         android:id="@+id/navigation_users"
-        android:name="com.example.tripster.ui.users.UsersFragment"
+        android:name="com.example.tripster.fragment.users.UsersFragment"
         android:label="@string/title_users"
         tools:layout="@layout/fragment_users" />
     <fragment
@@ -54,7 +54,7 @@
         tools:layout="@layout/fragment_single_accommodation" />
     <fragment
         android:id="@+id/navigation_accommodation_form"
-        android:name="com.example.tripster.ui.accommodations.AccommodationFormFragment"
+        android:name="com.example.tripster.fragment.accommodations.AccommodationFormFragment"
         android:label="fragment_accommodation_form"
         tools:layout="@layout/fragment_accommodation_form" >
         <action
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_upload_photos"
-        android:name="com.example.tripster.ui.accommodations.UploadPhotosFragment"
+        android:name="com.example.tripster.fragment.accommodations.UploadPhotosFragment"
         android:label="fragment_upload_photos"
         tools:layout="@layout/fragment_upload_photos" >
         <action
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_availability"
-        android:name="com.example.tripster.ui.accommodations.AvailabilityFragment"
+        android:name="com.example.tripster.fragment.accommodations.AvailabilityFragment"
         android:label="fragment_availability"
         tools:layout="@layout/fragment_availability" />
     <fragment

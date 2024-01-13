@@ -1,4 +1,4 @@
-package com.example.tripster.ui.home;
+package com.example.tripster.fragment.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

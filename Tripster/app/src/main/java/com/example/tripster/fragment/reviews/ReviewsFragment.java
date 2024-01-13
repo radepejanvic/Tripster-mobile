@@ -1,11 +1,10 @@
-package com.example.tripster.ui.reviews;
+package com.example.tripster.fragment.reviews;
 
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,10 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.tripster.R;
 import com.example.tripster.databinding.FragmentAccountBinding;
 import com.example.tripster.databinding.FragmentReviewsBinding;
-import com.example.tripster.ui.account.AccountViewModel;
 
 public class ReviewsFragment extends Fragment {
 

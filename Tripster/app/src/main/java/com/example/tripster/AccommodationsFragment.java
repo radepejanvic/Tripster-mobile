@@ -7,24 +7,16 @@ import static androidx.navigation.ViewKt.findNavController;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tripster.databinding.FragmentAccommodationsBinding;
 import com.example.tripster.databinding.FragmentAccountBinding;
 import com.example.tripster.databinding.FragmentHomeBinding;
 import com.example.tripster.databinding.FragmentNotificationsBinding;
-import com.example.tripster.ui.notifications.NotificationsViewModel;
-import com.google.android.material.card.MaterialCardView;
-import com.google.android.material.imageview.ShapeableImageView;
 
 /**
  * A simple {@link Fragment} subclass.

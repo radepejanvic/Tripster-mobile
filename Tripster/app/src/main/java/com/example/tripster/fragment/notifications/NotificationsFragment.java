@@ -1,4 +1,4 @@
-package com.example.tripster.ui.notifications;
+package com.example.tripster.fragment.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,15 +1,15 @@
-package com.example.tripster.ui.accommodations;
+package com.example.tripster.fragment.accommodations;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AccommodationFormViewModel extends ViewModel {
+public class AccommodationsViewModel extends ViewModel {
     private final MutableLiveData<String> mText;
 
-    public AccommodationFormViewModel() {
+    public AccommodationsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is account fragment");
+        mText.setValue("This is accommodations fragment");
     }
 
     public LiveData<String> getText() {

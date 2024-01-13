@@ -1,4 +1,4 @@
-package com.example.tripster.ui.accommodations;
+package com.example.tripster.fragment.accommodations;
 
 import static androidx.navigation.ViewKt.findNavController;
 
@@ -31,8 +31,6 @@ import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.enums.AccommodationType;
 import com.example.tripster.model.enums.Mode;
 import com.example.tripster.util.SharedPreferencesManager;
-
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
