@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tripster.FragmentTransition;
 import com.example.tripster.R;
@@ -39,7 +40,10 @@ public class ReviewsFragment extends Fragment {
         binding = FragmentReviewsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        FragmentTransition.to(ReviewListFragment.newInstance(reviews), getActivity(), false, R.id.scroll_reviews_list);
+        ReviewListFragment listFragment = ReviewListFragment.newInstance(reviews);
+        listFragment.setArguments(getArguments());
+
+        FragmentTransition.to(listFragment, getActivity(), false, R.id.scroll_reviews_list);
 
         return root;
     }

@@ -22,6 +22,7 @@ import com.example.tripster.adapters.ReviewListAdapter;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentReviewListBinding;
 import com.example.tripster.databinding.FragmentReviewsBinding;
+import com.example.tripster.model.enums.Mode;
 import com.example.tripster.model.view.Product;
 import com.example.tripster.model.view.Review;
 import com.example.tripster.products.AccommtionListFragment;
@@ -40,6 +41,10 @@ public class ReviewListFragment extends ListFragment {
     private FragmentReviewListBinding binding;
 
     private ReviewListAdapter adapter;
+
+    private Long accommodationId;
+
+    private Long hostId;
 
 
     public static ReviewListFragment newInstance(ArrayList<Review> reviews){
@@ -65,6 +70,12 @@ public class ReviewListFragment extends ListFragment {
         binding = FragmentReviewListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        if (getArguments() != null) {
+            accommodationId = getArguments().getLong("accommodationId");
+            hostId = getArguments().getLong("hostId");
+            Toast.makeText(getContext(), " Accommodation: " + accommodationId + " -- " + " Host: " + hostId, Toast.LENGTH_SHORT).show();
+        }
+
         adapter.clear();
 
         spinnerSetup(binding.type, R.array.review_types);
@@ -83,7 +94,7 @@ public class ReviewListFragment extends ListFragment {
         binding = null;
     }
 
-    private void getAccommodationReviews(Long accommodationId) {
+    private void getAccommodationReviews() {
         Call<List<Review>> call = ClientUtils.reviewService.getAccommodationReviews(accommodationId);
 
         call.enqueue(new Callback<List<Review>>() {
@@ -106,7 +117,7 @@ public class ReviewListFragment extends ListFragment {
         });
     }
 
-    private void getHostReviews(Long hostId) {
+    private void getHostReviews() {
         Call<List<Review>> call = ClientUtils.reviewService.getHostReviews(hostId);
 
         call.enqueue(new Callback<List<Review>>() {
@@ -135,22 +146,12 @@ public class ReviewListFragment extends ListFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-
-//                switch(position) {
-//                    case 0:
-//                        Toast.makeText(getContext(), "Pritisnija san accommodation", Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case 1:
-//                        Toast.makeText(getContext(), "Pritisnija san host", Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-
                 switch(position) {
                     case 0:
-                       getAccommodationReviews(1l);
+                       getAccommodationReviews();
                        break;
                     case 1:
-                        getHostReviews(1l);
+                        getHostReviews();
                         break;
                }
 
