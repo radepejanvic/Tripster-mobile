@@ -1,4 +1,4 @@
-package com.example.tripster;
+package com.example.tripster.fragment.reviews;
 
 import android.os.Bundle;
 
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tripster.FragmentTransition;
+import com.example.tripster.R;
 import com.example.tripster.databinding.FragmentAccommodationPageBinding;
 import com.example.tripster.databinding.FragmentReviewsBinding;
 import com.example.tripster.fragment.reviews.ReviewListFragment;

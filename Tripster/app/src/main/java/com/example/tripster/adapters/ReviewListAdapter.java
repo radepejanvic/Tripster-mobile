@@ -70,7 +70,7 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
 
         if (review != null) {
             title.setText(review.getTitle());
-            reviewer.setText(review.getReviewer());
+            reviewer.setText(review.getReviewerName() + " " + review.getReviewerSurname());
             timeStamp.setText(review.getTimeStamp());
             rate.setText(String.valueOf(review.getRate()));
             comment.setText(review.getComment());

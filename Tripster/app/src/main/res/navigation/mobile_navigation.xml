@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_reviews"
-        android:name="com.example.tripster.ReviewsFragment"
+        android:name="com.example.tripster.fragment.reviews.ReviewsFragment"
         android:label="fragment_reviews"
         tools:layout="@layout/fragment_reviews" />
 
