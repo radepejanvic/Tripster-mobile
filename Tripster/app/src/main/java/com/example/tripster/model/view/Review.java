@@ -27,6 +27,9 @@ public class Review implements Parcelable {
     private String reviewerName;
     private String reviewerSurname;
 
+    private Long reviewedId;
+
+
     protected Review(Parcel in) {
         id = in.readLong();
         title = in.readString();

@@ -82,6 +82,14 @@
     <string name="accommodation_form_availability_button_disable">Disable interval</string>
 
     <string name="add_new_review">Write a review</string>
+    <string name="review_form_title"> Write a review </string>
+    <string name="review_form_title_hint"> Title </string>
+    <string name="review_form_comment_hint"> Comment </string>
+    <string name="review_form_button_hint"> Send </string>
+
+    <string name="report_form_title_user"> Report user </string>
+    <string name="report_form_title_review"> Report review </string>
+    <string name="report_form_reason_hint"> Reason </string>
 
 
     <string-array name="type_options">
