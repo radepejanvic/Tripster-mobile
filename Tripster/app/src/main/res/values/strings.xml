@@ -125,21 +125,24 @@
         <item>Disable an interval</item>
     </string-array>
 
+    <string-array name="rate_names">
+        <item>Bad</item>
+        <item>Poor</item>
+        <item>Average</item>
+        <item>Good</item>
+        <item>Excellent</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <!--    veljko  -->
 
 
+    <!--    rade  -->
 
 
-<!--    rade  -->
-
-
-
-
-
-<!--    trajce  -->
-
-
-
+    <!--    trajce  -->
 
 
 </resources>
