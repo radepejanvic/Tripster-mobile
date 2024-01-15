@@ -2,6 +2,7 @@ package com.example.tripster.client;
 
 import com.example.tripster.TripsterApp;
 import com.example.tripster.BuildConfig;
+import com.example.tripster.service.ReviewService;
 import com.example.tripster.service.UserService;
 import com.example.tripster.util.SharedPreferencesManager;
 
@@ -56,7 +57,10 @@ public class ClientUtils {
     public static AuthService authService = retrofit.create(AuthService.class);
 
     public static  AccommodationService accommodationService = retrofit.create(AccommodationService.class);
+
     public static UserService userService = retrofit.create(UserService.class);
+
+    public static ReviewService reviewService = retrofit.create(ReviewService.class);
 }
 
 
