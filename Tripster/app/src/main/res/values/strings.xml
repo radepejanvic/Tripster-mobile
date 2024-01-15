@@ -81,6 +81,8 @@
     <string name="accommodation_form_availability_button_update">Update price list</string>
     <string name="accommodation_form_availability_button_disable">Disable interval</string>
 
+    <string name="add_new_review">Write a review</string>
+
 
     <string-array name="type_options">
         <item>Pick the type of your unit</item>
