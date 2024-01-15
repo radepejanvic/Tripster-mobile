@@ -87,7 +87,7 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
-                android:id="@+id/delete_review"
+                android:id="@+id/report_review"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginTop="16dp"
@@ -97,7 +97,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/report_review"
+                android:id="@+id/delete_review"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginTop="16dp"

@@ -73,17 +73,11 @@ public class ReviewListFragment extends ListFragment {
         if (getArguments() != null) {
             accommodationId = getArguments().getLong("accommodationId");
             hostId = getArguments().getLong("hostId");
-            Toast.makeText(getContext(), " Accommodation: " + accommodationId + " -- " + " Host: " + hostId, Toast.LENGTH_SHORT).show();
         }
 
         adapter.clear();
 
         spinnerSetup(binding.type, R.array.review_types);
-
-        // TODO: Get accommodation and host id from bundle
-//        getAccommodationReviews(1l);
-//        getAccommodationReviews(6l);
-
 
         return root;
     }
@@ -149,9 +143,11 @@ public class ReviewListFragment extends ListFragment {
                 switch(position) {
                     case 0:
                        getAccommodationReviews();
+                       adapter.setMode("accommodation");
                        break;
                     case 1:
                         getHostReviews();
+                        adapter.setMode("host");
                         break;
                }
 

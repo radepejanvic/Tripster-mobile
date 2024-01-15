@@ -23,6 +23,7 @@ public class Review implements Parcelable {
     private double rate;
     private String comment;
 
+    private Long reviewerId;
     private String reviewerName;
     private String reviewerSurname;
 

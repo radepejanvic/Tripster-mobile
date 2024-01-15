@@ -50,14 +50,14 @@ public interface ReviewService {
             "Content-Type:application/json"
     })
     @DELETE("accommodations/reviews/{id}")
-    Call<User> deleteAccommodationReview(@Path("id") long id);
+    Call<Boolean> deleteAccommodationReview(@Path("id") long id);
 
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
     @DELETE("users/reviews/{id}")
-    Call<User> deleteHostReview(@Path("id") long id);
+    Call<Boolean> deleteHostReview(@Path("id") long id);
 
 
 }
