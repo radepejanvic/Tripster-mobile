@@ -17,6 +17,7 @@ import com.example.tripster.adapters.ReservationListAdapter;
 import com.example.tripster.adapters.ReservationListAdapter;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentReservationListBinding;
+import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Reservation;
 import com.example.tripster.model.view.Reservation;
 import com.example.tripster.util.SharedPreferencesManager;
@@ -62,8 +63,12 @@ public class ReservationListFragment extends ListFragment {
 
         binding = FragmentReservationListBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        if (SharedPreferencesManager.getUserInfo(getContext()).getUserType().equals(UserType.HOST)){
+            getReservationsForHost();
 
-        getReservations();
+        }else {
+            getReservationsForGuest();
+        }
 
         return root;
     }
@@ -74,7 +79,7 @@ public class ReservationListFragment extends ListFragment {
         binding = null;
     }
 
-    private void getReservations( ) {
+    private void getReservationsForHost( ) {
         Call<List<Reservation>> call = ClientUtils.reservationService.getReservationForHost(SharedPreferencesManager.getUserInfo(getContext()).getId());
 
         call.enqueue(new Callback<List<Reservation>>() {
@@ -94,6 +99,27 @@ public class ReservationListFragment extends ListFragment {
             }
         });
     }
+    private void getReservationsForGuest( ) {
+        Call<List<Reservation>> call = ClientUtils.reservationService.getReservationForGuest(SharedPreferencesManager.getUserInfo(getContext()).getId());
+
+        call.enqueue(new Callback<List<Reservation>>() {
+            @Override
+            public void onResponse(Call<List<Reservation>> call, Response<List<Reservation>> response) {
+
+                if(response.code() == 200) {
+                    setAdapter(response.body());
+                } else {
+                    Log.e("GET Request", "Error fetching user " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Reservation>> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     private void setAdapter(List<Reservation> reservations) {
         this.adapter.addAll(reservations);
