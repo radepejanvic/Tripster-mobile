@@ -42,6 +42,7 @@
     <string name="update_account">Update account</string>
     <string name="delete_account">Delete account</string>
     <string name="decline">Decline</string>
+    <string name="reject">Reject</string>
     <string name="Accept">Accept</string>
     <string name="dialog_message" />
 
