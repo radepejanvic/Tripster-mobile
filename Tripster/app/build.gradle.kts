@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    compileOnly("org.projectlombok:lombok:1.18.22")
+    annotationProcessor("org.projectlombok:lombok:1.18.22")
     implementation("com.squareup.retrofit2:retrofit:2.3.0")
     implementation("com.squareup.retrofit2:converter-gson:2.3.0")
     implementation("com.squareup.okhttp3:logging-interceptor:3.12.1")
