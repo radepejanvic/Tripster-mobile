@@ -1,8 +1,10 @@
 package com.example.tripster.adapters;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -77,12 +79,16 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews){
 
                 TextView accept = convertView.findViewById(R.id.acceptReservation);
                 TextView reject = convertView.findViewById(R.id.rejectReservation);
+                TextView userButton = convertView.findViewById(R.id.userReservationButton);
 
                 if(reservation != null){
+
                         title.setText(reservation.getName());
                         address.setText(reservation.getAddress());
-                        guest.setText("Guest: "+reservation.getGuest());
-                        numOfCancelled.setText("Number of cancelled: "+reservation.getNumOfCancelled());
+                        if (userType.equals(UserType.HOST)){
+                                guest.setText("Guest: "+reservation.getGuest());
+                                numOfCancelled.setText("Number of cancelled: "+reservation.getNumOfCancelled());
+                        }
                         status.setText(String.valueOf(reservation.getStatus()));
                         price.setText(String.valueOf(reservation.getPrice()));
                         numOfGuest.setText(String.valueOf(reservation.getDuration())+" nights, "
@@ -92,24 +98,48 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews){
                         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
                         Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                         imageView.setImageBitmap(decodedBitmap);
-                        customizeImageViewVisibility(accept,reject,cardView,reservation);
+                        customizeImageViewVisibility(accept,reject,userButton,cardView,reservation);
 
                 }
 
                 return convertView;
         }
-        private void customizeImageViewVisibility(TextView accept, TextView reject,CardView cardView,Reservation reservation) {
+        private void customizeImageViewVisibility(TextView accept, TextView reject,TextView userButton,CardView cardView,Reservation reservation) {
                 accept.setVisibility(View.VISIBLE);
                 reject.setVisibility(View.VISIBLE);
+                userButton.setVisibility(View.VISIBLE);
                 cardView.setAlpha(1F);
 
-                if (!reservation.getStatus().equals(ReservationStatus.PENDING)){
-                     accept.setVisibility(View.GONE);
-                     reject.setVisibility(View.GONE);
+                if(userType.equals(UserType.HOST)){
+                        userButton.setVisibility(View.GONE);
+                        if (!reservation.getStatus().equals(ReservationStatus.PENDING)){
+                                accept.setVisibility(View.GONE);
+                                reject.setVisibility(View.GONE);
+                        }
+                        if (reservation.getStatus().equals(ReservationStatus.CANCELLED)){
+                                cardView.setAlpha(0.5F);
+                        }
+                }else {
+                        accept.setVisibility(View.GONE);
+                        reject.setVisibility(View.GONE);
+                        switch(reservation.getStatus()) {
+                                case CANCELLED:
+                                        cardView.setAlpha(0.5F);
+                                        userButton.setVisibility(View.GONE);
+                                        break;
+                                case REJECTED:
+                                        userButton.setText("Delete");
+                                        userButton.setTextColor(Color.RED);
+                                        break;
+                                case ACCEPTED:
+                                        userButton.setText("Cancel");
+                                        break;
+                                case PENDING:
+                                        userButton.setVisibility(View.GONE);
+                                        break;
+                        }
                 }
-                if (reservation.getStatus().equals(ReservationStatus.CANCELLED)){
-                        cardView.setAlpha(0.5F);
-                }
+
 
         }
 }

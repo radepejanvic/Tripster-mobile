@@ -168,6 +168,19 @@
                         app:layout_constraintStart_toEndOf="@+id/residenceName"
                         app:layout_constraintTop_toBottomOf="@+id/frame_layout_image2" />
 
+                    <TextView
+                        android:id="@+id/userReservationButton"
+                        style="@style/AccommodationButtons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="135dp"
+                        android:padding="5dp"
+                        android:text="@string/reject"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/frame_layout_image2"
+                        app:layout_constraintStart_toStartOf="@+id/frame_layout_image2"
+                        app:layout_constraintTop_toBottomOf="@+id/frame_layout_image2" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
