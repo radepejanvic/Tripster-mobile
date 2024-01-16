@@ -43,16 +43,21 @@ public class ReviewsApprovalFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                Bundle bundle = new Bundle();
+                ReviewReportlListFragment listFragment = ReviewReportlListFragment.newInstance(new ArrayList<>());
                 switch(position) {
                     case 0:
                         FragmentTransition.to(ReviewApprovalListFragment.newInstance(new ArrayList<>()), getActivity(), false, R.id.scroll_review_report_list);
                         break;
                     case 1:
-                        FragmentTransition.to(ReviewReportlListFragment.newInstance(new ArrayList<>()), getActivity(), false, R.id.scroll_review_report_list);
+                        bundle.putLong("mode", 1);
+                        listFragment.setArguments(bundle);
+                        FragmentTransition.to(listFragment, getActivity(), false, R.id.scroll_review_report_list);
                         break;
                     case 2:
-                        FragmentTransition.to(ReviewReportlListFragment.newInstance(new ArrayList<>()), getActivity(), false, R.id.scroll_review_report_list);
+                        bundle.putLong("mode", 2);
+                        listFragment.setArguments(bundle);
+                        FragmentTransition.to(listFragment, getActivity(), false, R.id.scroll_review_report_list);
                         break;
                 }
 

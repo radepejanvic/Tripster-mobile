@@ -3,6 +3,7 @@ package com.example.tripster.client;
 import com.example.tripster.TripsterApp;
 import com.example.tripster.BuildConfig;
 import com.example.tripster.service.ReservationService;
+import com.example.tripster.service.ReviewReportService;
 import com.example.tripster.service.ReviewService;
 import com.example.tripster.service.UserReportService;
 import com.example.tripster.service.UserService;
@@ -65,6 +66,7 @@ public class ClientUtils {
 
     public static ReviewService reviewService = retrofit.create(ReviewService.class);
     public static UserReportService userReportService = retrofit.create(UserReportService.class);
+    public static ReviewReportService reviewReportService = retrofit.create(ReviewReportService.class);
 }
 
 
