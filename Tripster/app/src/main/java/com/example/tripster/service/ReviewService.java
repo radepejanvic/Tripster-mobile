@@ -73,5 +73,10 @@ public interface ReviewService {
     @GET("users/reviews/{hostId}/{guestId}")
     Call<Boolean> canReviewHost(@Path("hostId") long accommodationId, @Path("guestId") long guestId);
 
-
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/reviews/new")
+    Call<List<Review>> getAllReviews();
 }
