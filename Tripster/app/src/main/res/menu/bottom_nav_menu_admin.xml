@@ -9,7 +9,7 @@
         android:icon="@drawable/ic_people_24"
         android:title="@string/title_users" />
     <item
-        android:id="@+id/navigation_reviews"
+        android:id="@+id/navigation_review_approval"
         android:icon="@drawable/ic_comment_24"
         android:title="@string/title_reviews" />
     <item

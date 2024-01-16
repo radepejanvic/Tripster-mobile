@@ -90,5 +90,10 @@
         android:name="com.example.tripster.fragment.reviews.ReviewsFragment"
         android:label="fragment_reviews"
         tools:layout="@layout/fragment_reviews" />
+    <fragment
+        android:id="@+id/navigation_review_approval"
+        android:name="com.example.tripster.fragment.reviews.ReviewsApprovalFragment"
+        android:label="fragment_reviews_approval"
+        tools:layout="@layout/fragment_reviews_approval" />
 
 </navigation>

@@ -42,6 +42,7 @@
     <string name="update_account">Update account</string>
     <string name="delete_account">Delete account</string>
     <string name="decline">Decline</string>
+    <string name="reject">Reject</string>
     <string name="Accept">Accept</string>
     <string name="dialog_message" />
 
@@ -148,8 +149,20 @@
         <item>Host reviews</item>
     </string-array>
 
+    <string-array name="review_reports">
+        <item>New accommodation reviews</item>
+        <item>Accommodation review reports</item>
+        <item>User review reports</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reporter">Reporter:</string>
+    <string name="reported">Reported:</string>
+    <string name="report_reason">Reason for report:</string>
+    <string name="delete">Delete</string>
+    <string name="approve">Approve</string>
+    <string name="comment">Comment:</string>
 
     <!--    veljko  -->
 

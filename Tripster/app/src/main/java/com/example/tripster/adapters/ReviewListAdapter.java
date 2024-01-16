@@ -7,10 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,8 +19,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.fragment.reports.ReportDialog;
-import com.example.tripster.model.User;
+import com.example.tripster.model.Status;
 import com.example.tripster.model.enums.ReportType;
+import com.example.tripster.model.enums.ReservationStatus;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Review;
 import com.example.tripster.util.SharedPreferencesManager;
@@ -86,8 +85,9 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
         TextView comment = convertView.findViewById(R.id.review_comment);
         ImageView delete = convertView.findViewById(R.id.delete_review);
         ImageView report = convertView.findViewById(R.id.report_review);
-
-        customizeImageViewVisibility(delete, report, review.getReviewerId());
+        TextView decline = convertView.findViewById(R.id.declineReview);
+        TextView accept = convertView.findViewById(R.id.acceptReview);
+        customizeImageViewVisibility(delete, report,decline,accept, review.getReviewerId());
 
         if (review != null) {
             title.setText(review.getTitle());
@@ -109,16 +109,66 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
             reportDialog.show();
         });
 
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Status status = new Status();
+                status.setId(review.getId());
+                status.setStatus("ACTIVE");
+                Call<String> call =  ClientUtils.reviewService.approveReview(status);
+                reviews.remove(position);
+                notifyDataSetChanged();
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("REZ","greska");
+                    }
+                });
+
+            }
+        });
+        decline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Call<String> call =  ClientUtils.reviewService.deleteReview(review.getId());
+                reviews.remove(position);
+                notifyDataSetChanged();
+                call.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        Log.d("REZ","greska");
+                    }
+                });
+
+            }
+        });
+
         return convertView;
     }
 
-    private void customizeImageViewVisibility(ImageView delete, ImageView report, Long reviewerId) {
+    private void customizeImageViewVisibility(ImageView delete, ImageView report, TextView decline, TextView accept, Long reviewerId) {
         switch(userType) {
             case HOST:
+                decline.setVisibility(View.GONE);
+                accept.setVisibility(View.GONE);
                 report.setVisibility(View.VISIBLE);
                 delete.setVisibility(View.GONE);
                 break;
             case GUEST:
+                decline.setVisibility(View.GONE);
+                accept.setVisibility(View.GONE);
                 delete.setVisibility(View.VISIBLE);
                 report.setVisibility(View.GONE);
                 if (userId != reviewerId) {
@@ -126,6 +176,8 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
                 }
                 break;
             case ADMIN:
+                decline.setVisibility(View.VISIBLE);
+                accept.setVisibility(View.VISIBLE);
                 delete.setVisibility(View.GONE);
                 report.setVisibility(View.GONE);
         }
