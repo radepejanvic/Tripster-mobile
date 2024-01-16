@@ -142,7 +142,6 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
                 } else {
                    Log.e("DELETE Request", "Error deleting review " + response.code());
                 }
-                return null;
             }
 
             @Override

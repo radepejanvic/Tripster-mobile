@@ -218,7 +218,7 @@ public class AccountFragment extends Fragment {
                 } else {
                     Log.e("GET Request", "Error fetching user " + response.code());
                 }
-                return null;
+
             }
 
             @Override
@@ -239,7 +239,7 @@ public class AccountFragment extends Fragment {
                 } else {
                     Log.e("PUT Request", "Error updating user " + response.code());
                 }
-                return null;
+
             }
 
             @Override
@@ -267,7 +267,7 @@ public class AccountFragment extends Fragment {
                     Toast.makeText(getContext(), "You have active reservations.", Toast.LENGTH_SHORT).show();
                     Log.e("DELETE Request", "Error deleting user " + response.code());
                 }
-                return null;
+
             }
 
             @Override

@@ -95,7 +95,7 @@ public class AccommtionListFragment extends ListFragment {
 
                 }
                 setAccommodation(products);
-                return null;
+
             }
 
             @Override
@@ -122,7 +122,7 @@ public class AccommtionListFragment extends ListFragment {
 
                 }
                 setAccommodation(products);
-                return null;
+
             }
 
             @Override
