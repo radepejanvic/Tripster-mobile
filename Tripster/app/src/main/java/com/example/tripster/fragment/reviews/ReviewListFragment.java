@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
@@ -35,6 +36,7 @@ import com.example.tripster.databinding.FragmentReviewListBinding;
 import com.example.tripster.databinding.FragmentReviewsBinding;
 import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.enums.Mode;
+import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Product;
 import com.example.tripster.model.view.Review;
 import com.example.tripster.products.AccommtionListFragment;
@@ -74,6 +76,8 @@ public class ReviewListFragment extends ListFragment {
 
     private Review review;
 
+    private FloatingActionButton fab;
+
     public static ReviewListFragment newInstance(ArrayList<Review> reviews){
         ReviewListFragment fragment = new ReviewListFragment();
         Bundle args = new Bundle();
@@ -106,7 +110,9 @@ public class ReviewListFragment extends ListFragment {
 
         spinnerSetup(binding.type, R.array.review_types);
 
-        binding.fab.setOnClickListener(v -> {
+        fab = binding.fab;
+
+        fab.setOnClickListener(v -> {
             layoutInflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
             ViewGroup popupContainer = (ViewGroup) layoutInflater.inflate(R.layout.review_form, null);
             popupWindow = new PopupWindow(popupContainer, ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.WRAP_CONTENT, true);
@@ -142,27 +148,11 @@ public class ReviewListFragment extends ListFragment {
         binding = null;
     }
 
-    private void getAccommodationReviews() {
-        Call<List<Review>> call = ClientUtils.reviewService.getAccommodationReviews(accommodationId);
-
-        call.enqueue(new Callback<List<Review>>() {
-            @Override
-            public void onResponse(Call<List<Review>> call, Response<List<Review>> response) {
-                if(response.code() == 200) {
-
-                    setAdapter(response.body());
-
-                    Log.d("GET Request", "Accommodation reviews count: " + response.body().size());
-                } else {
-                    Log.e("GET Request", "Error fetching user " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Review>> call, Throwable t) {
-
-            }
-        });
+    private void customizeFabVisibility() {
+        UserType userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
+//        if (userType != UserType.GUEST || !canAddReview()) {
+//
+//        }
     }
 
     private void spinnerSetup(Spinner spinner, int optionsResId) {
@@ -225,6 +215,7 @@ public class ReviewListFragment extends ListFragment {
                 } else {
                     Log.e("GET Request", "Error fetching host reviews " + response.code());
                 }
+                return null;
             }
 
             @Override
@@ -277,6 +268,7 @@ public class ReviewListFragment extends ListFragment {
 //                    Toast.makeText(getContext(), "Error review", Toast.LENGTH_SHORT).show();
                     Log.d("POST Request", "Error posting new review " + response.body());
                 }
+                return null;
             }
 
             @Override

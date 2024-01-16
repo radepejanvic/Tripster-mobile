@@ -59,5 +59,19 @@ public interface ReviewService {
     @DELETE("users/reviews/{id}")
     Call<Boolean> deleteHostReview(@Path("id") long id);
 
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("accommodations/reviews/{accommodationId}/{guestId}")
+    Call<Boolean> canReviewAccommodation(@Path("accommodationId") long accommodationId, @Path("guestId") long guestId);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("users/reviews/{hostId}/{guestId}")
+    Call<Boolean> canReviewHost(@Path("hostId") long accommodationId, @Path("guestId") long guestId);
+
 
 }

@@ -509,6 +509,7 @@ public class AccommodationFormFragment extends Fragment {
                 } else {
                     Log.d("POST Request", "Error posting new accommodation " + response.body());
                 }
+                return null;
             }
 
             @Override
@@ -532,6 +533,7 @@ public class AccommodationFormFragment extends Fragment {
                 } else {
                     Log.d("GET Request", "Error fetching accommodation " + response.body());
                 }
+                return null;
             }
 
             @Override
@@ -553,6 +555,7 @@ public class AccommodationFormFragment extends Fragment {
                 } else {
                     Log.d("PUT Request", "Error updating accommodation " + response.body());
                 }
+                return null;
             }
 
             @Override

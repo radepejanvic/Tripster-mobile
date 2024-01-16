@@ -69,6 +69,7 @@ public class SingleAccommodationFragment extends Fragment {
                 } else {
                     Log.d("GET Request", "Error fetching accommodation " + response.body());
                 }
+                return null;
             }
 
             @Override
