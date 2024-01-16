@@ -20,7 +20,7 @@ public class Review implements Parcelable {
     private String title;
 
     private String timeStamp;
-    private double rate;
+    private int rate;
     private String comment;
 
     private Long reviewerId;
@@ -36,7 +36,7 @@ public class Review implements Parcelable {
         reviewerName = in.readString();
         reviewerSurname = in.readString();
         timeStamp = in.readString();
-        rate = in.readDouble();
+        rate = in.readInt();
         comment = in.readString();
     }
 
@@ -64,7 +64,7 @@ public class Review implements Parcelable {
         dest.writeString(reviewerName);
         dest.writeString(reviewerSurname);
         dest.writeString(timeStamp);
-        dest.writeDouble(rate);
+        dest.writeInt(rate);
         dest.writeString(comment);
     }
 }

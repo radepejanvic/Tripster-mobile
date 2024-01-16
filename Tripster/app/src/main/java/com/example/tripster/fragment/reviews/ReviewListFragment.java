@@ -1,13 +1,11 @@
 package com.example.tripster.fragment.reviews;
 
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.media.Rating;
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,14 +14,11 @@ import androidx.viewpager.widget.ViewPager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -33,13 +28,11 @@ import com.example.tripster.R;
 import com.example.tripster.adapters.ReviewListAdapter;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentReviewListBinding;
-import com.example.tripster.databinding.FragmentReviewsBinding;
-import com.example.tripster.model.Accommodation;
-import com.example.tripster.model.enums.Mode;
+import com.example.tripster.fragment.reports.ReportDialog;
+import com.example.tripster.model.enums.ReportType;
+import com.example.tripster.model.enums.ReviewType;
 import com.example.tripster.model.enums.UserType;
-import com.example.tripster.model.view.Product;
 import com.example.tripster.model.view.Review;
-import com.example.tripster.products.AccommtionListFragment;
 import com.example.tripster.util.SharedPreferencesManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -62,21 +55,13 @@ public class ReviewListFragment extends ListFragment {
 
     private Long hostId;
 
-    private LayoutInflater layoutInflater;
-
-    private PopupWindow popupWindow;
-
     private String mode;
 
-    private EditText reviewTitle;
-
-    private EditText reviewComment;
-
-    private RatingBar reviewRate;
-
-    private Review review;
-
     private FloatingActionButton fab;
+
+    private boolean canReviewAccommodation;
+
+    private boolean canReviewHost;
 
     public static ReviewListFragment newInstance(ArrayList<Review> reviews){
         ReviewListFragment fragment = new ReviewListFragment();
@@ -112,35 +97,23 @@ public class ReviewListFragment extends ListFragment {
 
         fab = binding.fab;
 
+        canReview(true);
+        canReview(false);
+
+
         fab.setOnClickListener(v -> {
-            layoutInflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-            ViewGroup popupContainer = (ViewGroup) layoutInflater.inflate(R.layout.review_form, null);
-            popupWindow = new PopupWindow(popupContainer, ViewPager.LayoutParams.MATCH_PARENT, ViewPager.LayoutParams.WRAP_CONTENT, true);
-            popupWindow.showAtLocation(binding.constraintLayout, Gravity.CENTER, 500, 500);
-
-            popupContainer.setOnTouchListener((v1, event) -> {
-                popupWindow.dismiss();
-                return true;
-            });
-
-            reviewTitle = popupContainer.findViewById(R.id.title_input);
-            reviewComment = popupContainer.findViewById(R.id.comment_input);
-            reviewRate = popupContainer.findViewById(R.id.rate_input);
-
-            popupContainer.findViewById(R.id.add_review).setOnClickListener(v12 -> {
-                if(validateReviewForm()) {
-                    loadReviewFromInputs();
-                    addReview();
-                    popupWindow.dismiss();
-                } else {
-                    Toast.makeText(getContext(), "All fields must be filled", Toast.LENGTH_SHORT).show();
-                }
-            });
+            ReviewType type = mode == "accommodation" ? ReviewType.ACCOMMODATION : ReviewType.HOST;
+            Long id = mode == "accommodation" ? accommodationId : hostId;
+            Dialog reviewDialog =new ReviewDialog(getContext(), SharedPreferencesManager.getUserInfo(getContext()).getId(), id, type);
+            reviewDialog.setCancelable(true);
+            reviewDialog.setCanceledOnTouchOutside(true);
+            reviewDialog.show();
 
         });
 
         return root;
     }
+
 
     @Override
     public void onDestroyView() {
@@ -148,11 +121,48 @@ public class ReviewListFragment extends ListFragment {
         binding = null;
     }
 
-    private void customizeFabVisibility() {
+    private void customizeFabVisibility(boolean canReview) {
         UserType userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
-//        if (userType != UserType.GUEST || !canAddReview()) {
-//
+//        if (userType != UserType.GUEST || !canReview) {
+//            fab.setVisibility(View.GONE);
 //        }
+    }
+
+    private void canReview(boolean isAccommodation) {
+        Call<Boolean> call;
+        long guestId = SharedPreferencesManager.getUserInfo(getContext()).getId();
+
+        if (isAccommodation) {
+            call = ClientUtils.reviewService.canReviewAccommodation(accommodationId, guestId);
+        } else {
+            call = ClientUtils.reviewService.canReviewHost(hostId, guestId);
+        }
+
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful()) {
+
+                    if (isAccommodation) {
+                        canReviewAccommodation = response.body();
+                    } else {
+                        canReviewHost = response.body();
+                    }
+
+
+                    Log.d("GET Request", "Can review: " + response.body());
+                } else {
+                    Log.e("GET Request", "Error checking reviewability " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                // Handle the failure
+                t.printStackTrace();
+            }
+        });
+
     }
 
     private void spinnerSetup(Spinner spinner, int optionsResId) {
@@ -164,10 +174,12 @@ public class ReviewListFragment extends ListFragment {
                     case 0:
                         mode = "accommodation";
                         adapter.setMode(mode);
+                        customizeFabVisibility(canReviewAccommodation);
                         break;
                     case 1:
                         mode = "host";
                         adapter.setMode(mode);
+                        customizeFabVisibility(canReviewHost);
                         break;
                 }
 
@@ -229,51 +241,6 @@ public class ReviewListFragment extends ListFragment {
         adapter.clear();
         this.adapter.addAll(reviews);
         adapter.notifyDataSetChanged();
-    }
-
-    private boolean validateReviewForm() {
-        return  !reviewTitle.getText().toString().isEmpty() &&
-                !reviewComment.getText().toString().isEmpty() &&
-                reviewRate.getRating() != 0;
-    }
-
-    private void loadReviewFromInputs() {
-        review = new Review();
-        review.setTitle(reviewTitle.getText().toString());
-        review.setComment(reviewComment.getText().toString());
-        review.setRate(reviewRate.getRating());
-        review.setReviewerId((SharedPreferencesManager.getUserInfo(getContext()).getId()));
-        Long reviewedId = mode.equals("accommodation") ? accommodationId : hostId;
-        review.setReviewedId(reviewedId);
-    }
-
-    private void addReview() {
-
-        Call<Review> call;
-
-        if (mode.equals("accommodation")) {
-            call = ClientUtils.reviewService.addAccommodationReview(review);
-        } else {
-            call = ClientUtils.reviewService.addHostReview(review);
-        }
-
-        call.enqueue(new Callback<Review>() {
-            @Override
-            public void onResponse(Call<Review> call, Response<Review> response) {
-                if (response.code() == 201){
-                    Toast.makeText(getContext(), "Sent review", Toast.LENGTH_SHORT).show();
-                    Log.d("POST Request", "Review: " + response.body());
-                } else {
-//                    Toast.makeText(getContext(), "Error review", Toast.LENGTH_SHORT).show();
-                    Log.d("POST Request", "Error posting new review " + response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Review> call, Throwable t) {
-
-            }
-        });
     }
 
 
