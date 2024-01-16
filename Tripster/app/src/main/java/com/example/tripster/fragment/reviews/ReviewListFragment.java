@@ -215,7 +215,6 @@ public class ReviewListFragment extends ListFragment {
                 } else {
                     Log.e("GET Request", "Error fetching host reviews " + response.code());
                 }
-                return null;
             }
 
             @Override
@@ -268,7 +267,6 @@ public class ReviewListFragment extends ListFragment {
 //                    Toast.makeText(getContext(), "Error review", Toast.LENGTH_SHORT).show();
                     Log.d("POST Request", "Error posting new review " + response.body());
                 }
-                return null;
             }
 
             @Override

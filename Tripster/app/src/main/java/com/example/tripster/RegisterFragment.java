@@ -172,7 +172,7 @@ public class RegisterFragment extends Fragment{
                     AlertDialog dialog = builder.create();
                     dialog.show();
                 }
-                return null;
+
             }
 
             @Override
