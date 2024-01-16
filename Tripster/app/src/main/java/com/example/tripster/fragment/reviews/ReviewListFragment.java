@@ -78,6 +78,10 @@ public class ReviewListFragment extends ListFragment {
 
     private FloatingActionButton fab;
 
+    private boolean canReviewAccommodation;
+
+    private boolean canReviewHost;
+
     public static ReviewListFragment newInstance(ArrayList<Review> reviews){
         ReviewListFragment fragment = new ReviewListFragment();
         Bundle args = new Bundle();
@@ -111,6 +115,10 @@ public class ReviewListFragment extends ListFragment {
         spinnerSetup(binding.type, R.array.review_types);
 
         fab = binding.fab;
+
+        canReview(true);
+        canReview(false);
+
 
         fab.setOnClickListener(v -> {
             layoutInflater = (LayoutInflater) getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -148,11 +156,48 @@ public class ReviewListFragment extends ListFragment {
         binding = null;
     }
 
-    private void customizeFabVisibility() {
+    private void customizeFabVisibility(boolean canReview) {
         UserType userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
-//        if (userType != UserType.GUEST || !canAddReview()) {
-//
-//        }
+        if (userType != UserType.GUEST || !canReview) {
+            fab.setVisibility(View.GONE);
+        }
+    }
+
+    private void canReview(boolean isAccommodation) {
+        Call<Boolean> call;
+        long guestId = SharedPreferencesManager.getUserInfo(getContext()).getId();
+
+        if (isAccommodation) {
+            call = ClientUtils.reviewService.canReviewAccommodation(accommodationId, guestId);
+        } else {
+            call = ClientUtils.reviewService.canReviewHost(hostId, guestId);
+        }
+
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful()) {
+
+                    if (isAccommodation) {
+                        canReviewAccommodation = response.body();
+                    } else {
+                        canReviewHost = response.body();
+                    }
+
+
+                    Log.d("GET Request", "Can review: " + response.body());
+                } else {
+                    Log.e("GET Request", "Error checking reviewability " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                // Handle the failure
+                t.printStackTrace();
+            }
+        });
+
     }
 
     private void spinnerSetup(Spinner spinner, int optionsResId) {
@@ -164,10 +209,12 @@ public class ReviewListFragment extends ListFragment {
                     case 0:
                         mode = "accommodation";
                         adapter.setMode(mode);
+                        customizeFabVisibility(canReviewAccommodation);
                         break;
                     case 1:
                         mode = "host";
                         adapter.setMode(mode);
+                        customizeFabVisibility(canReviewHost);
                         break;
                 }
 
