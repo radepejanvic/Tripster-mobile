@@ -21,6 +21,7 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.tripster.R;
+import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentAccommodationListBinding;
 import com.example.tripster.model.enums.ReservationStatus;
 import com.example.tripster.model.enums.UserType;
@@ -29,6 +30,10 @@ import com.example.tripster.model.view.Review;
 import com.example.tripster.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReservationListAdapter extends ArrayAdapter<Reservation> {
 
@@ -101,6 +106,80 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews){
                         customizeImageViewVisibility(accept,reject,userButton,cardView,reservation);
 
                 }
+
+                reject.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                                Call<String> call =  ClientUtils.reservationService.reject(reservation.getId());
+                                reservation.setStatus(ReservationStatus.REJECTED);
+                                notifyDataSetChanged();
+                                call.enqueue(new Callback<String>() {
+                                        @Override
+                                        public void onResponse(Call<String> call, Response<String> response) {
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<String> call, Throwable t) {
+                                                Log.d("REZ","greska");
+                                        }
+                                });
+
+                        }
+                });
+
+                accept.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                                Call<String> call =  ClientUtils.reservationService.accept(reservation.getId());
+                                reservation.setStatus(ReservationStatus.ACCEPTED);
+                                notifyDataSetChanged();
+                                call.enqueue(new Callback<String>() {
+                                        @Override
+                                        public void onResponse(Call<String> call, Response<String> response) {
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<String> call, Throwable t) {
+                                                Log.d("REZ","greska");
+                                        }
+                                });
+
+                        }
+                });
+                userButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                Call<String> call;
+
+                                if (reservation.getStatus().equals(ReservationStatus.REJECTED)){
+                                        call =  ClientUtils.reservationService.delete(reservation.getId());
+                                        reviews.remove(position);
+                                }else {
+                                        call =  ClientUtils.reservationService.cancel(reservation.getId());
+                                        reservation.setStatus(ReservationStatus.CANCELLED);
+                                }
+
+
+                                notifyDataSetChanged();
+                                call.enqueue(new Callback<String>() {
+                                        @Override
+                                        public void onResponse(Call<String> call, Response<String> response) {
+
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<String> call, Throwable t) {
+                                                Log.d("REZ","greska");
+                                        }
+                                });
+
+                        }
+                });
+
 
                 return convertView;
         }

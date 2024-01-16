@@ -37,6 +37,12 @@ public interface ReservationService {
     })
     @PUT("reservations/reject/{id}")
     Call<String> reject(@Path("id") long id);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PUT("reservations/cancel/{id}")
+    Call<String> cancel(@Path("id") long id);
 
     @Headers({
             "User-Agent: Mobile-Android",
