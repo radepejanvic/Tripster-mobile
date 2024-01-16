@@ -241,7 +241,7 @@ public class ReviewListFragment extends ListFragment {
         review = new Review();
         review.setTitle(reviewTitle.getText().toString());
         review.setComment(reviewComment.getText().toString());
-        review.setRate(reviewRate.getRating());
+        review.setRate((int)reviewRate.getRating());
         review.setReviewerId((SharedPreferencesManager.getUserInfo(getContext()).getId()));
         Long reviewedId = mode.equals("accommodation") ? accommodationId : hostId;
         review.setReviewedId(reviewedId);
