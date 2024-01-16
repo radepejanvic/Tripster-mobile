@@ -1,6 +1,7 @@
 package com.example.tripster.service;
 
 import com.example.tripster.model.Accommodation;
+import com.example.tripster.model.Status;
 import com.example.tripster.model.User;
 import com.example.tripster.model.view.Review;
 
@@ -11,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -79,4 +81,16 @@ public interface ReviewService {
     })
     @GET("accommodations/reviews/new")
     Call<List<Review>> getAllReviews();
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @PATCH("accommodations/reviews")
+    Call<String> approveReview(@Body Status status);
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @DELETE("accommodations/reviews/{id}")
+    Call<String> deleteReview(@Path("id") long id);
 }
