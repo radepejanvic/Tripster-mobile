@@ -123,9 +123,9 @@ public class ReviewListFragment extends ListFragment {
 
     private void customizeFabVisibility(boolean canReview) {
         UserType userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
-        if (userType != UserType.GUEST || !canReview) {
-            fab.setVisibility(View.GONE);
-        }
+//        if (userType != UserType.GUEST || !canReview) {
+//            fab.setVisibility(View.GONE);
+//        }
     }
 
     private void canReview(boolean isAccommodation) {
