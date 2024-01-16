@@ -1,6 +1,7 @@
 package com.example.tripster.adapters;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +20,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
+import com.example.tripster.fragment.reports.ReportDialog;
 import com.example.tripster.model.User;
+import com.example.tripster.model.enums.ReportType;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Review;
 import com.example.tripster.util.SharedPreferencesManager;
@@ -40,10 +43,13 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
 
     private String mode;
 
+    private Long userId;
+
     public ReviewListAdapter(Context context, ArrayList<Review> reviews){
         super(context, R.layout.review_card, reviews);
         this.reviews = reviews;
         userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
+        userId =  SharedPreferencesManager.getUserInfo(getContext()).getUserID();
     }
 
     @Override
@@ -96,7 +102,11 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
         });
 
         report.setOnClickListener(v -> {
-            // TODO: Report review
+            ReportType type = mode == "accommodation" ? ReportType.ACCOMMODATION_REVIEW : ReportType.HOST_REVIEW;
+            Dialog reportDialog =new ReportDialog(getContext(), userId, review.getId(), type);
+            reportDialog.setCancelable(true);
+            reportDialog.setCanceledOnTouchOutside(true);
+            reportDialog.show();
         });
 
         return convertView;
@@ -105,11 +115,13 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
     private void customizeImageViewVisibility(ImageView delete, ImageView report, Long reviewerId) {
         switch(userType) {
             case HOST:
+                report.setVisibility(View.VISIBLE);
                 delete.setVisibility(View.GONE);
                 break;
             case GUEST:
+                delete.setVisibility(View.VISIBLE);
                 report.setVisibility(View.GONE);
-                if (SharedPreferencesManager.getUserInfo(getContext()).getUserID() != reviewerId) {
+                if (userId != reviewerId) {
                     delete.setVisibility(View.GONE);
                 }
                 break;
