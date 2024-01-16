@@ -167,6 +167,7 @@ public class LoginFragment extends Fragment {
                     Log.d("REZ","Meesage recieved: "+response.code());
                     openDialog(response);
                 }
+                return null;
             }
 
             @Override

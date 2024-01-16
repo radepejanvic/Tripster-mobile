@@ -47,8 +47,8 @@ public class SingleAccommodationFragment extends Fragment {
 
         binding.reviews.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString("accommodationId", String.valueOf(accommodation.getId()));
-            bundle.putString("hostId", String.valueOf(accommodation.getOwnerId()));
+            bundle.putLong("accommodationId", accommodation.getId());
+            bundle.putLong("hostId", accommodation.getOwnerUserId());
             findNavController(v).navigate(R.id.action_singleAccommodationFragment_to_navigation_reviews, bundle);
         });
 
@@ -69,6 +69,7 @@ public class SingleAccommodationFragment extends Fragment {
                 } else {
                     Log.d("GET Request", "Error fetching accommodation " + response.body());
                 }
+                return null;
             }
 
             @Override

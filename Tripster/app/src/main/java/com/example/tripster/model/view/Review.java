@@ -18,15 +18,23 @@ public class Review implements Parcelable {
 
     private Long id;
     private String title;
-    private String reviewer;
+
     private String timeStamp;
     private double rate;
     private String comment;
 
+    private Long reviewerId;
+    private String reviewerName;
+    private String reviewerSurname;
+
+    private Long reviewedId;
+
+
     protected Review(Parcel in) {
         id = in.readLong();
         title = in.readString();
-        reviewer = in.readString();
+        reviewerName = in.readString();
+        reviewerSurname = in.readString();
         timeStamp = in.readString();
         rate = in.readDouble();
         comment = in.readString();
@@ -53,7 +61,8 @@ public class Review implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeLong(id);
         dest.writeString(title);
-        dest.writeString(reviewer);
+        dest.writeString(reviewerName);
+        dest.writeString(reviewerSurname);
         dest.writeString(timeStamp);
         dest.writeDouble(rate);
         dest.writeString(comment);

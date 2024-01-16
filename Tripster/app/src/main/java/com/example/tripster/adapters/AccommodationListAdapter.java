@@ -162,6 +162,7 @@ public class AccommodationListAdapter extends ArrayAdapter<Product> {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
 
+                        return null;
                     }
 
                     @Override
@@ -185,6 +186,7 @@ public class AccommodationListAdapter extends ArrayAdapter<Product> {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
 
+                        return null;
                     }
 
                     @Override
