@@ -51,7 +51,7 @@ public class ReservationListFragment extends ListFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            adapter = new ReservationListAdapter(getActivity(), new ArrayList<>());
+            adapter = new ReservationListAdapter(getActivity(), new ArrayList<>(),this);
             setListAdapter(adapter);
         }
     }
@@ -79,7 +79,7 @@ public class ReservationListFragment extends ListFragment {
         binding = null;
     }
 
-    private void getReservationsForHost( ) {
+    public void getReservationsForHost( ) {
         Call<List<Reservation>> call = ClientUtils.reservationService.getReservationForHost(SharedPreferencesManager.getUserInfo(getContext()).getId());
 
         call.enqueue(new Callback<List<Reservation>>() {
@@ -99,7 +99,7 @@ public class ReservationListFragment extends ListFragment {
             }
         });
     }
-    private void getReservationsForGuest( ) {
+    public void getReservationsForGuest( ) {
         Call<List<Reservation>> call = ClientUtils.reservationService.getReservationForGuest(SharedPreferencesManager.getUserInfo(getContext()).getId());
 
         call.enqueue(new Callback<List<Reservation>>() {

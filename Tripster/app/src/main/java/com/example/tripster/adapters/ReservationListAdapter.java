@@ -1,7 +1,6 @@
 package com.example.tripster.adapters;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -13,20 +12,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.tripster.FragmentTransition;
 import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
-import com.example.tripster.databinding.FragmentAccommodationListBinding;
+import com.example.tripster.fragment.reservations.ReservationListFragment;
 import com.example.tripster.model.enums.ReservationStatus;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Reservation;
-import com.example.tripster.model.view.Review;
 import com.example.tripster.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
@@ -40,9 +37,12 @@ public class ReservationListAdapter extends ArrayAdapter<Reservation> {
 private ArrayList<Reservation> reviews;
 private UserType userType;
 
-public ReservationListAdapter(Context context, ArrayList<Reservation> reviews){
+private ReservationListFragment reservationListFragment;
+
+public ReservationListAdapter(Context context, ArrayList<Reservation> reviews, ReservationListFragment reservationListFragment){
         super(context, R.layout.review_card, reviews);
         this.reviews = reviews;
+        this.reservationListFragment = reservationListFragment;
         userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
         }
         @Override
@@ -112,7 +112,8 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews){
                         public void onClick(View v) {
 
                                 Call<String> call =  ClientUtils.reservationService.reject(reservation.getId());
-                                reservation.setStatus(ReservationStatus.REJECTED);
+                                FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
+
                                 notifyDataSetChanged();
                                 call.enqueue(new Callback<String>() {
                                         @Override
@@ -134,8 +135,8 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews){
                         public void onClick(View v) {
 
                                 Call<String> call =  ClientUtils.reservationService.accept(reservation.getId());
-                                reservation.setStatus(ReservationStatus.ACCEPTED);
-                                notifyDataSetChanged();
+                                FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
+
                                 call.enqueue(new Callback<String>() {
                                         @Override
                                         public void onResponse(Call<String> call, Response<String> response) {
@@ -157,14 +158,14 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews){
 
                                 if (reservation.getStatus().equals(ReservationStatus.REJECTED)){
                                         call =  ClientUtils.reservationService.delete(reservation.getId());
-                                        reviews.remove(position);
+                                        FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
                                 }else {
                                         call =  ClientUtils.reservationService.cancel(reservation.getId());
-                                        reservation.setStatus(ReservationStatus.CANCELLED);
+                                        FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
+
                                 }
 
 
-                                notifyDataSetChanged();
                                 call.enqueue(new Callback<String>() {
                                         @Override
                                         public void onResponse(Call<String> call, Response<String> response) {
