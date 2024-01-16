@@ -150,6 +150,22 @@ public class ReviewListFragment extends ListFragment {
         return root;
     }
 
+    private boolean validateReviewForm() {
+        return  !reviewTitle.getText().toString().isEmpty() &&
+                !reviewComment.getText().toString().isEmpty() &&
+                reviewRate.getRating() != 0;
+    }
+
+    private void loadReviewFromInputs() {
+        review = new Review();
+        review.setTitle(reviewTitle.getText().toString());
+        review.setComment(reviewComment.getText().toString());
+        review.setRate((int)reviewRate.getRating());
+        review.setReviewerId((SharedPreferencesManager.getUserInfo(getContext()).getId()));
+        Long reviewedId = mode.equals("accommodation") ? accommodationId : hostId;
+        review.setReviewedId(reviewedId);
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -278,21 +294,6 @@ public class ReviewListFragment extends ListFragment {
         adapter.notifyDataSetChanged();
     }
 
-    private boolean validateReviewForm() {
-        return  !reviewTitle.getText().toString().isEmpty() &&
-                !reviewComment.getText().toString().isEmpty() &&
-                reviewRate.getRating() != 0;
-    }
-
-    private void loadReviewFromInputs() {
-        review = new Review();
-        review.setTitle(reviewTitle.getText().toString());
-        review.setComment(reviewComment.getText().toString());
-        review.setRate((int)reviewRate.getRating());
-        review.setReviewerId((SharedPreferencesManager.getUserInfo(getContext()).getId()));
-        Long reviewedId = mode.equals("accommodation") ? accommodationId : hostId;
-        review.setReviewedId(reviewedId);
-    }
 
     private void addReview() {
 
