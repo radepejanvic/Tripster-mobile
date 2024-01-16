@@ -136,6 +136,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reporter">Reporter:</string>
+    <string name="reported">Reported:</string>
+    <string name="report_reason">Reason for report:</string>
+    <string name="delete">Delete</string>
+    <string name="approve">Approve</string>
 
     <!--    veljko  -->
 

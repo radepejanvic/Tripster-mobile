@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingConstraints"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="47dp">
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/reservationCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="25dp"
+                android:padding="20dp"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    style="@style/AccommodationBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:elevation="100dp"
+                    android:padding="10dp"
+                    android:paddingBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/userReporter"
+                        style="@style/ReservationStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reporter"
+
+                        android:textSize="10dp"
+
+                        app:layout_constraintStart_toStartOf="@+id/userReporterName"
+                        tools:layout_editor_absoluteY="10dp" />
+
+                    <TextView
+                        android:id="@+id/userReporterName"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="dghdfhdfhfdhdfhdfghdfghdfg"
+                        android:textSize="10dp"
+
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/userReporter" />
+
+                    <TextView
+                        android:id="@+id/userReportedName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="fvhjfghjfgjfghjfgjfghjfgryurtyu"
+                        android:layout_margin="5dp"
+
+                        android:textSize="10dp"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        app:layout_constraintTop_toBottomOf="@+id/userReported" />
+
+                    <TextView
+                        android:id="@+id/userReported"
+                        style="@style/ReservationStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="@string/reported"
+                        android:textSize="10dp"
+
+
+                        app:layout_constraintStart_toStartOf="@+id/userReportedName"
+                        tools:layout_editor_absoluteY="10dp" />
+                    <TextView
+                        android:id="@+id/userReportReason"
+                        style="@style/ReservationStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/report_reason"
+                        android:textSize="10dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/userReporterName"
+                        app:layout_constraintTop_toBottomOf="@+id/userReporterName" />
+
+                    <TextView
+                        android:id="@+id/userReportReasonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="sfxgsdfgdsgsdgdsgdsfgdsgdsg"
+                        android:textSize="10dp"
+
+                        app:layout_constraintStart_toStartOf="@+id/userReportReason"
+                        app:layout_constraintTop_toBottomOf="@+id/userReportReason" />
+
+                    <TextView
+                        android:id="@+id/deleteUserReport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:text="@string/delete"
+                        android:textColor="@color/red"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/userReportReasonText" />
+
+                    <TextView
+                        android:id="@+id/approveUserReport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/approve"
+                        android:layout_marginRight="15dp"
+                        android:textSize="15dp"
+                        app:layout_constraintEnd_toStartOf="@+id/deleteUserReport"
+                        app:layout_constraintTop_toBottomOf="@+id/userReportReasonText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
