@@ -82,6 +82,16 @@
     <string name="accommodation_form_availability_button_update">Update price list</string>
     <string name="accommodation_form_availability_button_disable">Disable interval</string>
 
+    <string name="add_new_review">Write a review</string>
+    <string name="review_form_title"> Write a review </string>
+    <string name="review_form_title_hint"> Title </string>
+    <string name="review_form_comment_hint"> Comment </string>
+    <string name="review_form_button_hint"> Send </string>
+
+    <string name="report_form_title_user"> Report user </string>
+    <string name="report_form_title_review"> Report review </string>
+    <string name="report_form_reason_hint"> Reason </string>
+
 
     <string-array name="type_options">
         <item>Pick the type of your unit</item>
@@ -132,6 +142,11 @@
         <item>Average</item>
         <item>Good</item>
         <item>Excellent</item>
+    </string-array>
+
+    <string-array name="review_types">
+        <item>Accommodation reviews</item>
+        <item>Host reviews</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
