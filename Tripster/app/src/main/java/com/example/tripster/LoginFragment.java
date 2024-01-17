@@ -58,14 +58,6 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
     public static LoginFragment newInstance(AuthorizationActivity param1, String param2) {
         LoginFragment fragment = new LoginFragment();
         Bundle args = new Bundle();
@@ -157,8 +149,8 @@ public class LoginFragment extends Fragment {
 
 
 
-                    SharedPreferencesManager.saveUserInfo(AUTHORIZATION, email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID(),response.body().getToken());
-                    Intent intent = new Intent(AUTHORIZATION, MainActivity.class);
+                    SharedPreferencesManager.saveUserInfo(getContext(), email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID(),response.body().getToken());
+                    Intent intent = new Intent(getContext(), MainActivity.class);
                     intent.putExtra("Role", role);
                     Toast.makeText(getContext(), "Welcome "+emailInput.getText().toString(), Toast.LENGTH_SHORT).show();
                     startActivity(intent);
