@@ -1,7 +1,6 @@
 package com.example.tripster.service;
 
 import com.example.tripster.model.view.Reservation;
-import com.example.tripster.model.view.Review;
 
 import java.util.List;
 

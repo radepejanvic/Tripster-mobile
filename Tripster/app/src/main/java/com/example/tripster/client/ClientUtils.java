@@ -1,5 +1,7 @@
 package com.example.tripster.client;
 
+import android.util.Log;
+
 import com.example.tripster.TripsterApp;
 import com.example.tripster.BuildConfig;
 import com.example.tripster.service.ReportService;
@@ -25,7 +27,7 @@ public class ClientUtils {
 
     public static final String SERVICE_API_PATH = "http://"+ BuildConfig.IP_ADDR +":8080/api/";
 
-    public static OkHttpClient authenticatedClient(final String authToken) {
+    public static OkHttpClient authenticatedClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -35,19 +37,16 @@ public class ClientUtils {
                 .writeTimeout(120, TimeUnit.SECONDS)
                 .addInterceptor(interceptor);
 
-        if (!authToken.equals("")){
-            builder.addInterceptor(new Interceptor() {
-                @Override
-                public Response intercept(Chain chain) throws IOException {
-                    Request originalRequest = chain.request();
-                    Request.Builder builder = originalRequest.newBuilder()
-                            .header("Authorization", "Bearer " + authToken);
-                    Request newRequest = builder.build();
-                    return chain.proceed(newRequest);
-                }
-            });
-        }
+        builder.addInterceptor(chain -> {
+            String jwt = SharedPreferencesManager.getUserInfo(TripsterApp.getContext()).getToken();
+            String header = jwt != "" ? "Bearer " + jwt : "";
 
+            Request originalRequest = chain.request();
+            Request.Builder builder1 = originalRequest.newBuilder()
+                    .header("Authorization", header);
+            Request newRequest = builder1.build();
+            return chain.proceed(newRequest);
+        });
 
         return builder.build();
     }
@@ -55,10 +54,11 @@ public class ClientUtils {
     public static Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(SERVICE_API_PATH)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(authenticatedClient(SharedPreferencesManager.getUserInfo(TripsterApp.getContext()).getToken()))
+            .client(authenticatedClient())
             .build();
 
     public static AuthService authService = retrofit.create(AuthService.class);
+
     public static ReservationService reservationService = retrofit.create(ReservationService.class);
 
     public static  AccommodationService accommodationService = retrofit.create(AccommodationService.class);
@@ -66,7 +66,9 @@ public class ClientUtils {
     public static UserService userService = retrofit.create(UserService.class);
 
     public static ReviewService reviewService = retrofit.create(ReviewService.class);
+
     public static UserReportService userReportService = retrofit.create(UserReportService.class);
+
     public static ReviewReportService reviewReportService = retrofit.create(ReviewReportService.class);
 
     public static ReportService reportService = retrofit.create(ReportService.class);

@@ -28,6 +28,7 @@ public class Reservation implements Parcelable{
     private int numOfCancelled;
     private String guest;
     private Long userID;
+    private boolean reportable;
 
     private double price;
 
@@ -44,6 +45,7 @@ public class Reservation implements Parcelable{
         guest = in.readString();
         userID = in.readLong();
         price = in.readDouble();
+        reportable = in.readBoolean();
     }
 
     public static final Parcelable.Creator<Reservation> CREATOR = new Parcelable.Creator<Reservation>() {
@@ -77,5 +79,6 @@ public class Reservation implements Parcelable{
         dest.writeString(guest);
         dest.writeLong(userID);
         dest.writeDouble(price);
+        dest.writeBoolean(reportable);
     }
 }

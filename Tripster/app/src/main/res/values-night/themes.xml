@@ -66,4 +66,8 @@
     <style name="AccommodationSmallText">
         <item name="android:textSize">10dp</item>
     </style>
+    <style name="ReservationStatus">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

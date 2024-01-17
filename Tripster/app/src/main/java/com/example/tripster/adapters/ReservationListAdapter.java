@@ -1,5 +1,6 @@
 package com.example.tripster.adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +21,9 @@ import androidx.cardview.widget.CardView;
 import com.example.tripster.FragmentTransition;
 import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
+import com.example.tripster.fragment.reports.ReportDialog;
 import com.example.tripster.fragment.reservations.ReservationListFragment;
+import com.example.tripster.model.enums.ReportType;
 import com.example.tripster.model.enums.ReservationStatus;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Reservation;
@@ -34,16 +37,20 @@ import retrofit2.Response;
 
 public class ReservationListAdapter extends ArrayAdapter<Reservation> {
 
-private ArrayList<Reservation> reviews;
-private UserType userType;
+        private ArrayList<Reservation> reviews;
 
-private ReservationListFragment reservationListFragment;
+        private UserType userType;
 
-public ReservationListAdapter(Context context, ArrayList<Reservation> reviews, ReservationListFragment reservationListFragment){
-        super(context, R.layout.review_card, reviews);
-        this.reviews = reviews;
-        this.reservationListFragment = reservationListFragment;
-        userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
+        private Long userId;
+
+        private ReservationListFragment reservationListFragment;
+
+        public ReservationListAdapter(Context context, ArrayList<Reservation> reviews, ReservationListFragment reservationListFragment){
+                super(context, R.layout.review_card, reviews);
+                this.reviews = reviews;
+                this.reservationListFragment = reservationListFragment;
+                userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
+                userId =  SharedPreferencesManager.getUserInfo(getContext()).getUserID();
         }
         @Override
         public int getCount() {
@@ -85,6 +92,7 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews, R
                 TextView accept = convertView.findViewById(R.id.acceptReservation);
                 TextView reject = convertView.findViewById(R.id.rejectReservation);
                 TextView userButton = convertView.findViewById(R.id.userReservationButton);
+                ImageView report = convertView.findViewById(R.id.report_guest);
 
                 if(reservation != null){
 
@@ -103,103 +111,116 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews, R
                         byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
                         Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                         imageView.setImageBitmap(decodedBitmap);
-                        customizeImageViewVisibility(accept,reject,userButton,cardView,reservation);
+                        customizeImageViewVisibility(accept,reject,userButton, report,cardView,reservation);
 
                 }
 
-                reject.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                reject.setOnClickListener(v -> {
 
-                                Call<String> call =  ClientUtils.reservationService.reject(reservation.getId());
-                                FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
+                        Call<String> call =  ClientUtils.reservationService.reject(reservation.getId());
+                        FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
 
-                                notifyDataSetChanged();
-                                call.enqueue(new Callback<String>() {
-                                        @Override
-                                        public void onResponse(Call<String> call, Response<String> response) {
-
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<String> call, Throwable t) {
-                                                Log.d("REZ","greska");
-                                        }
-                                });
-
-                        }
-                });
-
-                accept.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                                Call<String> call =  ClientUtils.reservationService.accept(reservation.getId());
-                                FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
-
-                                call.enqueue(new Callback<String>() {
-                                        @Override
-                                        public void onResponse(Call<String> call, Response<String> response) {
-
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<String> call, Throwable t) {
-                                                Log.d("REZ","greska");
-                                        }
-                                });
-
-                        }
-                });
-                userButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                                Call<String> call;
-
-                                if (reservation.getStatus().equals(ReservationStatus.REJECTED)){
-                                        call =  ClientUtils.reservationService.delete(reservation.getId());
-                                        FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
-                                }else {
-                                        call =  ClientUtils.reservationService.cancel(reservation.getId());
-                                        FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
+                        notifyDataSetChanged();
+                        call.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
 
                                 }
 
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+                                        Log.d("REZ","greska");
+                                }
+                        });
 
-                                call.enqueue(new Callback<String>() {
-                                        @Override
-                                        public void onResponse(Call<String> call, Response<String> response) {
+                });
 
-                                        }
+                accept.setOnClickListener(v -> {
 
-                                        @Override
-                                        public void onFailure(Call<String> call, Throwable t) {
-                                                Log.d("REZ","greska");
-                                        }
-                                });
+                        Call<String> call =  ClientUtils.reservationService.accept(reservation.getId());
+                        FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
+
+                        call.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+                                        Log.d("REZ","greska");
+                                }
+                        });
+
+                });
+                userButton.setOnClickListener(v -> {
+                        Call<String> call;
+
+                        if (reservation.getStatus().equals(ReservationStatus.REJECTED)){
+                                call =  ClientUtils.reservationService.delete(reservation.getId());
+                                FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
+                        }else {
+                                call =  ClientUtils.reservationService.cancel(reservation.getId());
+                                FragmentTransition.to(ReservationListFragment.newInstance(new ArrayList<>()), reservationListFragment.getActivity(), false, R.id.scroll_reviews_list);
 
                         }
+
+
+                        call.enqueue(new Callback<String>() {
+                                @Override
+                                public void onResponse(Call<String> call, Response<String> response) {
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<String> call, Throwable t) {
+                                        Log.d("REZ","greska");
+                                }
+                        });
+
+                });
+
+                report.setOnClickListener(v -> {
+                        Dialog reportDialog =new ReportDialog(getContext(), userId, reservation.getUserID(), ReportType.USER);
+                        reportDialog.setCancelable(true);
+                        reportDialog.setCanceledOnTouchOutside(true);
+                        reportDialog.show();
                 });
 
 
                 return convertView;
         }
-        private void customizeImageViewVisibility(TextView accept, TextView reject,TextView userButton,CardView cardView,Reservation reservation) {
+
+        private void customizeImageViewVisibility(TextView accept, TextView reject,TextView userButton, ImageView report, CardView cardView,Reservation reservation) {
                 accept.setVisibility(View.VISIBLE);
                 reject.setVisibility(View.VISIBLE);
                 userButton.setVisibility(View.VISIBLE);
+                report.setVisibility(View.VISIBLE);
                 cardView.setAlpha(1F);
+
 
                 if(userType.equals(UserType.HOST)){
                         userButton.setVisibility(View.GONE);
+
                         if (!reservation.getStatus().equals(ReservationStatus.PENDING)){
                                 accept.setVisibility(View.GONE);
                                 reject.setVisibility(View.GONE);
+
                         }
                         if (reservation.getStatus().equals(ReservationStatus.CANCELLED)){
                                 cardView.setAlpha(0.5F);
+                                report.setVisibility(View.GONE);
                         }
-                }else {
+                        if (!reservation.isReportable()) {
+                                report.setVisibility(View.GONE);
+                        }
+
+                } else {
+
+                        if (!userType.equals(UserType.GUEST) || !reservation.isReportable()) {
+                                report.setVisibility(View.GONE);
+                        }
+
                         accept.setVisibility(View.GONE);
                         reject.setVisibility(View.GONE);
                         switch(reservation.getStatus()) {
@@ -219,7 +240,5 @@ public ReservationListAdapter(Context context, ArrayList<Reservation> reviews, R
                                         break;
                         }
                 }
-
-
         }
 }
