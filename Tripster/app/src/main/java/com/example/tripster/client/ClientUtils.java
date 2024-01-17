@@ -13,6 +13,8 @@ import com.example.tripster.service.ReviewService;
 import com.example.tripster.service.UserReportService;
 import com.example.tripster.service.UserService;
 import com.example.tripster.util.SharedPreferencesManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;

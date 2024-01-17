@@ -19,6 +19,7 @@ import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.fragment.reports.ReportDialog;
 import com.example.tripster.model.Status;
+import com.example.tripster.model.enums.NotificationStatus;
 import com.example.tripster.model.enums.ReportType;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Notification;
@@ -26,6 +27,7 @@ import com.example.tripster.model.view.Review;
 import com.example.tripster.util.SharedPreferencesManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,7 +81,7 @@ public class NotificationListAdapter extends ArrayAdapter<Notification> {
         TextView timeStamp = convertView.findViewById(R.id.notification_timestamp);
         TextView text = convertView.findViewById(R.id.notification_text);
         TextView markAsRead = convertView.findViewById(R.id.mark_as_read);
-        customizeMarkAsReadVisibility(text, notification);
+        customizeMarkAsReadVisibility(markAsRead, notification);
 
         if (notification != null) {
             title.setText(notification.getTitle());
@@ -89,16 +91,38 @@ public class NotificationListAdapter extends ArrayAdapter<Notification> {
         }
 
         markAsRead.setOnClickListener(v -> {
-            // TODO: Add mark as read call
+            Call<String> call = ClientUtils.notificationService.markAsRead(new Status(notification.getId(), "READ"));
+
+            call.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if(response.code() == 200) {
+
+                        notifications.remove(position);
+                        notifyDataSetChanged();
+
+                        Log.d("PATCH Request", "Mark as read " + response.body());
+                    } else {
+                        Log.e("PATCH Request", "Error marking notification as read " + response.code());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    notifications.remove(position);
+                    notifyDataSetChanged();
+                    t.printStackTrace();
+                }
+            });
         });
 
         return convertView;
     }
 
-    private void customizeMarkAsReadVisibility(TextView text, Notification notification) {
+    private void customizeMarkAsReadVisibility(TextView markAsRead, Notification notification) {
         switch(notification.getStatus()) {
-            case NEW: text.setVisibility(View.VISIBLE); break;
-            default: text.setVisibility(View.GONE);
+            case NEW: markAsRead.setVisibility(View.VISIBLE); break;
+            default: markAsRead.setVisibility(View.GONE);
         }
     }
 

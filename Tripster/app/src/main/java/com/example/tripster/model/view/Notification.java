@@ -23,9 +23,9 @@ public class Notification implements Parcelable {
 
     private String text;
 
-    private NotificationType type;
+    private String type;
 
-    private NotificationStatus status;
+    private String status;
 
     private String timeStamp;
 
@@ -35,11 +35,21 @@ public class Notification implements Parcelable {
         id = in.readLong();
         title = in.readString();
         text = in.readString();
-        type = NotificationType.valueOf(in.readString());
-        status = NotificationStatus.valueOf(in.readString());
+        type = in.readString();
+        status = in.readString();
         timeStamp = in.readString();
         userId = in.readLong();
     }
+
+    public NotificationStatus getStatus() {
+        return NotificationStatus.valueOf(status);
+    }
+
+    public NotificationType getType() {
+        return NotificationType.valueOf(type);
+    }
+
+
 
     public static final Creator<Review> CREATOR = new Creator<Review>() {
         @Override
@@ -63,8 +73,8 @@ public class Notification implements Parcelable {
         dest.writeLong(id);
         dest.writeString(title);
         dest.writeString(text);
-        dest.writeString(String.valueOf(type));
-        dest.writeString(String.valueOf(status));
+        dest.writeString(type);
+        dest.writeString(status);
         dest.writeString(timeStamp);
         dest.writeLong(userId);
     }

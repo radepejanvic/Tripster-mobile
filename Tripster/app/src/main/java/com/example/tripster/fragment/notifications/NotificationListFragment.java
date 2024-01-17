@@ -3,8 +3,10 @@ package com.example.tripster.fragment.notifications;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +16,8 @@ import com.example.tripster.adapters.NotificationListAdapter;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentNotificationListBinding;
 import com.example.tripster.databinding.FragmentNotificationsBinding;
+import com.example.tripster.listener.OnSwipeTouchListener;
+import com.example.tripster.model.enums.NotificationStatus;
 import com.example.tripster.model.view.Notification;
 import com.example.tripster.util.SharedPreferencesManager;
 
@@ -31,6 +35,9 @@ public class NotificationListFragment extends ListFragment {
     private FragmentNotificationListBinding binding;
 
     private NotificationListAdapter adapter;
+
+    private NotificationStatus mode;
+
 
     public static NotificationListFragment newInstance(ArrayList<Notification> notifications){
         NotificationListFragment fragment = new NotificationListFragment();
@@ -55,24 +62,42 @@ public class NotificationListFragment extends ListFragment {
 
         adapter.clear();
 
-        getUnreadNotifications();
+        mode = NotificationStatus.NEW;
+        getNotifications();
 
-//        spinnerSetup(binding.type, R.array.review_types);
+        binding.list.setOnTouchListener(new OnSwipeTouchListener(getContext()) {
+            public void onSwipeRight() {
+                if (mode == NotificationStatus.NEW) {
+                    getNotifications();
+                }
+            }
+
+            public void onSwipeLeft() {
+                if (mode == NotificationStatus.READ) {
+                    getNotifications();
+                }
+            }
+        });
 
         return root;
     }
 
-    private void getUnreadNotifications() {
+    private void getNotifications() {
 
         Long userId = SharedPreferencesManager.getUserInfo(getContext()).getUserID();
 
-        Call<List<Notification>> call = ClientUtils.notificationService.getUnreadNotifications(userId);
+        Call<List<Notification>> call = null;
 
-//        if (mode.equals("accommodation")) {
-//            call = ClientUtils.reviewService.getAccommodationReviews(accommodationId);
-//        } else {
-//            call = ClientUtils.reviewService.getHostReviews(hostId);
-//        }
+        switch(mode) {
+            case NEW:
+                call = ClientUtils.notificationService.getUnreadNotifications(userId);
+                mode = NotificationStatus.READ;
+                break;
+            case READ:
+                call = ClientUtils.notificationService.getReadNotifications(userId);
+                mode = NotificationStatus.NEW;
+                break;
+        }
 
         call.enqueue(new Callback<List<Notification>>() {
             @Override

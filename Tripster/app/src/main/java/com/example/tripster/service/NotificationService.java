@@ -35,6 +35,6 @@ public interface NotificationService {
             "Content-Type:application/json"
     })
     @PATCH("notifications")
-    Call<Notification> markAsRead(@Body Status status);
+    Call<String> markAsRead(@Body Status status);
 
 }
