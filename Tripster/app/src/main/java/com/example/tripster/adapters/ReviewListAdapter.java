@@ -21,7 +21,6 @@ import com.example.tripster.client.ClientUtils;
 import com.example.tripster.fragment.reports.ReportDialog;
 import com.example.tripster.model.Status;
 import com.example.tripster.model.enums.ReportType;
-import com.example.tripster.model.enums.ReservationStatus;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Review;
 import com.example.tripster.util.SharedPreferencesManager;
@@ -78,15 +77,15 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
         }
 
         ConstraintLayout card = convertView.findViewById(R.id.review_card);
-        TextView title = convertView.findViewById(R.id.review_title);
+        TextView title = convertView.findViewById(R.id.notification_title);
         TextView reviewer = convertView.findViewById(R.id.review_reviewer);
-        TextView timeStamp = convertView.findViewById(R.id.review_timestamp);
+        TextView timeStamp = convertView.findViewById(R.id.notification_timestamp);
         TextView rate = convertView.findViewById(R.id.review_rate);
-        TextView comment = convertView.findViewById(R.id.review_comment);
+        TextView comment = convertView.findViewById(R.id.notification_text);
         ImageView delete = convertView.findViewById(R.id.delete_review);
         ImageView report = convertView.findViewById(R.id.report_review);
         TextView decline = convertView.findViewById(R.id.declineReview);
-        TextView accept = convertView.findViewById(R.id.acceptReview);
+        TextView accept = convertView.findViewById(R.id.mark_as_read);
         customizeImageViewVisibility(delete, report,decline,accept, review.getReviewerId());
 
         if (review != null) {

@@ -79,8 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         if (item.getItemId() == R.id.navigation_logout) {
             logOut();
+        } else if (item.getItemId() == R.id.navigation_notifications) {
+            Log.d("NOTIFIKACIJE", "RARARARARAR");
         }
         return super.onOptionsItemSelected(item);
     }
