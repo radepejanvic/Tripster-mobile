@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.example.tripster.TripsterApp;
 import com.example.tripster.BuildConfig;
+import com.example.tripster.model.view.Notification;
+import com.example.tripster.service.NotificationService;
 import com.example.tripster.service.ReportService;
 import com.example.tripster.service.ReservationService;
 import com.example.tripster.service.ReviewReportService;
@@ -72,6 +74,8 @@ public class ClientUtils {
     public static ReviewReportService reviewReportService = retrofit.create(ReviewReportService.class);
 
     public static ReportService reportService = retrofit.create(ReportService.class);
+
+    public static NotificationService notificationService = retrofit.create(NotificationService.class);
 }
 
 
