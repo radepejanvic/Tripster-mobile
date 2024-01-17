@@ -109,50 +109,44 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
             reportDialog.show();
         });
 
-        accept.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        accept.setOnClickListener(v -> {
 
-                Status status = new Status();
-                status.setId(review.getId());
-                status.setStatus("ACTIVE");
-                Call<String> call =  ClientUtils.reviewService.approveReview(status);
-                reviews.remove(position);
-                notifyDataSetChanged();
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+            Status status = new Status();
+            status.setId(review.getId());
+            status.setStatus("ACTIVE");
+            Call<String> call =  ClientUtils.reviewService.approveReview(status);
+            reviews.remove(position);
+            notifyDataSetChanged();
+            call.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
 
-                    }
+                }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Log.d("REZ","greska");
-                    }
-                });
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d("REZ","greska");
+                }
+            });
 
-            }
         });
-        decline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        decline.setOnClickListener(v -> {
 
-                Call<String> call =  ClientUtils.reviewService.deleteReview(review.getId());
-                reviews.remove(position);
-                notifyDataSetChanged();
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+            Call<String> call =  ClientUtils.reviewService.deleteReview(review.getId());
+            reviews.remove(position);
+            notifyDataSetChanged();
+            call.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
 
-                    }
+                }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-                        Log.d("REZ","greska");
-                    }
-                });
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Log.d("REZ","greska");
+                }
+            });
 
-            }
         });
 
         return convertView;
