@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_singleAccommodationFragment"
             app:destination="@id/singleAccommodationFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_notifications"
+            app:destination="@id/navigation_notifications" />
     </fragment>
 
     <fragment

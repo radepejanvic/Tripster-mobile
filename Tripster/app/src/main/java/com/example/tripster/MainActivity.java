@@ -8,6 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.tripster.databinding.ActivityMainBinding;
+import com.example.tripster.fragment.notifications.NotificationListFragment;
+import com.example.tripster.fragment.notifications.NotificationsFragment;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.util.SharedPreferencesManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -15,9 +17,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,10 +88,12 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.navigation_logout) {
             logOut();
         } else if (item.getItemId() == R.id.navigation_notifications) {
-            Log.d("NOTIFIKACIJE", "RARARARARAR");
+            navController.navigate(R.id.navigation_notifications);
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     public void logOut() {
         SharedPreferencesManager.clearUserInfo(this);

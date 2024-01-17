@@ -1,6 +1,7 @@
 package com.example.tripster.service;
 
 import com.example.tripster.model.Status;
+import com.example.tripster.model.view.Notification;
 import com.example.tripster.model.view.Review;
 
 import java.util.List;
@@ -20,20 +21,20 @@ public interface NotificationService {
             "Content-Type:application/json"
     })
     @GET("notifications/unread/{id}")
-    Call<List<Review>> getUnreadNotifications(@Path("id") long id);
+    Call<List<Notification>> getUnreadNotifications(@Path("id") long id);
 
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
     @GET("notifications/read/{id}")
-    Call<List<Review>> getReadNotifications(@Path("id") long id);
+    Call<List<Notification>> getReadNotifications(@Path("id") long id);
 
     @Headers({
             "User-Agent: Mobile-Android",
             "Content-Type:application/json"
     })
     @PATCH("notifications")
-    Call<Review> markAsRead(@Body Status status);
+    Call<Notification> markAsRead(@Body Status status);
 
 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.tripster.R;
@@ -41,7 +42,7 @@ public class NotificationListAdapter extends ArrayAdapter<Notification> {
     private Long userId;
 
     public NotificationListAdapter(Context context, ArrayList<Notification> notifications){
-        super(context, R.layout.review_card, notifications);
+        super(context, R.layout.notification_card, notifications);
         this.notifications = notifications;
         userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
         userId =  SharedPreferencesManager.getUserInfo(getContext()).getUserID();
