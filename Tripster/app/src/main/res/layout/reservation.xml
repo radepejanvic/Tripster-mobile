@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -28,8 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="100dp"
-                    android:paddingBottom="5dp"
-                    >
+                    android:paddingBottom="5dp">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/frame_layout_image2"
@@ -72,74 +72,115 @@
                         android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+
                         android:text="0.4 km from city centre"
                         android:textSize="10dp"
-                        app:layout_constraintStart_toStartOf="@+id/frame_layout_image2"
+
+                        app:layout_constraintEnd_toEndOf="@+id/residenceName"
+                        app:layout_constraintStart_toStartOf="@+id/residenceName"
                         app:layout_constraintTop_toBottomOf="@+id/residenceName" />
+
+                    <ImageView
+                        android:id="@+id/report_guest"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+
+                        android:src="@drawable/baseline_flag_circle_24"
+                        app:layout_constraintBottom_toBottomOf="@+id/residenceName"
+                        app:layout_constraintEnd_toEndOf="@+id/frame_layout_image2"
+                        app:layout_constraintTop_toTopOf="@+id/residenceName" />
+
 
                     <TextView
                         android:id="@+id/guestEmail"
+                        style="@style/ReservationStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="guest"
                         android:textSize="10dp"
-                        app:layout_constraintStart_toStartOf="@+id/address"
-                        app:layout_constraintTop_toBottomOf="@+id/address" />
+                        app:layout_constraintStart_toStartOf="@+id/frame_layout_image2"
+                        app:layout_constraintTop_toBottomOf="@+id/duration" />
 
                     <TextView
                         android:id="@+id/numOfCancelled"
+                        style="@style/ReservationStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:text="numOfCancelled"
                         android:textSize="10dp"
-                        app:layout_constraintStart_toStartOf="@+id/guestEmail"
-                        app:layout_constraintTop_toBottomOf="@+id/guestEmail" />
+                        app:layout_constraintBottom_toBottomOf="@+id/numOfGuest"
+                        app:layout_constraintStart_toStartOf="@+id/guestEmail" />
 
                     <TextView
                         android:id="@+id/status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/stamp"
+                        android:padding="5dp"
                         android:text="NEW"
+                        android:textColor="@color/black"
                         android:textSize="10dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/residenceName"
-                        app:layout_constraintTop_toBottomOf="@+id/residenceName" />
+                        android:translationZ="10dp"
+                        app:layout_constraintEnd_toEndOf="@+id/frame_layout_image2"
+                        app:layout_constraintTop_toTopOf="@+id/frame_layout_image2" />
+
+                    <!--                    <TextView-->
+                    <!--                        android:id="@+id/status"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:text="NEW"-->
+                    <!--                        android:textSize="10dp"-->
+                    <!--                        app:layout_constraintBottom_toTopOf="@+id/address"-->
+                    <!--                        app:layout_constraintEnd_toEndOf="@+id/frame_layout_image2"-->
+                    <!--                        app:layout_constraintTop_toTopOf="@+id/residenceName" />-->
+
+                    <TextView
+                        android:id="@+id/eur_sign"
+                        style="@style/ReservationStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="€"
+                        android:textSize="10dp"
+                        app:layout_constraintEnd_toEndOf="@+id/frame_layout_image2"
+                        app:layout_constraintTop_toTopOf="@+id/guestEmail" />
 
                     <TextView
                         android:id="@+id/price"
                         style="@style/ReservationStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
                         android:text="260 E"
                         android:textSize="10dp"
-                        app:layout_constraintEnd_toEndOf="@+id/status"
-                        app:layout_constraintTop_toBottomOf="@+id/status" />
+                        app:layout_constraintEnd_toEndOf="@+id/eur_sign"
+                        app:layout_constraintTop_toTopOf="@+id/guestEmail" />
+
 
                     <TextView
                         android:id="@+id/duration"
                         style="@style/ReservationStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
                         android:text="13.08.2023. - 14.08.2023"
                         android:textSize="10dp"
-                        app:layout_constraintEnd_toEndOf="@+id/status"
-                        app:layout_constraintTop_toBottomOf="@+id/price" />
+                        app:layout_constraintEnd_toEndOf="@+id/address"
+                        app:layout_constraintStart_toStartOf="@+id/address"
+                        app:layout_constraintTop_toBottomOf="@+id/address" />
 
                     <TextView
                         android:id="@+id/numOfGuest"
                         style="@style/ReservationStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:text="1 nights, 3 guests"
                         android:textSize="10dp"
-                        app:layout_constraintEnd_toEndOf="@+id/duration"
-                        app:layout_constraintTop_toBottomOf="@+id/duration" />
+                        app:layout_constraintEnd_toEndOf="@+id/eur_sign"
+                        app:layout_constraintTop_toBottomOf="@+id/price" />
 
                     <TextView
                         android:id="@+id/acceptReservation"
@@ -161,8 +202,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="135dp"
                         android:padding="5dp"
-                        android:textColor="@color/red"
                         android:text="@string/reject"
+                        android:textColor="@color/red"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/frame_layout_image2"
                         app:layout_constraintStart_toEndOf="@+id/residenceName"
