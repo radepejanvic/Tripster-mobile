@@ -126,7 +126,8 @@ public class AccommodationFormFragment extends Fragment {
                     loadAccommodationFromInputs();
                     postSave();
                     Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
-                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+//                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_uploadPhotosFragment);
                 }
 
             }
