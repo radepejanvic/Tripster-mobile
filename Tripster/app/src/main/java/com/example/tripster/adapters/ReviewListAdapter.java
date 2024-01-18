@@ -77,15 +77,15 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
         }
 
         ConstraintLayout card = convertView.findViewById(R.id.review_card);
-        TextView title = convertView.findViewById(R.id.notification_title);
+        TextView title = convertView.findViewById(R.id.review_title);
         TextView reviewer = convertView.findViewById(R.id.review_reviewer);
-        TextView timeStamp = convertView.findViewById(R.id.notification_timestamp);
+        TextView timeStamp = convertView.findViewById(R.id.review_timestamp);
         TextView rate = convertView.findViewById(R.id.review_rate);
-        TextView comment = convertView.findViewById(R.id.notification_text);
+        TextView comment = convertView.findViewById(R.id.review_comment);
         ImageView delete = convertView.findViewById(R.id.delete_review);
         ImageView report = convertView.findViewById(R.id.report_review);
-        TextView decline = convertView.findViewById(R.id.declineReview);
-        TextView accept = convertView.findViewById(R.id.mark_as_read);
+        TextView decline = convertView.findViewById(R.id.decline_review);
+        TextView accept = convertView.findViewById(R.id.accept_review);
         customizeImageViewVisibility(delete, report,decline,accept, review.getReviewerId());
 
         if (review != null) {
