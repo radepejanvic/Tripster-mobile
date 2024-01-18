@@ -72,6 +72,10 @@
     <string name="accommodation_form_hint_number">Number</string>
     <string name="accommodation_form_hint_description">Description</string>
 
+    <string name="go_to_photos">Go to photos</string>
+    <string name="go_to_price_lists">Go to price lists</string>
+    <string name="open_calendar">Open calendar</string>
+
     <string name="accommodation_form_button_register">Register accommodation</string>
     <string name="accommodation_form_button_update">Update accommodation</string>
     <string name="accommodation_form_button_delete">Delete accommodation</string>
@@ -164,8 +168,8 @@
     <string name="delete">Delete</string>
     <string name="approve">Approve</string>
     <string name="comment">Comment:</string>
-    <string name="add_photo">Add photo</string>
-    <string name="upload_photo">Upload photo</string>
+    <string name="add_photo">Select photos</string>
+    <string name="upload_photo">Upload photos</string>
 
     <!--    veljko  -->
 

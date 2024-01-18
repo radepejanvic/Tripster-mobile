@@ -43,6 +43,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.3.0")
     compileOnly("org.projectlombok:lombok:1.18.22")
     annotationProcessor("org.projectlombok:lombok:1.18.22")
+    implementation("com.google.android.material:material:1.3.0-alpha02")
     implementation("com.squareup.retrofit2:retrofit:2.3.0")
     implementation("com.squareup.retrofit2:converter-gson:2.3.0")
     implementation("com.squareup.okhttp3:logging-interceptor:3.12.1")
