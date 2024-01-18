@@ -1,6 +1,7 @@
 package com.example.tripster.fragment.accommodations;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Pair;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -24,6 +25,9 @@ import com.example.tripster.R;
 import com.example.tripster.databinding.FragmentAccommodationFormBinding;
 import com.example.tripster.databinding.FragmentAvailabilityBinding;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+
 public class AvailabilityFragment extends Fragment {
 
     private FragmentAvailabilityBinding binding;
@@ -32,6 +36,9 @@ public class AvailabilityFragment extends Fragment {
     private EditText price;
     private Button add;
     private Button disable;
+    private Button calendar;
+
+    private MaterialDatePicker<Pair<Long, Long>> dateRangePicker;
 
 
     @Override
@@ -46,10 +53,30 @@ public class AvailabilityFragment extends Fragment {
         mode = binding.mode;
         add = binding.addPriceList;
         disable = binding.removePriceList;
+        calendar = binding.calendar;
 
         spinnerSetUp(mode, R.array.availability_mode_options);
 
+        initDateRangePicker();
+        calendar.setOnClickListener(v -> showDateRangePicker());
+
         return root;
+    }
+
+    private void initDateRangePicker() {
+        MaterialDatePicker.Builder<Pair<Long, Long>> builder = MaterialDatePicker.Builder.dateRangePicker();
+        dateRangePicker = builder.build();
+
+        // Add listener for date range selection
+        dateRangePicker.addOnPositiveButtonClickListener(selection -> {
+            // Handle the selected date range
+            // 'selection' is a Pair<Long, Long> representing the start and end dates in milliseconds
+            // You can convert these milliseconds to a readable date using a SimpleDateFormat
+        });
+    }
+
+    private void showDateRangePicker() {
+        dateRangePicker.show(requireActivity().getSupportFragmentManager(), dateRangePicker.toString());
     }
 
     private void spinnerSetUp(Spinner spinner, int optionsResId) {

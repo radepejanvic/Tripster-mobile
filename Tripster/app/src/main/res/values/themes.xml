@@ -7,12 +7,23 @@
         <item name="colorOnPrimary">@color/black</item>
 
         <item name="colorSecondary">@color/white</item>
+        <item name="colorAccent">@color/fab</item>
 
         <item name="android:statusBarColor">@color/black</item>
         <item name="android:navigationBarColor">@color/black</item>
 
         <item name="fontFamily">@font/poppins</item>
         <item name="android:colorBackground">@color/grey</item>
+    </style>
+
+    <style name="DatePickerTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <!-- Customize your date picker theme as needed -->
+        <item name="colorPrimary">@color/grey</item>
+        <item name="colorOnPrimary">@color/black</item>
+
+        <item name="colorSecondary">@color/white</item>
+        <item name="colorAccent">@color/fab</item>
+        <!-- Add any other customizations for the date picker -->
     </style>
 
     <style name="ButtonTextStyle">
