@@ -14,10 +14,6 @@
         android:title="@string/title_notifications" />
 
     <item
-        android:id="@+id/navigation_accommodation_form"
-        android:title="@string/title_accommodation_form" />
-
-    <item
         android:id="@+id/navigation_settings"
         android:title="@string/title_settings" />
 
