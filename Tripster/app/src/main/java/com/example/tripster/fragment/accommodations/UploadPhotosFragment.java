@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentUploadPhotosBinding;
+import com.example.tripster.model.enums.Mode;
 import com.example.tripster.model.view.Photo;
 
 import java.io.File;
@@ -49,7 +50,7 @@ import retrofit2.Response;
 
 public class UploadPhotosFragment extends Fragment {
     private Long id;
-    private String mode;
+    private Mode mode;
     private UploadPhotosViewModel mViewModel;
     private FragmentUploadPhotosBinding binding;
     private LinearLayout linearLayoutImages;
@@ -69,7 +70,7 @@ public class UploadPhotosFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             id = getArguments().getLong("id");
-            mode = getArguments().getString("mode");
+            mode = Mode.valueOf(getArguments().getString("mode"));
         }
     }
     @Override
@@ -82,7 +83,7 @@ public class UploadPhotosFragment extends Fragment {
         linearLayoutImages = binding.line1;
         scrollView = binding.scrollPhoto;
 
-        if (mode.equals("update")){
+        if (mode.equals(Mode.UPDATE)){
 
             Call<List<Photo>> photoCall = ClientUtils.accommodationService.getPhotos(id);
 
@@ -106,7 +107,7 @@ public class UploadPhotosFragment extends Fragment {
                 registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(10), uris -> {
                     if (!uris.isEmpty()) {
                         if(uris.size() >= 5){
-                            if (!mode.equals("update")){
+                            if (!mode.equals(Mode.UPDATE)){
                                 linearLayoutImages.removeAllViews();
                                 imagesAccommodation.clear();
                             }
@@ -147,7 +148,7 @@ public class UploadPhotosFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 List<MultipartBody.Part> images = convertImages();
-                if (!mode.equals("update")){
+                if (!mode.equals(Mode.UPDATE)){
                     if (images.size() >= 5){
 
                         postImages(id, images);
@@ -193,7 +194,7 @@ public class UploadPhotosFragment extends Fragment {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.code() == 200){
                     Log.d("IMAGES", "Successful");
-                    if (!mode.equals("update")){
+                    if (!mode.equals(Mode.UPDATE)){
                         Toast.makeText(getActivity(), "Accommodation successful added", Toast.LENGTH_SHORT).show();
                         NavController navController = Navigation.findNavController(getView());
                         findNavController(getView()).navigate(R.id.action_uploadPhotosFragment_to_availabilityFragment);
