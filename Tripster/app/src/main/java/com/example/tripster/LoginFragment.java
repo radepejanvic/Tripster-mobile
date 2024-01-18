@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentLoginBinding;
+import com.example.tripster.model.Settings;
 import com.example.tripster.model.Token;
 import com.example.tripster.model.User;
 import com.example.tripster.model.enums.UserType;
@@ -150,6 +151,9 @@ public class LoginFragment extends Fragment {
 
 
                     SharedPreferencesManager.saveUserInfo(getContext(), email, UserType.valueOf(role), response.body().getUserID(),response.body().getPersonID(),response.body().getToken());
+
+                    getSettings(response.body().getUserID());
+
                     Intent intent = new Intent(getContext(), MainActivity.class);
                     intent.putExtra("Role", role);
                     Toast.makeText(getContext(), "Welcome "+emailInput.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -167,6 +171,29 @@ public class LoginFragment extends Fragment {
             }
         });
     }
+
+    private void getSettings(Long userId) {
+        Call<Settings> call = ClientUtils.settingsService.getSettings(userId);
+
+        call.enqueue(new Callback<Settings>() {
+            @Override
+            public void onResponse(Call<Settings> call, Response<Settings> response) {
+                if(response.code() == 200) {
+                    SharedPreferencesManager.saveSettings(getContext(), response.body());
+                    Log.d("GET Request", "Settings " + response.body());
+                } else {
+                    Log.e("GET Request", "Error fetching settings " + response.code());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Settings> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
 
     private void openDialog(Response<Token> response) {
         switch (response.code()) {

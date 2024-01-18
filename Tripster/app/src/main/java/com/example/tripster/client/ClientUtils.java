@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.example.tripster.TripsterApp;
 import com.example.tripster.BuildConfig;
+import com.example.tripster.model.Settings;
 import com.example.tripster.model.view.Notification;
 import com.example.tripster.service.AvailabilityService;
 import com.example.tripster.service.NotificationService;
@@ -11,6 +12,7 @@ import com.example.tripster.service.ReportService;
 import com.example.tripster.service.ReservationService;
 import com.example.tripster.service.ReviewReportService;
 import com.example.tripster.service.ReviewService;
+import com.example.tripster.service.SettingsService;
 import com.example.tripster.service.UserReportService;
 import com.example.tripster.service.UserService;
 import com.example.tripster.util.SharedPreferencesManager;
@@ -81,6 +83,9 @@ public class ClientUtils {
     public static NotificationService notificationService = retrofit.create(NotificationService.class);
 
     public static AvailabilityService availabilityService = retrofit.create(AvailabilityService.class);
+
+    public static SettingsService settingsService = retrofit.create(SettingsService.class);
+
 }
 
 

@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void logOut() {
         SharedPreferencesManager.clearUserInfo(this);
+        SharedPreferencesManager.clearSettings(this);
+
         Intent intent = new Intent(this, AuthorizationActivity.class);
         startActivity(intent);
         finish();
