@@ -126,7 +126,8 @@ public class AccommodationFormFragment extends Fragment {
                     loadAccommodationFromInputs();
                     postSave();
                     Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
-                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+//                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+
                 }
 
             }
@@ -144,7 +145,7 @@ public class AccommodationFormFragment extends Fragment {
                     loadAccommodationFromInputs();
                     updateAccommodation();
                     Toast.makeText(getContext(), "Successfully updated accommodation.", Toast.LENGTH_SHORT).show();
-                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
+//                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
                 }
 
 
@@ -505,7 +506,12 @@ public class AccommodationFormFragment extends Fragment {
             @Override
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                 if (response.code() == 201){
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("id",response.body().getId());
+                    bundle.putString("mode","post");
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_uploadPhotosFragment,bundle);
                     Log.d("POST Request", "Accommodation " + response.body());
+                    Log.d("POST Request", "Accommodation " + response.body().getId());
                 } else {
                     Log.d("POST Request", "Error posting new accommodation " + response.body());
                 }
@@ -551,6 +557,10 @@ public class AccommodationFormFragment extends Fragment {
             @Override
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                 if (response.code() == 200){
+                    Bundle bundle = new Bundle();
+                    bundle.putLong("id",response.body().getId());
+                    bundle.putString("mode","update");
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_uploadPhotosFragment,bundle);
                     Log.d("PUT Request", "Accommodation " + response.body());
                 } else {
                     Log.d("PUT Request", "Error updating accommodation " + response.body());
