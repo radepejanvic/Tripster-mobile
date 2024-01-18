@@ -55,32 +55,6 @@
 <!--                app:layout_constraintStart_toStartOf="parent"-->
 <!--                app:layout_constraintTop_toBottomOf="@+id/title" />-->
 
-            <TextView
-                android:id="@+id/label"
-                style="@style/SubtitleText"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:text="@string/accommodation_form_sub_title_availability_label"
-                android:textColor="?attr/colorOnPrimary"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/calendar"
-                />
-
-            <TextView
-                android:id="@+id/date_label"
-                style="@style/TitleText"
-                android:layout_width="320dp"
-                android:layout_height="wrap_content"
-                android:text="@string/accommodation_form_sub_title_main"
-                android:textColor="?attr/colorOnPrimary"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/label"
-                />
-
             <Spinner
                 android:id="@+id/mode"
                 style="@style/EditTextStyle"
@@ -90,7 +64,7 @@
                 android:background="@drawable/login_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/date_label" />
+                app:layout_constraintTop_toBottomOf="@+id/calendar" />
 
             <EditText
                 android:id="@+id/price"

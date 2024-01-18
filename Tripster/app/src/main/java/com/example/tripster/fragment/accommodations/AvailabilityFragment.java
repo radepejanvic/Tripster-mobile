@@ -99,17 +99,22 @@ public class AvailabilityFragment extends Fragment {
 
         add.setOnClickListener(v -> {
             if (validateDateRange() && validatePrice()) {
-                intervals.add(loadIntervalFromInputs());
+                intervals.add(loadIntervalFromInputs(false));
                 addCalendar();
             }
         });
 
         update.setOnClickListener(v -> {
-
+            if (validateDateRange() && validatePrice()) {
+                intervals.add(loadIntervalFromInputs(false));
+                updateCalendar();
+            }
         });
 
         disable.setOnClickListener(v -> {
-
+            if (validateDateRange()) {
+                disableDays(loadIntervalFromInputs(true));
+            }
         });
 
         return root;
@@ -127,8 +132,8 @@ public class AvailabilityFragment extends Fragment {
         dateRangePicker = builder.build();
 
         dateRangePicker.addOnPositiveButtonClickListener(selection -> {
-            start = DateTimeUtil.toLocalDate(selection.first);
-            end = DateTimeUtil.toLocalDate(selection.second);
+            start = DateTimeUtil.toLocalDate(selection.first).minusDays(1);
+            end = DateTimeUtil.toLocalDate(selection.second).minusDays(1);
         });
     }
 
@@ -137,8 +142,8 @@ public class AvailabilityFragment extends Fragment {
     }
 
     private boolean validateDateRange() {
-        return !start.equals(null) &&
-                !end.equals(null);
+        return !(start == null) &&
+                !(end == null);
     }
 
     private boolean validatePrice() {
@@ -146,8 +151,8 @@ public class AvailabilityFragment extends Fragment {
                 Double.parseDouble(price.getText().toString()) > 0;
     }
 
-    private Interval loadIntervalFromInputs() {
-        return new Interval(start, end, Double.parseDouble(price.getText().toString()));
+    private Interval loadIntervalFromInputs(boolean nullPrice) {
+        return new Interval(start, end, nullPrice ? 0.0 : Double.parseDouble(price.getText().toString()));
     }
 
     private void clearForm() {
@@ -168,6 +173,54 @@ public class AvailabilityFragment extends Fragment {
                     clearForm();
                     switchMode();
                     Toast.makeText(getContext(), "Added initial price list", Toast.LENGTH_SHORT).show();
+                    Log.d("POST Request", "Added " + response.body() + " days");
+                } else {
+                    Log.e("POST Request", "Error adding calendar " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void updateCalendar() {
+        Call<Integer> call = ClientUtils.availabilityService.updateCalendar(id, intervals);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.code() == 200) {
+
+                    clearForm();
+
+                    Toast.makeText(getContext(), "Updated price lists", Toast.LENGTH_SHORT).show();
+                    Log.d("POST Request", "Added " + response.body() + " days");
+                } else {
+                    Log.e("POST Request", "Error adding calendar " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void disableDays(Interval interval) {
+        Call<Integer> call = ClientUtils.availabilityService.disableDays(id, interval);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.code() == 200) {
+
+                    clearForm();
+
+                    Toast.makeText(getContext(), "Updated price lists", Toast.LENGTH_SHORT).show();
                     Log.d("POST Request", "Added " + response.body() + " days");
                 } else {
                     Log.e("POST Request", "Error adding calendar " + response.code());
