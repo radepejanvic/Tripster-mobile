@@ -74,6 +74,7 @@
 
     <string name="go_to_photos">Go to photos</string>
     <string name="go_to_price_lists">Go to price lists</string>
+    <string name="open_calendar">Open calendar</string>
 
     <string name="accommodation_form_button_register">Register accommodation</string>
     <string name="accommodation_form_button_update">Update accommodation</string>

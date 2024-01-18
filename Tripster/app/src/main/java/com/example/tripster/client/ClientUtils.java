@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.tripster.TripsterApp;
 import com.example.tripster.BuildConfig;
 import com.example.tripster.model.view.Notification;
+import com.example.tripster.service.AvailabilityService;
 import com.example.tripster.service.NotificationService;
 import com.example.tripster.service.ReportService;
 import com.example.tripster.service.ReservationService;
@@ -78,6 +79,8 @@ public class ClientUtils {
     public static ReportService reportService = retrofit.create(ReportService.class);
 
     public static NotificationService notificationService = retrofit.create(NotificationService.class);
+
+    public static AvailabilityService availabilityService = retrofit.create(AvailabilityService.class);
 }
 
 

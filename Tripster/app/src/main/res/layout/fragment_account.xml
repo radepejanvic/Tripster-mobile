@@ -259,7 +259,6 @@
 
         <Button
             android:id="@+id/update"
-            style="@style/ButtonTextStyle"
             android:layout_width="140dp"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
