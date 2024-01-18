@@ -164,8 +164,8 @@
     <string name="delete">Delete</string>
     <string name="approve">Approve</string>
     <string name="comment">Comment:</string>
-    <string name="add_photo">Add photo</string>
-    <string name="upload_photo">Upload photo</string>
+    <string name="add_photo">Select photos</string>
+    <string name="upload_photo">Upload photos</string>
 
     <!--    veljko  -->
 
