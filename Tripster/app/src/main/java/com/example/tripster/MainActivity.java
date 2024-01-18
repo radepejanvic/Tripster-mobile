@@ -89,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
             logOut();
         } else if (item.getItemId() == R.id.navigation_notifications) {
             navController.navigate(R.id.navigation_notifications);
+        } else if (item.getItemId() == R.id.navigation_settings) {
+            navController.navigate(R.id.navigation_settings);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -98,6 +98,14 @@
     <string name="report_form_reason_hint"> Reason </string>
 
 
+    <string name="settings_title"> Settings </string>
+    <string name="settings_reservation_notifications"> Reservation notifications </string>
+    <string name="settings_review_notifications"> Review notifications </string>
+    <string name="settings_accommodation_review_notifications"> Accommodation review notifications </string>
+    <string name="settings_apply"> Apply </string>
+
+
+
     <string-array name="type_options">
         <item>Pick the type of your unit</item>
         <item>Apartment</item>
