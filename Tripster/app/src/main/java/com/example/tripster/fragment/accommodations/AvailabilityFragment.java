@@ -31,16 +31,12 @@ public class AvailabilityFragment extends Fragment {
     private Spinner mode;
     private EditText price;
     private Button add;
-    private Button update;
     private Button disable;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        AvailabilityViewModel availabilityViewModel =
-                new ViewModelProvider(this).get(AvailabilityViewModel.class);
 
         binding = FragmentAvailabilityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -49,11 +45,9 @@ public class AvailabilityFragment extends Fragment {
         price = binding.price;
         mode = binding.mode;
         add = binding.addPriceList;
-        update = binding.updatePriceList;
         disable = binding.removePriceList;
 
         spinnerSetUp(mode, R.array.availability_mode_options);
-        availabilityViewModel.getText().observe(getViewLifecycleOwner(), price::setText);
 
         return root;
     }
@@ -62,12 +56,22 @@ public class AvailabilityFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Handle item selection
-                String selectedItem = (String) parent.getItemAtPosition(position);
-                if (position == 0) {
-                    // Handle the case where the first item is selected
-                } else {
-                    // Handle other selections
+
+                switch (position) {
+                    case 0:
+                        add.setVisibility(View.GONE);
+                        price.setVisibility(View.GONE);
+                        disable.setVisibility(View.GONE);
+                        break;
+                    case 1:
+                        add.setVisibility(View.VISIBLE);
+                        price.setVisibility(View.VISIBLE);
+                        disable.setVisibility(View.GONE);
+                        break;
+                    case 2:
+                        add.setVisibility(View.GONE);
+                        price.setVisibility(View.GONE);
+                        disable.setVisibility(View.VISIBLE);
                 }
             }
 
