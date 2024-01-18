@@ -5,6 +5,7 @@ import static androidx.navigation.ViewKt.findNavController;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,10 +28,13 @@ import android.widget.Toast;
 import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentAccommodationFormBinding;
+import com.example.tripster.fragment.reviews.ReviewDialog;
 import com.example.tripster.model.Accommodation;
 import com.example.tripster.model.enums.AccommodationType;
 import com.example.tripster.model.enums.Mode;
+import com.example.tripster.model.enums.ReviewType;
 import com.example.tripster.util.SharedPreferencesManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,6 +73,8 @@ public class AccommodationFormFragment extends Fragment {
 
     private Mode mode = Mode.ADD;
 
+    private FloatingActionButton fab;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -101,6 +107,7 @@ public class AccommodationFormFragment extends Fragment {
         cancellationPolicy = binding.cancellationPolicy;
         register = binding.register;
         update = binding.update;
+        fab = binding.fab;
 
         spinnerSetUp(type, R.array.type_options);
         spinnerSetUp1(reservationPolicy, R.array.reservation_policy_options);
@@ -112,44 +119,42 @@ public class AccommodationFormFragment extends Fragment {
 
         // TODO: Remove this hardcoded call, instead implement pass a variable via navigation which suggests if it is update or create
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        register.setOnClickListener(v -> {
 
-                if (validateFormNotEmpty()){
-                    Toast.makeText(getContext(), "All fields must be filled!", Toast.LENGTH_SHORT).show();
-                } else if (validateCapacity()) {
-                    Toast.makeText(getContext(), "Minimal capacity must be smaller than maximal!", Toast.LENGTH_SHORT).show();
-                }else {
-                    accommodation = new Accommodation();
-                    accommodation.setOwnerId(SharedPreferencesManager.getUserInfo(getContext()).getId());
-                    loadAccommodationFromInputs();
-                    postSave();
-                    Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
+            if (validateFormNotEmpty()){
+                Toast.makeText(getContext(), "All fields must be filled!", Toast.LENGTH_SHORT).show();
+            } else if (validateCapacity()) {
+                Toast.makeText(getContext(), "Minimal capacity must be smaller than maximal!", Toast.LENGTH_SHORT).show();
+            }else {
+                accommodation = new Accommodation();
+                accommodation.setOwnerId(SharedPreferencesManager.getUserInfo(getContext()).getId());
+                loadAccommodationFromInputs();
+                postSave();
+                Toast.makeText(getContext(), "Successfully registered " + accommodation.getName() + "!", Toast.LENGTH_SHORT).show();
 //                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
 
-                }
-
             }
+
         });
 
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        update.setOnClickListener(v -> {
 
-                if (validateFormNotEmpty()){
-                    Toast.makeText(getContext(), "All fields must be filled!", Toast.LENGTH_SHORT).show();
-                } else if (validateCapacity()) {
-                    Toast.makeText(getContext(), "Minimal capacity must be smaller than maximal!", Toast.LENGTH_SHORT).show();
-                }else {
-                    loadAccommodationFromInputs();
-                    updateAccommodation();
-                    Toast.makeText(getContext(), "Successfully updated accommodation.", Toast.LENGTH_SHORT).show();
+            if (validateFormNotEmpty()){
+                Toast.makeText(getContext(), "All fields must be filled!", Toast.LENGTH_SHORT).show();
+            } else if (validateCapacity()) {
+                Toast.makeText(getContext(), "Minimal capacity must be smaller than maximal!", Toast.LENGTH_SHORT).show();
+            }else {
+                loadAccommodationFromInputs();
+                updateAccommodation();
+                Toast.makeText(getContext(), "Successfully updated accommodation.", Toast.LENGTH_SHORT).show();
 //                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability);
-                }
-
-
             }
+
+
+        });
+
+        fab.setOnClickListener(v -> {
+            findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_uploadPhotosFragment,getBundle());
         });
 
         return root;
@@ -157,7 +162,7 @@ public class AccommodationFormFragment extends Fragment {
 
     private void configureButtons() {
         switch(mode) {
-            case ADD: update.setVisibility(View.GONE); break;
+            case ADD: update.setVisibility(View.GONE); fab.setVisibility(View.GONE); break;
             case UPDATE: register.setVisibility(View.GONE); break;
             default:
                 register.setVisibility(View.GONE);
@@ -506,10 +511,16 @@ public class AccommodationFormFragment extends Fragment {
             @Override
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                 if (response.code() == 201){
+
+                    accommodation = response.body();
+
                     Bundle bundle = new Bundle();
                     bundle.putLong("id",response.body().getId());
-                    bundle.putString("mode","post");
+                    bundle.putString("mode","ADD");
+
                     findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_uploadPhotosFragment,bundle);
+//                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability,bundle);
+
                     Log.d("POST Request", "Accommodation " + response.body());
                     Log.d("POST Request", "Accommodation " + response.body().getId());
                 } else {
@@ -557,9 +568,11 @@ public class AccommodationFormFragment extends Fragment {
             @Override
             public void onResponse(Call<Accommodation> call, Response<Accommodation> response) {
                 if (response.code() == 200){
+
                     Bundle bundle = new Bundle();
                     bundle.putLong("id",response.body().getId());
-                    bundle.putString("mode","update");
+                    bundle.putString("mode","UPDATE");
+
                     findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_uploadPhotosFragment,bundle);
                     Log.d("PUT Request", "Accommodation " + response.body());
                 } else {
@@ -574,6 +587,13 @@ public class AccommodationFormFragment extends Fragment {
             }
         });
 
+    }
+
+    private Bundle getBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putLong("id", accommodation.getId());
+        bundle.putString("mode", String.valueOf(mode));
+        return bundle;
     }
 
 }

@@ -319,7 +319,18 @@
                 app:layout_constraintTop_toBottomOf="@id/update"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/baseline_arrow_forward_ios_24"
+        android:contentDescription="@string/go_to_photos"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

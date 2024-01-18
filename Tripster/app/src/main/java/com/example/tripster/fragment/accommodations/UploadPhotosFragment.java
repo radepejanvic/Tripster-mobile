@@ -35,6 +35,7 @@ import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentUploadPhotosBinding;
 import com.example.tripster.model.enums.Mode;
 import com.example.tripster.model.view.Photo;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -57,6 +58,8 @@ public class UploadPhotosFragment extends Fragment {
     private ScrollView scrollView;
     private List<Long> deletedPhoto = new ArrayList<>();
     private List<Uri> imagesAccommodation = new ArrayList<>();
+
+    private FloatingActionButton fab;
 
     public static UploadPhotosFragment newInstance() {
         UploadPhotosFragment fragment = new UploadPhotosFragment();
@@ -82,6 +85,7 @@ public class UploadPhotosFragment extends Fragment {
         Button upload = binding.uploadPhoto;
         linearLayoutImages = binding.line1;
         scrollView = binding.scrollPhoto;
+        fab = binding.fab;
 
         if (mode.equals(Mode.UPDATE)){
 
@@ -161,6 +165,10 @@ public class UploadPhotosFragment extends Fragment {
                 }
 
             }
+        });
+
+        fab.setOnClickListener(v -> {
+            findNavController(getView()).navigate(R.id.action_uploadPhotosFragment_to_availabilityFragment,getBundle());
         });
 
         return root;
@@ -268,5 +276,12 @@ public class UploadPhotosFragment extends Fragment {
         String filePath = cursor.getString(columnIndex);
         cursor.close();
         return filePath;
+    }
+
+    private Bundle getBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putLong("id", id);
+        bundle.putString("mode", String.valueOf(mode));
+        return bundle;
     }
 }
