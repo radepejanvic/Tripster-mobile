@@ -22,10 +22,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tripster.FragmentTransition;
 import com.example.tripster.R;
 import com.example.tripster.client.ClientUtils;
 import com.example.tripster.databinding.FragmentAvailabilityBinding;
 
+import com.example.tripster.fragment.notifications.NotificationListFragment;
 import com.example.tripster.model.enums.Mode;
 import com.example.tripster.model.view.Interval;
 import com.example.tripster.util.DateTimeUtil;
@@ -59,13 +61,13 @@ public class AvailabilityFragment extends Fragment {
 
     private MaterialDatePicker<Pair<Long, Long>> dateRangePicker;
 
-    private List<Interval> currentIntervals;
-
     private List<Interval> intervals;
 
     private LocalDate start;
 
     private LocalDate end;
+
+    private IntervalListFragment fragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,13 +86,18 @@ public class AvailabilityFragment extends Fragment {
         binding = FragmentAvailabilityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        scrollView = binding.scroll;
+//        scrollView = binding.scroll;
         price = binding.price;
         spinner = binding.mode;
         add = binding.addPriceList;
         update = binding.updatePriceList;
         disable = binding.removePriceList;
         calendar = binding.calendar;
+
+        fragment = IntervalListFragment.newInstance(new ArrayList<>());
+        fragment.setArguments(getArguments());
+
+        FragmentTransition.to(fragment, getActivity(), false, R.id.scroll_intervals_list);
 
         spinnerSetUp(spinner, R.array.availability_mode_options);
 
@@ -172,6 +179,7 @@ public class AvailabilityFragment extends Fragment {
 
                     clearForm();
                     switchMode();
+                    fragment.getIntervals();
                     Toast.makeText(getContext(), "Added initial price list", Toast.LENGTH_SHORT).show();
                     Log.d("POST Request", "Added " + response.body() + " days");
                 } else {
@@ -195,7 +203,7 @@ public class AvailabilityFragment extends Fragment {
                 if(response.code() == 200) {
 
                     clearForm();
-
+                    fragment.getIntervals();
                     Toast.makeText(getContext(), "Updated price lists", Toast.LENGTH_SHORT).show();
                     Log.d("POST Request", "Added " + response.body() + " days");
                 } else {
@@ -219,7 +227,7 @@ public class AvailabilityFragment extends Fragment {
                 if(response.code() == 200) {
 
                     clearForm();
-
+                    fragment.getIntervals();
                     Toast.makeText(getContext(), "Updated price lists", Toast.LENGTH_SHORT).show();
                     Log.d("POST Request", "Added " + response.body() + " days");
                 } else {

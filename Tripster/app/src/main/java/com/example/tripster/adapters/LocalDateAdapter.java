@@ -29,8 +29,17 @@ public class LocalDateAdapter extends TypeAdapter<LocalDate> {
             in.nextNull();
             return null;
         } else {
-            String dateString = in.nextString();
-            return LocalDate.parse(dateString, formatter);
+            if (in.peek() == JsonToken.BEGIN_ARRAY) {
+                in.beginArray();
+                int year = in.nextInt();
+                int month = in.nextInt();
+                int day = in.nextInt();
+                in.endArray();
+                return LocalDate.of(year, month, day);
+            } else {
+                String dateString = in.nextString();
+                return LocalDate.parse(dateString, formatter);
+            }
         }
     }
 
