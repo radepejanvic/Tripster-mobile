@@ -21,7 +21,6 @@ import com.example.tripster.client.ClientUtils;
 import com.example.tripster.fragment.reports.ReportDialog;
 import com.example.tripster.model.Status;
 import com.example.tripster.model.enums.ReportType;
-import com.example.tripster.model.enums.ReservationStatus;
 import com.example.tripster.model.enums.UserType;
 import com.example.tripster.model.view.Review;
 import com.example.tripster.util.SharedPreferencesManager;
@@ -85,8 +84,8 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
         TextView comment = convertView.findViewById(R.id.review_comment);
         ImageView delete = convertView.findViewById(R.id.delete_review);
         ImageView report = convertView.findViewById(R.id.report_review);
-        TextView decline = convertView.findViewById(R.id.declineReview);
-        TextView accept = convertView.findViewById(R.id.acceptReview);
+        TextView decline = convertView.findViewById(R.id.decline_review);
+        TextView accept = convertView.findViewById(R.id.accept_review);
         customizeImageViewVisibility(delete, report,decline,accept, review.getReviewerId());
 
         if (review != null) {

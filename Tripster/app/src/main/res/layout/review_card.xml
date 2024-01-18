@@ -90,8 +90,9 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="Comment"
-                app:layout_constraintBottom_toTopOf="@+id/declineReview"
+                app:layout_constraintBottom_toTopOf="@+id/decline_review"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.468"
                 app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +119,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/acceptReview"
+                android:id="@+id/accept_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -131,7 +132,7 @@
                  />
 
             <TextView
-                android:id="@+id/declineReview"
+                android:id="@+id/decline_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -140,7 +141,7 @@
                 android:textColor="@color/red"
                 android:text="@string/decline"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/acceptReview" />
+                app:layout_constraintEnd_toStartOf="@+id/accept_review" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

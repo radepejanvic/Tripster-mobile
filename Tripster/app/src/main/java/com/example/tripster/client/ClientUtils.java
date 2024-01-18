@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.example.tripster.TripsterApp;
 import com.example.tripster.BuildConfig;
+import com.example.tripster.model.view.Notification;
+import com.example.tripster.service.NotificationService;
 import com.example.tripster.service.ReportService;
 import com.example.tripster.service.ReservationService;
 import com.example.tripster.service.ReviewReportService;
@@ -11,6 +13,8 @@ import com.example.tripster.service.ReviewService;
 import com.example.tripster.service.UserReportService;
 import com.example.tripster.service.UserService;
 import com.example.tripster.util.SharedPreferencesManager;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -72,6 +76,8 @@ public class ClientUtils {
     public static ReviewReportService reviewReportService = retrofit.create(ReviewReportService.class);
 
     public static ReportService reportService = retrofit.create(ReportService.class);
+
+    public static NotificationService notificationService = retrofit.create(NotificationService.class);
 }
 
 

@@ -44,6 +44,7 @@
     <string name="decline">Decline</string>
     <string name="reject">Reject</string>
     <string name="Accept">Accept</string>
+    <string name="mark_as_read">Mark as read</string>
     <string name="dialog_message" />
 
     <string name="accommodation_form_title">Hello Rade, let`s register your new accommodation!</string>
