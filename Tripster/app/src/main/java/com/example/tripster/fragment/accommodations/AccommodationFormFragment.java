@@ -518,8 +518,8 @@ public class AccommodationFormFragment extends Fragment {
                     bundle.putLong("id",response.body().getId());
                     bundle.putString("mode","ADD");
 
-//                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_uploadPhotosFragment,bundle);
-                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability,bundle);
+                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_uploadPhotosFragment,bundle);
+//                    findNavController(getView()).navigate(R.id.action_navigation_accommodation_form_to_navigation_availability,bundle);
 
                     Log.d("POST Request", "Accommodation " + response.body());
                     Log.d("POST Request", "Accommodation " + response.body().getId());

@@ -32,6 +32,8 @@ public class User {
     private String token;
     private Long id;
 
+    private Double rate;
+    private Long numOfReviews;
 
     public User( String email, String password, UserType userType, String name,
                  String surname, String phone, String country, String city,

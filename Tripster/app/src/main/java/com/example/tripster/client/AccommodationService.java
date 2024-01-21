@@ -86,4 +86,12 @@ public interface AccommodationService {
     })
     @PUT("photos")
     Call<List<Long> > deletePhotos(@Body List<Long> ids);
+
+    @Headers({
+            "User-Agent: Mobile-Android",
+            "Content-Type:application/json"
+    })
+    @GET("person/hosts/{ownerId}")
+    Call<User> getOwner(@Path("ownerId") Long ownerId);
+
 }
