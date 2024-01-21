@@ -49,6 +49,7 @@ public class SingleAccommodationFragment extends Fragment {
             Bundle bundle = new Bundle();
             bundle.putLong("accommodationId", accommodation.getId());
             bundle.putLong("hostId", accommodation.getOwnerUserId());
+            bundle.putLong("hostIdForCheck", accommodation.getOwnerId());
             findNavController(v).navigate(R.id.action_singleAccommodationFragment_to_navigation_reviews, bundle);
         });
 

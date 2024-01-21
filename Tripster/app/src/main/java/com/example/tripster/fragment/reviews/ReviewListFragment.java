@@ -55,6 +55,8 @@ public class ReviewListFragment extends ListFragment {
 
     private Long hostId;
 
+    private Long hostIdForCheck;
+
     private String mode;
 
     private FloatingActionButton fab;
@@ -89,6 +91,7 @@ public class ReviewListFragment extends ListFragment {
         if (getArguments() != null) {
             accommodationId = getArguments().getLong("accommodationId");
             hostId = getArguments().getLong("hostId");
+            hostIdForCheck = getArguments().getLong("hostIdForCheck");
         }
 
         adapter.clear();
@@ -99,6 +102,7 @@ public class ReviewListFragment extends ListFragment {
 
         canReview(true);
         canReview(false);
+        customizeFabVisibility(canReviewAccommodation);
 
 
         fab.setOnClickListener(v -> {
@@ -123,6 +127,13 @@ public class ReviewListFragment extends ListFragment {
 
     private void customizeFabVisibility(boolean canReview) {
         UserType userType = SharedPreferencesManager.getUserInfo(getContext()).getUserType();
+
+        if (userType != UserType.GUEST || !canReview) {
+            fab.setVisibility(View.GONE);
+        } else {
+            fab.setVisibility(View.VISIBLE);
+        }
+
 //        if (userType != UserType.GUEST || !canReview) {
 //            fab.setVisibility(View.GONE);
 //        }
@@ -135,7 +146,7 @@ public class ReviewListFragment extends ListFragment {
         if (isAccommodation) {
             call = ClientUtils.reviewService.canReviewAccommodation(accommodationId, guestId);
         } else {
-            call = ClientUtils.reviewService.canReviewHost(hostId, guestId);
+            call = ClientUtils.reviewService.canReviewHost(hostIdForCheck, guestId);
         }
 
         call.enqueue(new Callback<Boolean>() {
