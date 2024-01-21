@@ -69,15 +69,25 @@
                 app:layout_constraintTop_toTopOf="@+id/textView" />
 
             <TextView
-                android:id="@+id/textViewReviewCount"
+                android:id="@+id/accommodation_reviews"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
-                android:text="1,456 reviews"
 
+                android:text="1,456"
                 android:textSize="10sp"
-                app:layout_constraintEnd_toStartOf="@+id/cardView"
-                app:layout_constraintTop_toBottomOf="@+id/gradeText" />
+                app:layout_constraintEnd_toStartOf="@+id/reviews_filler"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <TextView
+                android:id="@+id/reviews_filler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="reviews"
+                android:textSize="10sp"
+                app:layout_constraintEnd_toEndOf="@+id/gradeText"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -90,7 +100,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView">
 
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/accommodation_rating"
                     style="@style/AccommodationButtons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,13 +161,105 @@
                 android:text="Parking"
                 app:layout_constraintTop_toBottomOf="@id/amenity3"
                 app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/owner_details"
+                style="@style/AccommodationTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Owner details"
+
+                app:layout_constraintStart_toStartOf="@+id/amenity4"
+                app:layout_constraintTop_toBottomOf="@id/amenity4" />
+
+            <TextView
+                android:id="@+id/owner_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Owner name: "
+                app:layout_constraintStart_toEndOf="@+id/owner_name_text"
+                app:layout_constraintTop_toBottomOf="@+id/owner_details" />
+
+            <TextView
+                android:id="@+id/owner_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name: "
+
+                app:layout_constraintStart_toStartOf="@+id/amenity4"
+                app:layout_constraintTop_toBottomOf="@id/owner_details" />
+
+            <TextView
+                android:id="@+id/owner_email_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email: "
+
+                app:layout_constraintStart_toStartOf="@+id/amenity4"
+                app:layout_constraintTop_toBottomOf="@+id/owner_name" />
+
+            <TextView
+                android:id="@+id/owner_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Owner email: "
+                app:layout_constraintStart_toEndOf="@+id/owner_email_text"
+                app:layout_constraintTop_toBottomOf="@+id/owner_name_text" />
+
+            <TextView
+                android:id="@+id/owner_rate_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rate: "
+
+                app:layout_constraintStart_toStartOf="@+id/amenity4"
+                app:layout_constraintTop_toBottomOf="@id/owner_email_text" />
+
+            <TextView
+                android:id="@+id/owner_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Owner rate: "
+                app:layout_constraintStart_toEndOf="@+id/owner_rate_text"
+                app:layout_constraintTop_toBottomOf="@+id/owner_email" />
+
+            <TextView
+                android:id="@+id/owner_reviews_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reviews: "
+
+                app:layout_constraintStart_toStartOf="@+id/amenity4"
+                app:layout_constraintTop_toBottomOf="@id/owner_rate_text" />
+
+            <TextView
+                android:id="@+id/owner_reviews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Owner reviews: "
+                app:layout_constraintStart_toEndOf="@+id/owner_reviews_text"
+                app:layout_constraintTop_toBottomOf="@+id/owner_rate" />
+
+            <Button
+                android:id="@+id/reviews"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Reviews"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.924"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/reviews"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button" />
+
+
 
 
     </LinearLayout>
